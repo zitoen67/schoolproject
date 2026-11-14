@@ -11,6 +11,9 @@ def home():
 @app.route("/producten")
 def products():
     return render_template("products.html")
+@app.route("/afrekenen")
+def checkout():
+    return render_template("checkout.html")
 @app.route("/location", methods=["POST"])
 def location():
     data = request.get_json(silent=True)
