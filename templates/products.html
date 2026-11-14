@@ -109,7 +109,17 @@ function filterProducts(category, button) {
     showProducts(category);
 }
 
-showProducts("Alle");
+const params = new URLSearchParams(window.location.search);
+const selectedCategory = params.get('categorie') || 'Alle';
+
+const categoryButton = [...document.querySelectorAll('.categories button')]
+    .find(button => button.textContent.trim() === selectedCategory);
+
+if (categoryButton) {
+    filterProducts(selectedCategory, categoryButton);
+} else {
+    showProducts('Alle');
+}
 </script>
 </body>
 </html>
