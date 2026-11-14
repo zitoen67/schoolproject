@@ -8,7 +8,9 @@ logging.basicConfig(level=logging.INFO)
 @app.route("/")
 def home():
     return render_template("index.html")
-
+@app.route("/producten")
+def products():
+    return render_template("products.html")
 @app.route("/location", methods=["POST"])
 def location():
     data = request.get_json(silent=True)
