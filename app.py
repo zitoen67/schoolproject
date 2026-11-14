@@ -119,9 +119,18 @@ def home():
 @app.route("/producten")
 def product_list():
     selected_category = request.args.get("categorie", "")
+
+    filtered_products = products
+
+    if selected_category:
+        filtered_products = [
+            product for product in products
+            if product["category"] == selected_category
+        ]
+
     return render_template(
         "products.html",
-        products=products,
+        products=filtered_products,
         categories=categories,
         selected_category=selected_category
     )
