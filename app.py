@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, abort
+from urllib.parse import quote
 
 app = Flask(__name__)
 
@@ -48,6 +49,17 @@ product_names = {
     ],
 }
 
+image_search_terms = {
+    "Jassen": "black puffer jacket fashion",
+    "Hoodies": "oversized streetwear hoodie",
+    "Truien": "minimal knit sweater fashion",
+    "T-shirts": "oversized basic t shirt fashion",
+    "Broeken": "streetwear cargo pants fashion",
+    "Jeans": "baggy denim jeans fashion",
+    "Sneakers": "minimal streetwear sneakers",
+    "Outfits": "modern streetwear tracksuit outfit",
+}
+
 products = []
 product_id = 1
 
@@ -56,6 +68,10 @@ for category_index, category in enumerate(categories):
 
     for number, product_name in enumerate(product_names[category_name]):
         price = 39.95 + (number * 10) + (category_index * 2)
+
+        search_term = quote(
+            image_search_terms[category_name] + f" {number + 1}"
+        )
 
         products.append({
             "id": product_id,
@@ -67,7 +83,10 @@ for category_index, category in enumerate(categories):
                 "Een stijlvolle toevoeging aan de VÉRRO collectie, "
                 "met een comfortabele pasvorm en moderne uitstraling."
             ),
-            "image": f"/static/images/product-{product_id}.jpg",
+            "image": (
+                "https://loremflickr.com/900/1100/"
+                + search_term
+            ),
             "sizes": ["S", "M", "L", "XL"]
         })
 
