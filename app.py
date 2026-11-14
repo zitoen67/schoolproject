@@ -13,64 +13,64 @@ categories = [
 
 product_names = {
     "Pistolen": [
-        "Glock 17 Display Replica",
-        "Beretta 92 Display Replica",
-        "Colt 1911 Display Replica",
-        "Desert Eagle Display Replica",
-        "SIG Sauer P226 Display Replica",
-        "Walther PPK Display Replica",
-        "CZ 75 Display Replica",
-        "Browning Hi-Power Display Replica"
+        "Glock 17",
+        "Beretta 92FS",
+        "Colt M1911",
+        "Desert Eagle",
+        "SIG Sauer P226",
+        "Walther PPK",
+        "CZ 75",
+        "FN Browning Hi-Power"
     ],
     "Messen": [
-        "Classic Bowie Display",
-        "Tanto Display Knife",
-        "Karambit Display Prop",
-        "Hunting Knife Display",
-        "Combat Knife Display Prop",
-        "Butterfly Knife Display",
-        "Dagger Collectible",
-        "Survival Knife Display"
+        "Victorinox Swiss Army Knife",
+        "Buck 110 Folding Hunter",
+        "KA-BAR USMC Fighting Knife",
+        "Opinel No. 8",
+        "Leatherman Wave+",
+        "Morakniv Companion",
+        "Spyderco Paramilitary 2",
+        "Wüsthof Classic Chef's Knife"
     ],
     "Kogels": [
-        "Brass Ammunition Display",
-        "Silver Bullet Collectible",
-        "Vintage Cartridge Display",
-        "Golden Bullet Prop",
-        "Military Ammunition Display",
-        "Classic Cartridge Set",
-        "Collector Bullet Display",
-        "Inert Ammunition Set"
+        "9×19mm Parabellum",
+        ".22 Long Rifle",
+        "5.56×45mm NATO",
+        "7.62×39mm",
+        ".45 ACP",
+        "7.62×51mm NATO",
+        "12 Gauge",
+        ".50 BMG"
     ],
     "Boksbeugels": [
-        "Chrome Knuckle Display",
-        "Black Metal Display Prop",
-        "Vintage Knuckle Collectible",
-        "Silver Collector Prop",
-        "Classic Display Knuckles",
-        "Matte Black Display",
-        "Steel Finish Collectible",
-        "Retro Knuckle Display"
+        "Klassieke Viervinger-boksbeugel",
+        "Romeinse Caestus",
+        "Mark I Trench Knife",
+        "Apache Revolver",
+        "Tekko",
+        "Tweevinger-boksbeugel",
+        "G10 Boksbeugel",
+        "Boksbeugel-mes"
     ],
     "Pistoolmagazijnen": [
-        "Glock Magazine Display",
-        "Beretta Magazine Display",
-        "Colt Magazine Display",
-        "SIG Sauer Magazine Display",
-        "Walther Magazine Display",
-        "CZ Magazine Display",
-        "Browning Magazine Display",
-        "Universal Magazine Display"
+        "Double-Stack Magazijn",
+        "Single-Stack Magazijn",
+        "Glock OEM Polymeer Magazijn",
+        "Mec-Gar Stalen Magazijn",
+        "Extended Magazijn",
+        "Drum Magazijn",
+        "Vast Intern Magazijn",
+        "1.5-Stack"
     ],
     "Bommen": [
-        "Vintage Bomb Display Prop",
-        "Classic Grenade Display",
-        "Industrial Explosive Display",
-        "Retro Game Bomb Prop",
-        "Military Collectible Display",
-        "Fictional Timer Prop",
-        "Vintage Ordnance Display",
-        "Museum Bomb Replica"
+        "Buskruitbom",
+        "Mills-bom",
+        "Stielhandgranate",
+        "Tallboy",
+        "Little Boy & Fat Man",
+        "Tsar Bomba",
+        "JDAM",
+        "MOAB"
     ],
 }
 
