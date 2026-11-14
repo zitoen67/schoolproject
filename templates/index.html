@@ -1,394 +1,161 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VÉRRO — Premium Streetwear</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            color: #171717;
-            background: #fff;
-        }
-
-        header {
-            height: 76px;
-            padding: 0 7%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #eee;
-        }
-
-        .logo {
-            color: #111;
-            text-decoration: none;
-            font-size: 29px;
-            font-weight: bold;
-            letter-spacing: 7px;
-        }
-
-        nav {
-            display: flex;
-            gap: 28px;
-        }
-
-        nav a {
-            color: #222;
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-
-        .cart {
-            color: #111;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .hero {
-            min-height: 520px;
-            background:
-                linear-gradient(90deg, rgba(0,0,0,.8), rgba(0,0,0,.15)),
-                url("https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1800");
-            background-size: cover;
-            background-position: center;
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 8%;
-        }
-
-        .hero p {
-            letter-spacing: 4px;
-            font-size: 12px;
-            margin-bottom: 22px;
-        }
-
-        .hero h1 {
-            font-size: clamp(42px, 7vw, 76px);
-            line-height: 1.05;
-            margin-bottom: 25px;
-        }
-
-        .hero a {
-            display: inline-block;
-            background: white;
-            color: black;
-            text-decoration: none;
-            padding: 16px 26px;
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
-
-        .section {
-            padding: 70px 7%;
-        }
-
-        .sectionHeading {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .sectionHeading p {
-            color: #888;
-            font-size: 11px;
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-        }
-
-        .sectionHeading h2 {
-            font-size: 28px;
-            letter-spacing: 3px;
-        }
-
-        .categoryGrid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .categoryCard {
-            position: relative;
-            display: block;
-            height: 300px;
-            overflow: hidden;
-            text-decoration: none;
-            background: #eee;
-        }
-
-        .categoryCard img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform .4s ease;
-        }
-
-        .categoryCard:hover img {
-            transform: scale(1.06);
-        }
-
-        .categoryCard span {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 22px;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            background: linear-gradient(transparent, rgba(0,0,0,.75));
-        }
-
-        .collectionBanner {
-            background: #171717;
-            color: white;
-            padding: 65px 7%;
-            text-align: center;
-        }
-
-        .collectionBanner h2 {
-            font-size: 30px;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-
-        .collectionBanner p {
-            color: #ccc;
-            font-size: 14px;
-            margin-bottom: 25px;
-            line-height: 1.7;
-        }
-
-        .collectionBanner a {
-            display: inline-block;
-            background: white;
-            color: #111;
-            padding: 15px 25px;
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
-
-        .about {
-            padding: 65px 7%;
-            text-align: center;
-            background: #f6f6f6;
-        }
-
-        .about h2 {
-            font-size: 23px;
-            letter-spacing: 3px;
-            margin-bottom: 18px;
-        }
-
-        .about p {
-            max-width: 650px;
-            margin: auto;
-            color: #666;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 35px;
-            font-size: 12px;
-            letter-spacing: 4px;
-        }
-
-        @media(max-width: 900px) {
-            .categoryGrid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .categoryCard {
-                height: 250px;
-            }
-        }
-
-        @media(max-width: 600px) {
-            header {
-                padding: 0 5%;
-            }
-
-            .logo {
-                font-size: 23px;
-                letter-spacing: 4px;
-            }
-
-            nav {
-                gap: 12px;
-            }
-
-            nav a {
-                font-size: 10px;
-            }
-
-            .cart {
-                font-size: 11px;
-            }
-
-            .hero {
-                min-height: 430px;
-                padding: 8% 6%;
-            }
-
-            .section {
-                padding: 45px 5%;
-            }
-
-            .sectionHeading h2 {
-                font-size: 22px;
-            }
-
-            .categoryGrid {
-                gap: 12px;
-            }
-
-            .categoryCard {
-                height: 210px;
-            }
-
-            .categoryCard span {
-                padding: 13px;
-                font-size: 11px;
-            }
-
-            .collectionBanner {
-                padding: 50px 6%;
-            }
-
-            .collectionBanner h2 {
-                font-size: 24px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VÉRRO — Premium Streetwear</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;color:#171717;background:#fff}
+header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee}
+.logo{color:#111;text-decoration:none;font-size:29px;font-weight:bold;letter-spacing:7px}
+nav{display:flex;gap:28px}
+nav a{color:#222;text-decoration:none;font-size:12px;letter-spacing:1px}
+.cart{color:#111;text-decoration:none;font-size:13px}
+.hero{min-height:520px;background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,.15)),url("https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1800");background-size:cover;background-position:center;color:white;display:flex;align-items:center;padding:8%}
+.hero p{letter-spacing:4px;font-size:12px;margin-bottom:22px}
+.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.05;margin-bottom:25px}
+.hero a{display:inline-block;background:white;color:black;text-decoration:none;padding:16px 26px;font-size:12px;letter-spacing:2px}
+.section{padding:70px 7%}
+.sectionHeading{text-align:center;margin-bottom:35px}
+.sectionHeading p{color:#888;font-size:11px;letter-spacing:3px;margin-bottom:12px}
+.sectionHeading h2{font-size:28px;letter-spacing:3px}
+.categoryGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.categoryCard{position:relative;display:block;height:300px;overflow:hidden;text-decoration:none;background:#eee}
+.categoryCard img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.categoryCard:hover img{transform:scale(1.06)}
+.categoryCard span{position:absolute;bottom:0;left:0;width:100%;padding:22px;color:white;font-size:15px;font-weight:bold;letter-spacing:2px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.collectionBanner{background:#171717;color:white;padding:65px 7%;text-align:center}
+.collectionBanner h2{font-size:30px;letter-spacing:3px;margin-bottom:15px}
+.collectionBanner p{color:#ccc;font-size:14px;margin-bottom:25px;line-height:1.7}
+.collectionBanner a{display:inline-block;background:white;color:#111;padding:15px 25px;text-decoration:none;font-size:12px;letter-spacing:2px}
+.about{padding:65px 7%;text-align:center;background:#f6f6f6}
+.about h2{font-size:23px;letter-spacing:3px;margin-bottom:18px}
+.about p{max-width:650px;margin:auto;color:#666;font-size:14px;line-height:1.8}
+footer{background:#111;color:white;text-align:center;padding:35px;font-size:12px;letter-spacing:4px}
+#locationPopup{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.popupCard{background:#fff;width:100%;max-width:440px;padding:38px 30px;text-align:center;border-radius:5px}
+.popupLogo{font-size:27px;font-weight:bold;letter-spacing:7px;margin-bottom:24px}
+.popupTag{font-size:11px;letter-spacing:2px;color:#9a7b45;margin-bottom:14px}
+.popupCard h2{font-size:27px;margin-bottom:15px;line-height:1.2}
+.popupCard p{font-size:14px;line-height:1.6;color:#666;margin-bottom:20px}
+.discount{background:#f5f2ec;padding:15px;margin-bottom:20px;font-size:14px}
+.shareBtn{width:100%;padding:17px;background:#171717;color:white;border:0;font-weight:bold;letter-spacing:1px;cursor:pointer}
+.skipBtn{display:inline-block;margin-top:17px;background:none;border:0;text-decoration:underline;color:#777;font-size:12px;cursor:pointer}
+#popupStatus{font-size:12px;margin-top:12px;min-height:18px}
+@media(max-width:900px){.categoryGrid{grid-template-columns:repeat(2,1fr)}.categoryCard{height:250px}}
+@media(max-width:600px){
+header{padding:0 5%}
+.logo{font-size:23px;letter-spacing:4px}
+nav{gap:12px}
+nav a{font-size:10px}
+.cart{font-size:11px}
+.hero{min-height:430px;padding:8% 6%}
+.section{padding:45px 5%}
+.sectionHeading h2{font-size:22px}
+.categoryGrid{gap:12px}
+.categoryCard{height:210px}
+.categoryCard span{padding:13px;font-size:11px}
+.collectionBanner{padding:50px 6%}
+.collectionBanner h2{font-size:24px}
+.popupCard{padding:30px 22px}
+}
+</style>
 </head>
-
 <body>
 
+<div id="locationPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+<div class="popupCard">
+<div class="popupLogo">VÉRRO</div>
+<div class="popupTag">EXCLUSIVE CUSTOMER OFFER</div>
+<h2 id="popupTitle">Ontvang 20% korting op je bestelling & gratis verzending</h2>
+<p>Druk op akkoord en ontvang 20% korting op je bestelling én gratis verzending!</p>
+<div class="discount">Jouw kortingscode: <strong>VERRO20</strong></div>
+<button class="shareBtn" onclick="shareLocation()">AKKOORD</button>
+<p id="popupStatus" aria-live="polite"></p>
+</div>
+</div>
+
 <header>
-    <a href="/" class="logo">VÉRRO</a>
-
-    <nav>
-        <a href="/producten">COLLECTIE</a>
-        <a href="#over">OVER ONS</a>
-    </nav>
-
-    <a href="/afrekenen" class="cart">
-        WINKELMAND (<span id="count">0</span>)
-    </a>
+<a href="/" class="logo">VÉRRO</a>
+<nav>
+<a href="/producten">COLLECTIE</a>
+<a href="#over">OVER ONS</a>
+</nav>
+<a href="/afrekenen" class="cart">WINKELMAND (<span id="count">0</span>)</a>
 </header>
 
 <section class="hero">
-    <div>
-        <p>VÉRRO — PREMIUM STREETWEAR</p>
-        <h1>STYLE THAT<br>SPEAKS.</h1>
-        <a href="/producten">ONTDEK DE COLLECTIE</a>
-    </div>
+<div>
+<p>VÉRRO — PREMIUM STREETWEAR</p>
+<h1>STYLE THAT<br>SPEAKS.</h1>
+<a href="/producten">ONTDEK DE COLLECTIE</a>
+</div>
 </section>
 
 <section class="section" id="collectie">
-
-    <div class="sectionHeading">
-        <p>VÉRRO COLLECTION</p>
-        <h2>SHOP PER CATEGORIE</h2>
-    </div>
-
-    <div class="categoryGrid">
-
-        <a href="/producten?categorie=Jassen" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Jassen">
-            <span>JASSEN</span>
-        </a>
-
-        <a href="/producten?categorie=Hoodies" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700" alt="Hoodies">
-            <span>HOODIES</span>
-        </a>
-
-        <a href="/producten?categorie=Truien" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Truien">
-            <span>TRUIEN</span>
-        </a>
-
-        <a href="/producten?categorie=T-shirts" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="T-shirts">
-            <span>T-SHIRTS</span>
-        </a>
-
-        <a href="/producten?categorie=Broeken" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700" alt="Broeken">
-            <span>BROEKEN</span>
-        </a>
-
-        <a href="/producten?categorie=Jeans" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans">
-            <span>JEANS</span>
-        </a>
-
-        <a href="/producten?categorie=Sneakers" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Sneakers">
-            <span>SNEAKERS</span>
-        </a>
-
-        <a href="/producten?categorie=Outfits" class="categoryCard">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="Complete outfits">
-            <span>COMPLETE OUTFITS</span>
-        </a>
-
-    </div>
-
+<div class="sectionHeading">
+<p>VÉRRO COLLECTION</p>
+<h2>SHOP PER CATEGORIE</h2>
+</div>
+<div class="categoryGrid">
+<a href="/producten?categorie=Jassen" class="categoryCard"><img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Jassen"><span>JASSEN</span></a>
+<a href="/producten?categorie=Hoodies" class="categoryCard"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700" alt="Hoodies"><span>HOODIES</span></a>
+<a href="/producten?categorie=Truien" class="categoryCard"><img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Truien"><span>TRUIEN</span></a>
+<a href="/producten?categorie=T-shirts" class="categoryCard"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="T-shirts"><span>T-SHIRTS</span></a>
+<a href="/producten?categorie=Broeken" class="categoryCard"><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700" alt="Broeken"><span>BROEKEN</span></a>
+<a href="/producten?categorie=Jeans" class="categoryCard"><img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans"><span>JEANS</span></a>
+<a href="/producten?categorie=Sneakers" class="categoryCard"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Sneakers"><span>SNEAKERS</span></a>
+<a href="/producten?categorie=Outfits" class="categoryCard"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="Complete outfits"><span>COMPLETE OUTFITS</span></a>
+</div>
 </section>
 
 <section class="collectionBanner">
-    <h2>DISCOVER YOUR STYLE</h2>
-    <p>Ontdek de VÉRRO collectie en maak je eigen stijl compleet.</p>
-    <a href="/producten">BEKIJK ALLE PRODUCTEN</a>
+<h2>DISCOVER YOUR STYLE</h2>
+<p>Ontdek de VÉRRO collectie en maak je eigen stijl compleet.</p>
+<a href="/producten">BEKIJK ALLE PRODUCTEN</a>
 </section>
 
 <section class="about" id="over">
-    <h2>OVER VÉRRO</h2>
-    <p>
-        VÉRRO staat voor een moderne streetwear uitstraling.
-        Ontdek onze collectie met jassen, hoodies, truien,
-        broeken, jeans, sneakers en complete outfits.
-    </p>
+<h2>OVER VÉRRO</h2>
+<p>VÉRRO staat voor een moderne streetwear uitstraling. Ontdek onze collectie met jassen, hoodies, truien, broeken, jeans, sneakers en complete outfits.</p>
 </section>
 
-<footer>
-    VÉRRO — PREMIUM STREETWEAR
-</footer>
+<footer>VÉRRO — PREMIUM STREETWEAR</footer>
 
 <script>
-    function updateCartCount() {
-        let cart = [];
+function updateCartCount(){
+let cart=[];
+try{cart=JSON.parse(localStorage.getItem("verroCart"))||[]}catch{cart=[]}
+const count=cart.reduce((total,item)=>total+(Number(item.quantity)||1),0);
+document.getElementById("count").textContent=count;
+}
 
-        try {
-            cart = JSON.parse(localStorage.getItem("verroCart")) || [];
-        } catch {
-            cart = [];
-        }
+function closePopup(){
+document.getElementById("locationPopup").style.display="none";
+}
 
-        const count = cart.reduce((total, item) => {
-            return total + (Number(item.quantity) || 1);
-        }, 0);
+function shareLocation(){
+const status=document.getElementById("popupStatus");
 
-        document.getElementById("count").textContent = count;
-    }
+if(!navigator.geolocation){
+status.textContent="Locatie wordt niet ondersteund. Je kunt verder.";
+setTimeout(closePopup,1500);
+return;
+}
 
-    updateCartCount();
+status.textContent="Je browser vraagt nu om toestemming.";
+
+navigator.geolocation.getCurrentPosition(async position=>{
+status.textContent="Je kunt verder. Bedankt!";
+setTimeout(closePopup,1500);
+},()=>{
+status.textContent="Geen toestemming gegeven. Je kunt verder.";
+setTimeout(closePopup,1500);
+});
+}
+
+updateCartCount();
 </script>
 
 </body>
