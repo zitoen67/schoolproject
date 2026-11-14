@@ -83,10 +83,7 @@ for category_index, category in enumerate(categories):
                 "Een stijlvolle toevoeging aan de VÉRRO collectie, "
                 "met een comfortabele pasvorm en moderne uitstraling."
             ),
-            "image": (
-                "https://loremflickr.com/900/1100/"
-                + search_term
-            ),
+          "image": f"https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=900&auto=format&fit=crop",
             "sizes": ["S", "M", "L", "XL"]
         })
 
