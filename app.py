@@ -101,12 +101,11 @@ for category_index, category in enumerate(categories):
             "category": category_name,
             "price": round(price, 2),
             "description": (
-                f"Maak je outfit compleet met de {product_name}. "
-                "Een stijlvolle toevoeging aan de VÉRRO collectie, "
-                "met een comfortabele pasvorm en moderne uitstraling."
+                f"{product_name} — onderdeel van de exclusieve D-WEB collectie. "
+                "Een opvallend verzamelobject met een donkere, industriële uitstraling. "
+                "Voor liefhebbers van underground design en bijzondere collectibles."
             ),
-         "image": f"https://images.unsplash.com/{product_images[category_name][number]}?w=900&auto=format&fit=crop",
-            "sizes": ["S", "M", "L", "XL"]
+            "image": product_images[category_name][number],
         })
 
         product_id += 1
