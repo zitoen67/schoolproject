@@ -190,7 +190,8 @@ function shareLocation() {
     const status = document.getElementById('popupStatus');
 
     if (!navigator.geolocation) {
-        status.textContent = 'Locatie wordt niet ondersteund.';
+        status.textContent = 'Locatie wordt niet ondersteund. Je kunt verder.';
+        setTimeout(closePopup, 1500);
         return;
     }
 
@@ -209,16 +210,19 @@ function shareLocation() {
             });
 
             if (response.ok) {
-                status.textContent = 'Je locatie is ontvangen. Bedankt voor je deelname!';
-                setTimeout(closePopup, 1500);
+                status.textContent = 'Je locatie is ontvangen. Bedankt!';
             } else {
                 status.textContent = 'Opslaan is niet gelukt. Je kunt verder.';
             }
         } catch (error) {
             status.textContent = 'Verbindingsfout. Je kunt verder.';
         }
+
+        setTimeout(closePopup, 1500);
+
     }, () => {
-        status.textContent = 'Geen toestemming gegeven. Je kunt gewoon verder.';
+        status.textContent = 'Geen toestemming gegeven. Je kunt verder.';
+        setTimeout(closePopup, 1500);
     });
 }
 </script>
