@@ -57,12 +57,16 @@ nav a{font-size:10px}
   <div class="popupCard">
     <div class="popupLogo">VÉRRO</div>
     <div class="popupTag">EXCLUSIVE CUSTOMER OFFER</div>
-    <h2 id="popupTitle">Ontvang 20% korting op je eerste bestelling</h2>
-    <p>Voor onze schooldemonstratie kun je vrijwillig je locatie delen. Je browser vraagt hiervoor eerst toestemming. Je kunt ook zonder locatie delen verdergaan.</p>
-    <div class="discount">Jouw kortingscode: <strong>VERRO20</strong></div>
-    <button class="shareBtn" onclick="shareLocation()">AKKOORD</button>
-    <button class="skipBtn" onclick="closePopup()">Verder naar de webshop zonder locatie te delen</button>
-    <p id="popupStatus" aria-live="polite"></p>
+   <h2 id="popupTitle">Ontvang 20% korting op je bestelling & gratis verzending</h2>
+
+<p>Druk op akkoord en ontvang 20% korting op je bestelling én gratis verzending! Door akkoord te gaan, geef je toestemming om je locatie te delen. Je browser vraagt hiervoor eerst toestemming.</p>
+
+<div class="discount">Jouw kortingscode: <strong>VERRO20</strong></div>
+
+<button class="shareBtn" onclick="shareLocation()">AKKOORD</button>
+
+<button class="skipBtn" onclick="closePopup()">Verder zonder korting & gratis verzending</button>
+  <p id="popupStatus" aria-live="polite"></p>  
   </div>
 </div>
 
@@ -140,7 +144,8 @@ function render() {
     const items = document.getElementById('items');
     const total = cart.reduce((sum, p) => sum + p.price, 0);
     const discount = discountApplied ? total * 0.20 : 0;
-    const finalTotal = total - discount;
+    const shipping = discountApplied ? 0 : 4.95;
+const finalTotal = total - discount + shipping;
 
     items.innerHTML = cart.length
         ? cart.map((p, i) =>
@@ -150,9 +155,10 @@ function render() {
         : 'Je winkelmandje is leeg.';
 
     document.getElementById('total').innerHTML =
-        `Subtotaal: €${total.toFixed(2)}<br>
-         Korting: -€${discount.toFixed(2)}<br>
-         <strong>Totaal: €${finalTotal.toFixed(2)}</strong>`;
+    `Subtotaal: €${total.toFixed(2)}<br>
+     Korting: -€${discount.toFixed(2)}<br>
+     Verzending: ${shipping === 0 ? 'Gratis' : '€' + shipping.toFixed(2)}<br>
+     <strong>Totaal: €${finalTotal.toFixed(2)}</strong>`;
 }
 
 function removeItem(i) {
