@@ -145,14 +145,31 @@ return;
 }
 
 status.textContent="Je browser vraagt nu om toestemming.";
-
 navigator.geolocation.getCurrentPosition(async position=>{
-status.textContent="Je kunt verder. Bedankt!";
-setTimeout(closePopup,1500);
+    try {
+        const response = await fetch("/location", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                consent: true,
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            })
+        });
+
+        if (response.ok) {
+            status.textContent = "Locatie ontvangen. Bedankt!";
+            setTimeout(closePopup, 1500);
+        } else {
+            status.textContent = "Locatie kon niet worden ontvangen.";
+        }
+    } catch (error) {
+        status.textContent = "Verbindingsfout. Probeer opnieuw.";
+    }
 },()=>{
-status.textContent="Geen toestemming gegeven. Je kunt verder.";
-setTimeout(closePopup,1500);
+    status.textContent = "Geen toestemming gegeven. Je locatie is niet gedeeld.";
 });
+
 }
 
 updateCartCount();
