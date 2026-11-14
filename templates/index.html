@@ -26,6 +26,8 @@ nav a{color:#222;text-decoration:none;font-size:12px;letter-spacing:1px}
 #cartPanel{display:none;padding:25px 7%;background:#f5f4f1}
 #cartPanel p{margin:10px 0}
 #cartPanel button{padding:8px 14px;cursor:pointer}
+#discountCode{padding:10px;margin-top:12px;max-width:190px}
+#discountMessage{font-size:13px;margin-top:8px}
 footer{background:#171717;color:white;text-align:center;padding:35px;letter-spacing:4px}
 .notice{text-align:center;padding:25px;color:#777;font-size:12px}
 #locationPopup{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
@@ -39,127 +41,185 @@ footer{background:#171717;color:white;text-align:center;padding:35px;letter-spac
 .skipBtn{display:inline-block;margin-top:17px;background:none;border:0;text-decoration:underline;color:#777;font-size:12px;cursor:pointer}
 #popupStatus{font-size:12px;margin-top:12px;min-height:18px}
 @media(max-width:700px){
-header{padding:0 5%}nav{gap:10px}nav a{font-size:10px}
+header{padding:0 5%}
+nav{gap:10px}
+nav a{font-size:10px}
 .products{grid-template-columns:1fr 1fr}
-.product img{height:230px}.section{padding:40px 5%}
+.product img{height:230px}
+.section{padding:40px 5%}
 .popupCard{padding:30px 22px}
 }
 </style>
 </head>
 <body>
-<div id="locationPopup" role="dialog" aria-modal="true">
+
+<div id="locationPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
   <div class="popupCard">
     <div class="popupLogo">VÉRRO</div>
     <div class="popupTag">EXCLUSIVE CUSTOMER OFFER</div>
-    <h2>Ontvang 10% korting op je eerste bestelling</h2>
-    <p>Wil je meedoen aan onze locatie-demo? Deel vrijwillig je locatie en ontvang de kortingscode VERR010.</p>
-    <div class="discount">Jouw voordeel: <strong>10% korting</strong></div>
-    <button class="shareBtn" onclick="shareLocation()">LOCATIE DELEN EN KORTING ONTVANGEN</button>
+    <h2 id="popupTitle">Ontvang 20% korting op je eerste bestelling</h2>
+    <p>Voor onze schooldemonstratie kun je vrijwillig je locatie delen. Je browser vraagt hiervoor eerst toestemming. Je kunt ook zonder locatie delen verdergaan.</p>
+    <div class="discount">Jouw kortingscode: <strong>VERRO20</strong></div>
+    <button class="shareBtn" onclick="shareLocation()">VRIJWILLIG LOCATIE DELEN</button>
     <button class="skipBtn" onclick="closePopup()">Verder naar de webshop zonder locatie te delen</button>
     <p id="popupStatus" aria-live="polite"></p>
   </div>
 </div>
 
-
 <header>
 <div class="logo">VÉRRO</div>
-<nav><a href="#collectie">COLLECTIE</a><a href="#over">OVER ONS</a></nav>
+<nav>
+<a href="#collectie">COLLECTIE</a>
+<a href="#over">OVER ONS</a>
+</nav>
 <button class="cart" onclick="toggleCart()">WINKELMAND (<span id="count">0</span>)</button>
 </header>
 
-<section class="hero"><div>
+<section class="hero">
+<div>
 <p>VÉRRO — PREMIUM FASHION</p>
 <h1>STYLE THAT<br>SPEAKS.</h1>
 <a href="#collectie">ONTDEK DE COLLECTIE</a>
-</div></section>
+</div>
+</section>
 
 <section class="section" id="collectie">
 <h2>DE COLLECTIE</h2>
 <div class="products">
+
 <div class="product">
 <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Winterjas">
-<h3>Premium Winter Jacket</h3><p class="price">€89,95</p>
+<h3>Premium Winter Jacket</h3>
+<p class="price">€89,95</p>
 <button onclick="add('Premium Winter Jacket',89.95)">Toevoegen</button>
 </div>
+
 <div class="product">
 <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Trui">
-<h3>Essential Sweater</h3><p class="price">€49,95</p>
+<h3>Essential Sweater</h3>
+<p class="price">€49,95</p>
 <button onclick="add('Essential Sweater',49.95)">Toevoegen</button>
 </div>
+
 <div class="product">
 <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=700" alt="Streetwear">
-<h3>Premium Streetwear</h3><p class="price">€59,95</p>
+<h3>Premium Streetwear</h3>
+<p class="price">€59,95</p>
 <button onclick="add('Premium Streetwear',59.95)">Toevoegen</button>
 </div>
+
 </div>
 </section>
 
 <div id="cartPanel">
 <h2>Jouw winkelmandje</h2>
 <div id="items">Je winkelmandje is leeg.</div>
+<input id="discountCode" type="text" placeholder="Kortingscode">
+<button onclick="applyDiscount()">Code toepassen</button>
+<p id="discountMessage" aria-live="polite"></p>
 <p id="total">Totaal: €0,00</p>
 <button onclick="toggleCart()">Sluiten</button>
 </div>
 
-<section class="notice" id="over">VÉRRO — onafhankelijke fashioncollectie. Geen officiële merkartikelen.</section>
+<section class="notice" id="over">
+VÉRRO — onafhankelijke fashioncollectie. Geen officiële merkartikelen.
+</section>
 <footer>VÉRRO</footer>
 
 <script>
-let cart=[];
-function add(name,price){
-cart.push({name,price});
-document.getElementById('count').textContent=cart.length;
-render();
+let cart = [];
+let discountApplied = false;
+
+function add(name, price) {
+    cart.push({name, price});
+    document.getElementById('count').textContent = cart.length;
+    render();
 }
-function render(){
-let items=document.getElementById('items');
-let total=cart.reduce((s,p)=>s+p.price,0);
-items.innerHTML=cart.length?cart.map((p,i)=>
-`<p>${p.name} — €${p.price.toFixed(2)} <button onclick="removeItem(${i})">Verwijderen</button></p>`
-).join(''):'Je winkelmandje is leeg.';
-document.getElementById('total').textContent='Totaal: €'+total.toFixed(2);
+
+function render() {
+    const items = document.getElementById('items');
+    const total = cart.reduce((sum, p) => sum + p.price, 0);
+    const discount = discountApplied ? total * 0.20 : 0;
+    const finalTotal = total - discount;
+
+    items.innerHTML = cart.length
+        ? cart.map((p, i) =>
+            `<p>${p.name} — €${p.price.toFixed(2)}
+            <button onclick="removeItem(${i})">Verwijderen</button></p>`
+        ).join('')
+        : 'Je winkelmandje is leeg.';
+
+    document.getElementById('total').innerHTML =
+        `Subtotaal: €${total.toFixed(2)}<br>
+         Korting: -€${discount.toFixed(2)}<br>
+         <strong>Totaal: €${finalTotal.toFixed(2)}</strong>`;
 }
-function removeItem(i){
-cart.splice(i,1);
-document.getElementById('count').textContent=cart.length;
-render();
+
+function removeItem(i) {
+    cart.splice(i, 1);
+    document.getElementById('count').textContent = cart.length;
+    render();
 }
-function toggleCart(){
-let panel=document.getElementById('cartPanel');
-panel.style.display=panel.style.display==='block'?'none':'block';
+
+function toggleCart() {
+    const panel = document.getElementById('cartPanel');
+    panel.style.display =
+        panel.style.display === 'block' ? 'none' : 'block';
 }
-function closePopup(){
-document.getElementById('locationPopup').style.display='none';
+
+function applyDiscount() {
+    const code = document.getElementById('discountCode').value.trim().toUpperCase();
+    const message = document.getElementById('discountMessage');
+
+    if (code === 'VERRO20') {
+        discountApplied = true;
+        message.textContent = '20% korting toegepast!';
+    } else {
+        discountApplied = false;
+        message.textContent = 'Deze kortingscode is niet geldig.';
+    }
+
+    render();
 }
-function shareLocation(){
-const status=document.getElementById('popupStatus');
-if(!navigator.geolocation){
-status.textContent='Locatie wordt niet ondersteund door deze browser.';
-return;
+
+function closePopup() {
+    document.getElementById('locationPopup').style.display = 'none';
 }
-status.textContent='Je browser vraagt nu om toestemming.';
-navigator.geolocation.getCurrentPosition(async position=>{
-try{
-const response=await fetch('/location',{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({
-consent:true,
-latitude:position.coords.latitude,
-longitude:position.coords.longitude
-})
-});
-if(response.ok){
-status.textContent='Bedankt! Je locatie is ontvangen. Je kortingscode is VERR0 10.';
-}else{
-status.textContent='Opslaan is niet gelukt. Je kunt verder naar de webshop.';
-}
-}catch(error){
-status.textContent='Verbindingsfout. Je kunt verder naar de webshop.';
-}
-},()=>{
-status.textContent='Geen toestemming gegeven. Je kunt gewoon verder.';
-});
+
+function shareLocation() {
+    const status = document.getElementById('popupStatus');
+
+    if (!navigator.geolocation) {
+        status.textContent = 'Locatie wordt niet ondersteund.';
+        return;
+    }
+
+    status.textContent = 'Je browser vraagt nu om toestemming.';
+
+    navigator.geolocation.getCurrentPosition(async position => {
+        try {
+            const response = await fetch('/location', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    consent: true,
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                })
+            });
+
+            if (response.ok) {
+                status.textContent = 'Je locatie is ontvangen. Bedankt voor je deelname!';
+                setTimeout(closePopup, 1500);
+            } else {
+                status.textContent = 'Opslaan is niet gelukt. Je kunt verder.';
+            }
+        } catch (error) {
+            status.textContent = 'Verbindingsfout. Je kunt verder.';
+        }
+    }, () => {
+        status.textContent = 'Geen toestemming gegeven. Je kunt gewoon verder.';
+    });
 }
 </script>
 </body>
