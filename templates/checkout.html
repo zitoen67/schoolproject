@@ -4,37 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afrekenen | VÉRRO</title>
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; color: #171717; background: #f7f7f7; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #171717;
+            background: #f7f7f7;
+        }
+
         header {
-            background: white; padding: 24px 7%;
-            display: flex; justify-content: space-between; align-items: center;
+            background: white;
+            padding: 24px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid #eee;
         }
-        .logo { font-size: 27px; font-weight: bold; letter-spacing: 5px; }
-        a { color: inherit; text-decoration: none; }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            letter-spacing: 5px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
         main {
-            max-width: 650px; margin: 45px auto; padding: 35px;
+            max-width: 750px;
+            margin: 45px auto;
+            padding: 35px;
             background: white;
         }
-        h1 { margin-bottom: 12px; }
-        .intro { color: #777; margin-bottom: 28px; }
-        label { display: block; margin: 17px 0 7px; font-size: 14px; }
+
+        h1 {
+            margin-bottom: 12px;
+        }
+
+        .intro {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .summary {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f7f7f7;
+        }
+
+        .cartItem {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cartItem img {
+            width: 75px;
+            height: 90px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .itemInfo {
+            flex: 1;
+            line-height: 1.7;
+        }
+
+        .remove {
+            border: 0;
+            background: none;
+            color: #888;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 5px;
+        }
+
+        .totals p {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+        }
+
+        .grandTotal {
+            font-size: 19px;
+            font-weight: bold;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 17px 0 7px;
+            font-size: 14px;
+        }
+
         input, select {
-            width: 100%; padding: 14px; border: 1px solid #ddd;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
             font-size: 15px;
         }
-        button {
-            width: 100%; padding: 16px; margin-top: 25px;
-            background: #171717; color: white; border: 0;
-            cursor: pointer; font-size: 14px;
+
+        button.submit {
+            width: 100%;
+            padding: 16px;
+            margin-top: 25px;
+            background: #171717;
+            color: white;
+            border: 0;
+            cursor: pointer;
+            font-size: 14px;
         }
-        #message { margin-top: 18px; }
-        .demo { margin-top: 20px; color: #777; font-size: 12px; line-height: 1.6; }
+
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 18px;
+            line-height: 1.6;
+        }
+
+        .demo {
+            margin-top: 20px;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .empty {
+            padding: 20px 0;
+            color: #777;
+        }
+
+        @media(max-width: 600px) {
+            main {
+                margin: 20px 12px;
+                padding: 22px;
+            }
+
+            header {
+                padding: 20px 5%;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
+
 <body>
+
 <header>
     <a class="logo" href="/">VÉRRO</a>
     <a href="/producten">← Verder winkelen</a>
@@ -42,12 +174,35 @@
 
 <main>
     <h1>Afrekenen</h1>
-    <div id="orderSummary" style="margin:20px 0;padding:18px;background:#f7f7f7;">
-    <h3>Jouw bestelling</h3>
-    <div id="orderItems"></div>
-    <p id="orderTotal" style="margin-top:15px;font-weight:bold;"></p>
-</div>
-    <p class="intro">Vul je gegevens in voor je demo-bestelling.</p>
+    <p class="intro">Controleer je bestelling en vul je gegevens in.</p>
+
+    <div class="summary">
+        <h3>Jouw bestelling</h3>
+
+        <div id="orderItems"></div>
+
+        <div class="totals">
+            <p>
+                <span>Subtotaal</span>
+                <span id="subtotal">€0,00</span>
+            </p>
+
+            <p>
+                <span>Korting</span>
+                <span id="discount">€0,00</span>
+            </p>
+
+            <p>
+                <span>Verzendkosten</span>
+                <span id="shipping">€4,95</span>
+            </p>
+
+            <p class="grandTotal">
+                <span>Totaal</span>
+                <span id="total">€0,00</span>
+            </p>
+        </div>
+    </div>
 
     <form id="checkoutForm">
         <label for="name">Volledige naam</label>
@@ -62,101 +217,208 @@
         <label for="email">E-mailadres</label>
         <input id="email" type="email" required>
 
-        <label for="phone">Telefoonnummer (optioneel)</label>
-        <input id="phone" type="tel">
-
         <label for="paymentMethod">Betaalmethode</label>
-        <select id="paymentMethod">
-            <option>iDEAL (demo)</option>
-            <option>Creditcard (demo)</option>
+        <select id="paymentMethod" required>
+            <option value="iDEAL (demo)">iDEAL (demo)</option>
+            <option value="Creditcard (demo)">Creditcard (demo)</option>
         </select>
 
-        <button type="submit">Bestelling plaatsen</button>
+        <button class="submit" id="submitButton" type="submit">
+            Bestelling plaatsen
+        </button>
     </form>
 
     <p id="message" aria-live="polite"></p>
+
     <p class="demo">
         Dit is een schooldemo. Er wordt geen echte betaling uitgevoerd.
-        Gebruik uitsluitend testgegevens, geen echte klantgegevens.
+        Gebruik uitsluitend testgegevens en geen echte klantgegevens.
     </p>
 </main>
 
 <script>
-const cart = JSON.parse(localStorage.getItem('verroCart') || '[]');
-const discountApplied = localStorage.getItem('verroDiscount') === 'yes';
-
-const itemsElement = document.getElementById('orderItems');
-const totalElement = document.getElementById('orderTotal');
-
-if (cart.length === 0) {
-    itemsElement.textContent = 'Je winkelmandje is leeg.';
-    totalElement.textContent = '';
-    document.querySelector('button[type="submit"]').disabled = true;
-} else {
-    itemsElement.innerHTML = cart.map(item => `
-        <p>${item.name} — €${Number(item.price).toFixed(2)}</p>
-    `).join('');
-
-    const subtotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
-    const discount = discountApplied ? subtotal * 0.20 : 0;
-    const shipping = discountApplied ? 0 : 4.95;
-    const total = subtotal - discount + shipping;
-
-    totalElement.textContent = 'Totaal: €' + total.toFixed(2);
-}
-
-document.getElementById("checkoutForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    if (cart.length === 0) {
-        alert('Je winkelmandje is leeg.');
-        return;
-    }
-
-    const name = document.getElementById("name").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const paymentMethod = document.getElementById("paymentMethod").value;
-
-    const subtotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
-    const discount = discountApplied ? subtotal * 0.20 : 0;
-    const shipping = discountApplied ? 0 : 4.95;
-    const total = subtotal - discount + shipping;
-
-    const message = document.getElementById("message");
-    message.textContent = "Bestelling wordt verwerkt...";
+    let cart = [];
 
     try {
-        const response = await fetch('/order', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name,
-                address,
-                city,
-                email,
-                paymentMethod,
-                items: cart,
-                total: '€' + total.toFixed(2)
-            })
+        cart = JSON.parse(localStorage.getItem("verroCart")) || [];
+    } catch {
+        cart = [];
+    }
+
+    const discountApplied =
+        localStorage.getItem("verroDiscount") === "yes";
+
+    const itemsElement = document.getElementById("orderItems");
+    const submitButton = document.getElementById("submitButton");
+
+    function euro(amount) {
+        return "€" + amount.toFixed(2).replace(".", ",");
+    }
+
+    function getQuantity(item) {
+        return Math.max(1, Number(item.quantity) || 1);
+    }
+
+    function calculateTotals() {
+        const subtotal = cart.reduce((sum, item) => {
+            return sum + Number(item.price) * getQuantity(item);
+        }, 0);
+
+        const discount = discountApplied ? subtotal * 0.20 : 0;
+        const shipping = discountApplied ? 0 : 4.95;
+        const total = subtotal - discount + shipping;
+
+        return { subtotal, discount, shipping, total };
+    }
+
+    function updateCheckout() {
+        itemsElement.replaceChildren();
+
+        if (cart.length === 0) {
+            const empty = document.createElement("p");
+            empty.className = "empty";
+            empty.textContent = "Je winkelmandje is leeg.";
+            itemsElement.appendChild(empty);
+
+            submitButton.disabled = true;
+
+            document.getElementById("subtotal").textContent = euro(0);
+            document.getElementById("discount").textContent = euro(0);
+            document.getElementById("shipping").textContent = euro(0);
+            document.getElementById("total").textContent = euro(0);
+
+            return;
+        }
+
+        submitButton.disabled = false;
+
+        cart.forEach((item, index) => {
+            const row = document.createElement("div");
+            row.className = "cartItem";
+
+            const img = document.createElement("img");
+            img.src = item.image || "";
+            img.alt = item.name || "Product";
+
+            const info = document.createElement("div");
+            info.className = "itemInfo";
+
+            const name = document.createElement("strong");
+            name.textContent = item.name || "Product";
+
+            const details = document.createElement("p");
+            details.textContent =
+                "Maat: " + (item.size || "-") +
+                " | Aantal: " + getQuantity(item);
+
+            const price = document.createElement("p");
+            price.textContent =
+                euro(Number(item.price) * getQuantity(item));
+
+            const remove = document.createElement("button");
+            remove.className = "remove";
+            remove.type = "button";
+            remove.textContent = "Verwijderen";
+
+            remove.addEventListener("click", function() {
+                cart.splice(index, 1);
+                localStorage.setItem("verroCart", JSON.stringify(cart));
+                updateCheckout();
+            });
+
+            info.append(name, details, price, remove);
+            row.append(img, info);
+            itemsElement.appendChild(row);
         });
 
-        if (!response.ok) throw new Error();
+        const totals = calculateTotals();
 
-        localStorage.removeItem('verroCart');
-        localStorage.removeItem('verroDiscount');
+        document.getElementById("subtotal").textContent =
+            euro(totals.subtotal);
 
-        document.querySelector('main').innerHTML = `
-            <h1>Bedankt voor je bestelling!</h1>
-            <p>Je demobestelling is ontvangen.</p>
-            <p>Er is geen echte betaling uitgevoerd.</p>
-            <a href="/producten">Verder winkelen</a>
-        `;
-    } catch (error) {
-        message.textContent = "Er ging iets mis. Probeer opnieuw.";
+        document.getElementById("discount").textContent =
+            "- " + euro(totals.discount);
+
+        document.getElementById("shipping").textContent =
+            euro(totals.shipping);
+
+        document.getElementById("total").textContent =
+            euro(totals.total);
     }
-});
+
+    updateCheckout();
+
+    document.getElementById("checkoutForm").addEventListener(
+        "submit",
+        async function(event) {
+            event.preventDefault();
+
+            if (cart.length === 0) {
+                return;
+            }
+
+            const totals = calculateTotals();
+
+            const orderData = {
+                name: document.getElementById("name").value.trim(),
+                address: document.getElementById("address").value.trim(),
+                city: document.getElementById("city").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                paymentMethod:
+                    document.getElementById("paymentMethod").value,
+                items: cart,
+                total: euro(totals.total)
+            };
+
+            const message = document.getElementById("message");
+
+            submitButton.disabled = true;
+            message.textContent = "Demobestelling wordt verwerkt...";
+
+            try {
+                const response = await fetch("/order", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.error || "Er ging iets mis."
+                    );
+                }
+
+                localStorage.removeItem("verroCart");
+                localStorage.removeItem("verroDiscount");
+
+                document.querySelector("main").innerHTML = `
+                    <h1>Bedankt voor je bestelling!</h1>
+                    <p style="margin-top:15px;">
+                        Je demobestelling is ontvangen.
+                    </p>
+                    <p style="margin-top:10px;">
+                        Er is geen echte betaling uitgevoerd.
+                    </p>
+                    <p style="margin-top:25px;">
+                        <a href="/producten">
+                            Verder winkelen →
+                        </a>
+                    </p>
+                `;
+
+            } catch (error) {
+                message.textContent =
+                    error.message || "Er ging iets mis. Probeer opnieuw.";
+
+                submitButton.disabled = false;
+            }
+        }
+    );
 </script>
+
 </body>
 </html>
