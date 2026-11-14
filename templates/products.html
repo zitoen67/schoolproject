@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.name }} | VÉRRO</title>
+    <title>Collectie | VÉRRO</title>
 
     <style>
         * {
@@ -52,128 +52,131 @@
             font-size: 13px;
         }
 
-        .breadcrumb {
-            padding: 25px 7%;
-            color: #777;
-            font-size: 13px;
+        .pageTitle {
+            padding: 65px 7% 35px;
+            text-align: center;
         }
 
-        .breadcrumb a {
-            color: #777;
-            text-decoration: none;
-        }
-
-        .productPage {
-            max-width: 1200px;
-            margin: 20px auto 80px;
-            padding: 0 25px;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 65px;
-        }
-
-        .productImage {
-            width: 100%;
-            height: 620px;
-            object-fit: cover;
-            background: #eee;
-        }
-
-        .productInfo {
-            padding-top: 35px;
-        }
-
-        .category {
+        .pageTitle p {
             color: #888;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 18px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
         }
 
-        h1 {
-            font-size: 34px;
-            margin-bottom: 18px;
+        .pageTitle h1 {
+            font-size: 38px;
+            letter-spacing: 3px;
         }
 
-        .price {
-            font-size: 21px;
-            margin-bottom: 30px;
-        }
-
-        .description {
-            color: #666;
-            line-height: 1.8;
-            font-size: 14px;
-            margin-bottom: 35px;
-        }
-
-        .sizeTitle {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 13px;
-        }
-
-        .sizes {
+        .categoryButtons {
             display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 28px;
+            padding: 10px 5% 30px;
         }
 
-        .sizeButton {
-            width: 48px;
-            height: 45px;
+        .categoryButtons a {
+            padding: 11px 18px;
             border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
+            color: #333;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.2s;
         }
 
-        .sizeButton.selected {
+        .categoryButtons a:hover,
+        .categoryButtons a.active {
             background: #111;
             color: white;
             border-color: #111;
         }
 
-        .addButton {
+        .searchArea {
+            max-width: 400px;
+            margin: 0 auto 35px;
+            padding: 0 15px;
+        }
+
+        .searchArea input {
             width: 100%;
-            padding: 18px;
-            border: none;
-            background: #111;
-            color: white;
+            padding: 14px;
+            border: 1px solid #ddd;
             font-size: 13px;
-            letter-spacing: 1px;
-            cursor: pointer;
+            outline: none;
         }
 
-        .addButton:hover {
-            background: #333;
+        .productGrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px 20px;
+            padding: 0 7% 80px;
         }
 
-        .message {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #287a42;
-            min-height: 18px;
+        .product {
+            min-width: 0;
         }
 
-        .backLink {
-            display: inline-block;
-            margin-top: 25px;
-            color: #555;
-            font-size: 13px;
+        .product a {
+            color: inherit;
             text-decoration: none;
         }
 
+        .productImage {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            background: #eee;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .product a:hover .productImage {
+            opacity: 0.85;
+        }
+
+        .product h3 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 15px 0 8px;
+        }
+
+        .product .category {
+            color: #888;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .noResults {
+            display: none;
+            text-align: center;
+            padding: 50px 15px;
+            color: #777;
+            grid-column: 1 / -1;
+        }
+
         footer {
-            padding: 35px 7%;
             background: #111;
             color: white;
             text-align: center;
+            padding: 35px;
             font-size: 12px;
             letter-spacing: 2px;
         }
 
-        @media(max-width: 750px) {
+        @media(max-width: 950px) {
+            .productGrid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width: 650px) {
             header {
                 padding: 0 5%;
             }
@@ -182,22 +185,35 @@
                 display: none;
             }
 
-            .productPage {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin-top: 0;
+            .pageTitle {
+                padding-top: 45px;
+            }
+
+            .pageTitle h1 {
+                font-size: 29px;
+            }
+
+            .productGrid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px 12px;
+                padding: 0 4% 55px;
             }
 
             .productImage {
-                height: 430px;
+                height: 230px;
             }
 
-            .productInfo {
-                padding-top: 10px;
+            .product h3 {
+                font-size: 12px;
             }
 
-            h1 {
-                font-size: 27px;
+            .categoryButtons {
+                gap: 7px;
+            }
+
+            .categoryButtons a {
+                padding: 9px 12px;
+                font-size: 11px;
             }
         }
     </style>
@@ -218,59 +234,65 @@
     </a>
 </header>
 
-<div class="breadcrumb">
-    <a href="/">Home</a> /
-    <a href="/producten">Collectie</a> /
-    {{ product.name }}
+<section class="pageTitle">
+    <p>VÉRRO COLLECTION</p>
+    <h1>ONZE COLLECTIE</h1>
+</section>
+
+<div class="categoryButtons">
+    <a href="/producten"
+       class="{% if not selected_category %}active{% endif %}">
+        Alles
+    </a>
+
+    {% for category in categories %}
+        <a
+            href="/producten?categorie={{ category.slug|urlencode }}"
+            class="{% if selected_category == category.slug %}active{% endif %}"
+        >
+            {{ category.name }}
+        </a>
+    {% endfor %}
 </div>
 
-<main class="productPage">
-
-    <img
-        class="productImage"
-        src="{{ product.image }}"
-        alt="{{ product.name }}"
+<div class="searchArea">
+    <input
+        type="search"
+        id="searchInput"
+        placeholder="Zoek een product..."
     >
+</div>
 
-    <section class="productInfo">
+<main class="productGrid" id="productGrid">
 
-        <div class="category">{{ product.category }}</div>
-
-        <h1>{{ product.name }}</h1>
-
-        <div class="price">
-            € {{ "%.2f"|format(product.price) }}
-        </div>
-
-        <p class="description">
-            {{ product.description }}
-        </p>
-
-        <div class="sizeTitle">KIES JE MAAT</div>
-
-        <div class="sizes">
-            {% for size in product.sizes %}
-                <button
-                    type="button"
-                    class="sizeButton"
-                    onclick="selectSize(this, '{{ size }}')"
+    {% for product in products %}
+        <article
+            class="product"
+            data-category="{{ product.category }}"
+            data-name="{{ product.name|lower }}"
+        >
+            <a href="/product/{{ product.id }}">
+                <img
+                    class="productImage"
+                    src="{{ product.image }}"
+                    alt="{{ product.name }}"
+                    loading="lazy"
                 >
-                    {{ size }}
-                </button>
-            {% endfor %}
-        </div>
 
-        <button class="addButton" onclick="addToCart()">
-            IN WINKELMAND
-        </button>
+                <h3>{{ product.name }}</h3>
 
-        <p class="message" id="message"></p>
+                <p class="category">{{ product.category }}</p>
 
-        <a href="/producten" class="backLink">
-            ← Terug naar collectie
-        </a>
+                <p class="price">
+                    € {{ "%.2f"|format(product.price) }}
+                </p>
+            </a>
+        </article>
+    {% endfor %}
 
-    </section>
+    <p class="noResults" id="noResults">
+        Geen producten gevonden.
+    </p>
 
 </main>
 
@@ -279,25 +301,7 @@
 </footer>
 
 <script>
-    const product = {
-        id: {{ product.id|tojson }},
-        name: {{ product.name|tojson }},
-        price: {{ product.price|tojson }},
-        image: {{ product.image|tojson }}
-    };
-
-    let selectedSize = "";
-
-    function selectSize(button, size) {
-        document.querySelectorAll(".sizeButton").forEach(item => {
-            item.classList.remove("selected");
-        });
-
-        button.classList.add("selected");
-        selectedSize = size;
-
-        document.getElementById("message").textContent = "";
-    }
+    const selectedCategory = {{ selected_category|tojson }};
 
     function getCart() {
         try {
@@ -309,6 +313,7 @@
 
     function updateCartCount() {
         const cart = getCart();
+
         const count = cart.reduce((total, item) => {
             return total + (Number(item.quantity) || 1);
         }, 0);
@@ -316,40 +321,41 @@
         document.getElementById("cartCount").textContent = count;
     }
 
-    function addToCart() {
-        if (!selectedSize) {
-            document.getElementById("message").textContent =
-                "Kies eerst een maat.";
-            return;
-        }
+    function filterProducts() {
+        const search = document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase();
 
-        const cart = getCart();
+        const cards = document.querySelectorAll(".product");
+        let visibleCount = 0;
 
-        const existingItem = cart.find(item =>
-            item.id === product.id && item.size === selectedSize
-        );
+        cards.forEach(card => {
+            const matchesCategory =
+                !selectedCategory ||
+                card.dataset.category === selectedCategory;
 
-        if (existingItem) {
-            existingItem.quantity = (Number(existingItem.quantity) || 1) + 1;
-        } else {
-            cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                size: selectedSize,
-                quantity: 1
-            });
-        }
+            const matchesSearch =
+                card.dataset.name.includes(search);
 
-        localStorage.setItem("verroCart", JSON.stringify(cart));
+            const visible = matchesCategory && matchesSearch;
 
-        updateCartCount();
+            card.style.display = visible ? "" : "none";
 
-        document.getElementById("message").textContent =
-            "Product toegevoegd aan je winkelmand!";
+            if (visible) {
+                visibleCount++;
+            }
+        });
+
+        document.getElementById("noResults").style.display =
+            visibleCount === 0 ? "block" : "none";
     }
 
+    document
+        .getElementById("searchInput")
+        .addEventListener("input", filterProducts);
+
+    filterProducts();
     updateCartCount();
 </script>
 
