@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collectie | VÉRRO</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; color: #171717; }
+        header {
+            height: 76px; padding: 0 7%; display: flex;
+            align-items: center; justify-content: space-between;
+            border-bottom: 1px solid #eee;
+        }
+        .logo { font-size: 27px; font-weight: bold; letter-spacing: 5px; }
+        a { color: inherit; text-decoration: none; }
+        .back { font-size: 14px; }
+        main { padding: 55px 7%; }
+        h1 { font-size: 36px; margin-bottom: 12px; }
+        .intro { color: #777; margin-bottom: 35px; }
+        .categories {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 40px;
+        }
+        .categories button {
+            border: 1px solid #ddd; background: white;
+            padding: 11px 19px; cursor: pointer;
+        }
+        .categories button.active,
+        .categories button:hover { background: #171717; color: white; }
+        .products {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        .product { cursor: pointer; }
+        .product img {
+            width: 100%; aspect-ratio: 3/4; object-fit: cover;
+            background: #f2f2f2;
+        }
+        .product h3 { font-size: 16px; margin-top: 13px; }
+        .product p { color: #777; margin-top: 7px; }
+        @media(max-width: 800px) {
+            .products { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a class="logo" href="/">VÉRRO</a>
+    <a class="back" href="/">← Terug naar home</a>
+</header>
 
+<main>
+    <h1>Onze collectie</h1>
+    <p class="intro">Ontdek jouw nieuwe favoriete outfit.</p>
+
+    <div class="categories">
+        <button class="active" onclick="filterProducts('Alle', this)">Alles</button>
+        <button onclick="filterProducts('Jassen', this)">Jassen</button>
+        <button onclick="filterProducts('Hoodies', this)">Hoodies</button>
+        <button onclick="filterProducts('Truien', this)">Truien</button>
+        <button onclick="filterProducts('T-shirts', this)">T-shirts</button>
+        <button onclick="filterProducts('Broeken', this)">Broeken</button>
+        <button onclick="filterProducts('Jeans', this)">Jeans</button>
+        <button onclick="filterProducts('Sneakers', this)">Sneakers</button>
+        <button onclick="filterProducts('Outfits', this)">Outfits</button>
+    </div>
+
+    <div class="products" id="products"></div>
+</main>
+
+<script>
+const products = [
+    {name:"Premium Winter Jacket", price:89.95, category:"Jassen", image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=700"},
+    {name:"Urban Puffer Jacket", price:99.95, category:"Jassen", image:"https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700"},
+    {name:"Essential Hoodie", price:54.95, category:"Hoodies", image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+    {name:"Street Hoodie", price:59.95, category:"Hoodies", image:"https://images.unsplash.com/photo-1578681994506-b8f463449011?w=700"},
+    {name:"Classic Sweater", price:49.95, category:"Truien", image:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700"},
+    {name:"Premium Knit", price:64.95, category:"Truien", image:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=700"},
+    {name:"Basic T-shirt", price:24.95, category:"T-shirts", image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
+    {name:"Oversized T-shirt", price:29.95, category:"T-shirts", image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=700"},
+    {name:"Cargo Pants", price:59.95, category:"Broeken", image:"https://images.unsplash.com/photo-1517438476312-10d79c077509?w=700"},
+    {name:"Relaxed Pants", price:54.95, category:"Broeken", image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700"},
+    {name:"Classic Jeans", price:64.95, category:"Jeans", image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700"},
+    {name:"Relaxed Jeans", price:69.95, category:"Jeans", image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=700"},
+    {name:"Essential Sneakers", price:79.95, category:"Sneakers", image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
+    {name:"Urban Sneakers", price:89.95, category:"Sneakers", image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?w=700"},
+    {name:"Complete Street Outfit", price:119.95, category:"Outfits", image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700"},
+    {name:"Everyday Outfit", price:109.95, category:"Outfits", image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700"}
+];
+
+function showProducts(category) {
+    const filtered = category === "Alle"
+        ? products
+        : products.filter(p => p.category === category);
+
+    document.getElementById("products").innerHTML = filtered.map(p => `
+        <div class="product">
+            <img src="${p.image}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p>€${p.price.toFixed(2)}</p>
+        </div>
+    `).join("");
+}
+
+function filterProducts(category, button) {
+    document.querySelectorAll(".categories button").forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+    showProducts(category);
+}
+
+showProducts("Alle");
+</script>
+</body>
+</html>
