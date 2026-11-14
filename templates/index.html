@@ -95,45 +95,44 @@ nav a{font-size:10px}
 <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Winterjas">
 <h3>Premium Winter Jacket</h3>
 <p class="price">€89,95</p>
-<button onclick="add('Premium Winter Jacket',89.95)">Toevoegen</button>
+<button onclick="add('Premium Winter Jacket',89.95,this)">Toevoegen</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Trui">
 <h3>Essential Sweater</h3>
 <p class="price">€49,95</p>
-<button onclick="add('Essential Sweater',49.95)">Toevoegen</button>
+<button onclick="add('Essential Sweater',49.95,this)">Toevoegen</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=700" alt="Streetwear">
 <h3>Premium Streetwear</h3>
 <p class="price">€59,95</p>
-<button onclick="add('Premium Streetwear',59.95)">Toevoegen</button>
+<button onclick="add('Premium Streetwear',59.95,this)">Toevoegen</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=700" alt="Sneakers">
 <h3>Essential Sneakers</h3>
 <p class="price">€69,95</p>
-<button onclick="add('Essential Sneakers',69.95)">Toevoegen</button>
+<button onclick="add('Essential Sneakers',69.95,this)">Toevoegen</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="Fashion outfit">
 <h3>Premium Outfit</h3>
 <p class="price">€89,95</p>
-<button onclick="add('Premium Outfit',89.95)">Toevoegen</button>
+<button onclick="add('Premium Outfit',89.95,this)">Toevoegen</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700" alt="Fashion kleding">
 <h3>Urban Style Outfit</h3>
 <p class="price">€74,95</p>
-<button onclick="add('Urban Style Outfit',74.95)">Toevoegen</button>
+<button onclick="add('Urban Style Outfit',74.95,this)">Toevoegen</button>
 </div>
 
-</div>
 </div>
 </section>
 
@@ -145,8 +144,25 @@ nav a{font-size:10px}
 <p id="discountMessage" aria-live="polite"></p>
 <p id="total">Totaal: €0,00</p>
 <button onclick="toggleCart()">Sluiten</button>
+  <button onclick="checkout()">Afrekenen</button>
 </div>
+ <input id="customerAddress" placeholder="Straat en huisnummer" required><br><br>
+    <input id="customerCity" placeholder="Postcode en woonplaats" required><br><br>
+    <input id="customerEmail" type="email" placeholder="E-mailadres" required><br><br>
 
+    <label for="paymentMethod">Betaalmethode</label><br>
+    <select id="paymentMethod">
+        <option value="iDEAL (demo)">iDEAL (demo)</option>
+        <option value="Creditcard (demo)">Creditcard (demo)</option>
+    </select><br><br>
+
+    <button onclick="placeOrder()">Bestelling plaatsen</button>
+    <button onclick="document.getElementById('checkoutPanel').style.display='none'">Terug</button>
+
+    <p style="font-size:12px;color:#777;margin-top:15px;">
+        Dit is een demonstratie. Er wordt geen echte betaling uitgevoerd.
+    </p>
+</div>
 <section class="notice" id="over">
 VÉRRO — onafhankelijke fashioncollectie. Geen officiële merkartikelen.
 </section>
@@ -156,11 +172,6 @@ VÉRRO — onafhankelijke fashioncollectie. Geen officiële merkartikelen.
 let cart = [];
 let discountApplied = false;
 
-function add(name, price) {
-    cart.push({name, price});
-    document.getElementById('count').textContent = cart.length;
-    render();
-}
 
 function render() {
     const items = document.getElementById('items');
@@ -183,12 +194,37 @@ const finalTotal = total - discount + shipping;
      <strong>Totaal: €${finalTotal.toFixed(2)}</strong>`;
 }
 
+function add(name, price, button) {
+    cart.push({name, price});
+    document.getElementById('count').textContent = cart.length;
+    render();
+
+    const oldText = button.textContent;
+    button.textContent = 'Toegevoegd ✓';
+    button.style.background = '#287a43';
+
+    setTimeout(() => {
+        button.textContent = oldText;
+        button.style.background = '#171717';
+    }, 1500);
+}
 function removeItem(i) {
     cart.splice(i, 1);
     document.getElementById('count').textContent = cart.length;
     render();
 }
+  function checkout() {
+    if (cart.length === 0) {
+        alert('Je winkelmandje is leeg!');
+        return;
+    }
 
+    document.getElementById('cartPanel').style.display = 'none';
+    document.getElementById('checkoutPanel').style.display = 'block';
+    document.getElementById('checkoutPanel').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
 function toggleCart() {
     const panel = document.getElementById('cartPanel');
 
@@ -214,7 +250,37 @@ function applyDiscount() {
 
     render();
 }
+function placeOrder() {
+    const name = document.getElementById('customerName').value.trim();
+    const address = document.getElementById('customerAddress').value.trim();
+    const city = document.getElementById('customerCity').value.trim();
+    const email = document.getElementById('customerEmail').value.trim();
 
+    if (!name || !address || !city || !email) {
+        alert('Vul alle gegevens in!');
+        return;
+    }
+
+    if (!document.getElementById('customerEmail').checkValidity()) {
+        alert('Vul een geldig e-mailadres in!');
+        return;
+    }
+
+    const method = document.getElementById('paymentMethod').value;
+
+    document.getElementById('checkoutPanel').innerHTML = `
+        <h2>Bedankt voor je bestelling!</h2>
+        <p>Je bestelling is succesvol geplaatst in deze demo.</p>
+        <p>Naam: ${name}</p>
+        <p>Betaalmethode: ${method}</p>
+        <p><strong>Er is geen echte betaling uitgevoerd.</strong></p>
+    `;
+
+    cart = [];
+    discountApplied = false;
+    document.getElementById('count').textContent = '0';
+    render();
+}
 function closePopup() {
     document.getElementById('locationPopup').style.display = 'none';
 }
