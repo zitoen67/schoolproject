@@ -1,373 +1,395 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VÉRRO — Premium Fashion</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;color:#171717;background:#fff}
-header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee}
-.logo{font-size:29px;font-weight:bold;letter-spacing:7px}
-nav{display:flex;gap:28px}
-nav a{color:#222;text-decoration:none;font-size:12px;letter-spacing:1px}
-.cart{border:0;background:none;font-size:14px;cursor:pointer}
-.hero{min-height:480px;background:linear-gradient(90deg,#171717,#555);color:white;display:flex;align-items:center;padding:8%}
-.hero p{letter-spacing:4px;font-size:12px;margin-bottom:22px}
-.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.05;margin-bottom:25px}
-.hero a{display:inline-block;background:white;color:black;text-decoration:none;padding:16px 26px;font-size:12px;letter-spacing:2px}
-.section{padding:65px 7%}
-.section h2{font-size:25px;letter-spacing:3px;margin-bottom:30px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.categoryGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-.categoryCard {
-    position: relative;
-    display: block;
-    height: 300px;
-    overflow: hidden;
-    text-decoration: none;
-    background: #eee;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VÉRRO — Premium Streetwear</title>
 
-.categoryCard img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.categoryCard:hover img {
-    transform: scale(1.06);
-}
+        body {
+            font-family: Arial, sans-serif;
+            color: #171717;
+            background: #fff;
+        }
 
-.categoryCard span {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 22px;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-}
+        header {
+            height: 76px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+        }
 
-@media(max-width:700px) {
-    .categoryGrid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+        .logo {
+            color: #111;
+            text-decoration: none;
+            font-size: 29px;
+            font-weight: bold;
+            letter-spacing: 7px;
+        }
 
-    .categoryCard {
-        height: 210px;
-    }
-}
-.product img{width:100%;height:340px;object-fit:cover;background:#eee}
-.product h3{font-size:15px;margin:15px 0 8px}
-.price{color:#777;font-size:14px}
-.product button{margin-top:13px;padding:12px 17px;background:#171717;color:white;border:0;cursor:pointer}
-#cartPanel{display:none;padding:25px 7%;background:#f5f4f1}
-#cartPanel p{margin:10px 0}
-#cartPanel button{padding:8px 14px;cursor:pointer}
-#discountCode{padding:10px;margin-top:12px;max-width:190px}
-#discountMessage{font-size:13px;margin-top:8px}
-footer{background:#171717;color:white;text-align:center;padding:35px;letter-spacing:4px}
-.notice{text-align:center;padding:25px;color:#777;font-size:12px}
-#locationPopup{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
-.popupCard{background:#fff;width:100%;max-width:440px;padding:38px 30px;text-align:center;border-radius:5px}
-.popupLogo{font-size:27px;font-weight:bold;letter-spacing:7px;margin-bottom:24px}
-.popupTag{font-size:11px;letter-spacing:2px;color:#9a7b45;margin-bottom:14px}
-.popupCard h2{font-size:27px;margin-bottom:15px;line-height:1.2}
-.popupCard p{font-size:14px;line-height:1.6;color:#666;margin-bottom:20px}
-.discount{background:#f5f2ec;padding:15px;margin-bottom:20px;font-size:14px}
-.shareBtn{width:100%;padding:17px;background:#171717;color:white;border:0;font-weight:bold;letter-spacing:1px;cursor:pointer}
-.skipBtn{display:inline-block;margin-top:17px;background:none;border:0;text-decoration:underline;color:#777;font-size:12px;cursor:pointer}
-#popupStatus{font-size:12px;margin-top:12px;min-height:18px}
-@media(max-width:700px){
-header{padding:0 5%}
-nav{gap:10px}
-nav a{font-size:10px}
-.products{grid-template-columns:1fr 1fr}
-.product img{height:230px}
-.section{padding:40px 5%}
-.popupCard{padding:30px 22px}
-}
-</style>
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #222;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .cart {
+            color: #111;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .hero {
+            min-height: 520px;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.8), rgba(0,0,0,.15)),
+                url("https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1800");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 8%;
+        }
+
+        .hero p {
+            letter-spacing: 4px;
+            font-size: 12px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero a {
+            display: inline-block;
+            background: white;
+            color: black;
+            text-decoration: none;
+            padding: 16px 26px;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .section {
+            padding: 70px 7%;
+        }
+
+        .sectionHeading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .sectionHeading p {
+            color: #888;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .sectionHeading h2 {
+            font-size: 28px;
+            letter-spacing: 3px;
+        }
+
+        .categoryGrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .categoryCard {
+            position: relative;
+            display: block;
+            height: 300px;
+            overflow: hidden;
+            text-decoration: none;
+            background: #eee;
+        }
+
+        .categoryCard img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .categoryCard:hover img {
+            transform: scale(1.06);
+        }
+
+        .categoryCard span {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 22px;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background: linear-gradient(transparent, rgba(0,0,0,.75));
+        }
+
+        .collectionBanner {
+            background: #171717;
+            color: white;
+            padding: 65px 7%;
+            text-align: center;
+        }
+
+        .collectionBanner h2 {
+            font-size: 30px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .collectionBanner p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .collectionBanner a {
+            display: inline-block;
+            background: white;
+            color: #111;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .about {
+            padding: 65px 7%;
+            text-align: center;
+            background: #f6f6f6;
+        }
+
+        .about h2 {
+            font-size: 23px;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .about p {
+            max-width: 650px;
+            margin: auto;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 35px;
+            font-size: 12px;
+            letter-spacing: 4px;
+        }
+
+        @media(max-width: 900px) {
+            .categoryGrid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categoryCard {
+                height: 250px;
+            }
+        }
+
+        @media(max-width: 600px) {
+            header {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 23px;
+                letter-spacing: 4px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            nav a {
+                font-size: 10px;
+            }
+
+            .cart {
+                font-size: 11px;
+            }
+
+            .hero {
+                min-height: 430px;
+                padding: 8% 6%;
+            }
+
+            .section {
+                padding: 45px 5%;
+            }
+
+            .sectionHeading h2 {
+                font-size: 22px;
+            }
+
+            .categoryGrid {
+                gap: 12px;
+            }
+
+            .categoryCard {
+                height: 210px;
+            }
+
+            .categoryCard span {
+                padding: 13px;
+                font-size: 11px;
+            }
+
+            .collectionBanner {
+                padding: 50px 6%;
+            }
+
+            .collectionBanner h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div id="locationPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-  <div class="popupCard">
-    <div class="popupLogo">VÉRRO</div>
-    <div class="popupTag">EXCLUSIVE CUSTOMER OFFER</div>
-   <h2 id="popupTitle">Ontvang 20% korting op je bestelling & gratis verzending</h2>
-
-<p>Druk op akkoord en ontvang 20% korting op je bestelling én gratis verzending!</p>
-
-<div class="discount">Jouw kortingscode: <strong>VERRO20</strong></div>
-
-<button class="shareBtn" onclick="shareLocation()">AKKOORD</button>
-
-
-  <p id="popupStatus" aria-live="polite"></p>  
-  </div>
-</div>
-
 <header>
-<div class="logo">VÉRRO</div>
-<nav>
-<a href="/producten">COLLECTIE</a>
-<a href="#over">OVER ONS</a>
-</nav>
-<button class="cart" onclick="toggleCart()">WINKELMAND (<span id="count">0</span>)</button>
+    <a href="/" class="logo">VÉRRO</a>
+
+    <nav>
+        <a href="/producten">COLLECTIE</a>
+        <a href="#over">OVER ONS</a>
+    </nav>
+
+    <a href="/afrekenen" class="cart">
+        WINKELMAND (<span id="count">0</span>)
+    </a>
 </header>
 
 <section class="hero">
-<div>
-<p>VÉRRO — PREMIUM FASHION</p>
-<h1>STYLE THAT<br>SPEAKS.</h1>
-<a href="#collectie">ONTDEK DE COLLECTIE</a>
-</div>
+    <div>
+        <p>VÉRRO — PREMIUM STREETWEAR</p>
+        <h1>STYLE THAT<br>SPEAKS.</h1>
+        <a href="/producten">ONTDEK DE COLLECTIE</a>
+    </div>
 </section>
 
 <section class="section" id="collectie">
-    <h2>SHOP PER CATEGORIE</h2>
+
+    <div class="sectionHeading">
+        <p>VÉRRO COLLECTION</p>
+        <h2>SHOP PER CATEGORIE</h2>
+    </div>
 
     <div class="categoryGrid">
 
-    <a href="/producten?categorie=Jassen" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Jassen">
-        <span>JASSEN →</span>
-    </a>
+        <a href="/producten?categorie=Jassen" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Jassen">
+            <span>JASSEN</span>
+        </a>
 
-    <a href="/producten?categorie=Hoodies" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700" alt="Hoodies">
-        <span>HOODIES →</span>
-    </a>
+        <a href="/producten?categorie=Hoodies" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700" alt="Hoodies">
+            <span>HOODIES</span>
+        </a>
 
-    <a href="/producten?categorie=Truien" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Truien">
-        <span>TRUIEN →</span>
-    </a>
+        <a href="/producten?categorie=Truien" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Truien">
+            <span>TRUIEN</span>
+        </a>
 
-    <a href="/producten?categorie=T-shirts" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="T-shirts">
-        <span>T-SHIRTS →</span>
-    </a>
+        <a href="/producten?categorie=T-shirts" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700" alt="T-shirts">
+            <span>T-SHIRTS</span>
+        </a>
 
-    <a href="/producten?categorie=Broeken" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700" alt="Broeken">
-        <span>BROEKEN →</span>
-    </a>
+        <a href="/producten?categorie=Broeken" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700" alt="Broeken">
+            <span>BROEKEN</span>
+        </a>
 
-    <a href="/producten?categorie=Jeans" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans">
-        <span>JEANS →</span>
-    </a>
+        <a href="/producten?categorie=Jeans" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700" alt="Jeans">
+            <span>JEANS</span>
+        </a>
 
-    <a href="/producten?categorie=Sneakers" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Sneakers">
-        <span>SNEAKERS →</span>
-    </a>
+        <a href="/producten?categorie=Sneakers" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700" alt="Sneakers">
+            <span>SNEAKERS</span>
+        </a>
 
-    <a href="/producten?categorie=Outfits" class="categoryCard">
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="Outfits">
-        <span>COMPLETE OUTFITS →</span>
-    </a>
+        <a href="/producten?categorie=Outfits" class="categoryCard">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="Complete outfits">
+            <span>COMPLETE OUTFITS</span>
+        </a>
 
-</div>
+    </div>
+
 </section>
 
-<div id="cartPanel">
-<h2>Jouw winkelmandje</h2>
-<div id="items">Je winkelmandje is leeg.</div>
-<input id="discountCode" type="text" placeholder="Kortingscode">
-<button onclick="applyDiscount()">Code toepassen</button>
-<p id="discountMessage" aria-live="polite"></p>
-<p id="total">Totaal: €0,00</p>
-<button onclick="toggleCart()">Sluiten</button>
-  <button onclick="checkout()">Afrekenen</button>
-</div>
- <input id="customerAddress" placeholder="Straat en huisnummer" required><br><br>
-    <input id="customerCity" placeholder="Postcode en woonplaats" required><br><br>
-    <input id="customerEmail" type="email" placeholder="E-mailadres" required><br><br>
-  <input id="customerPhone" type="tel" placeholder="Telefoonnummer" required><br><br>
+<section class="collectionBanner">
+    <h2>DISCOVER YOUR STYLE</h2>
+    <p>Ontdek de VÉRRO collectie en maak je eigen stijl compleet.</p>
+    <a href="/producten">BEKIJK ALLE PRODUCTEN</a>
+</section>
 
-    <label for="paymentMethod">Betaalmethode</label><br>
-    <select id="paymentMethod">
-        <option value="iDEAL">iDEAL</option>
-        <option value="Creditcard">Creditcard</option>
-    </select><br><br>
-
-    <button onclick="placeOrder()">Bestelling plaatsen</button>
-    <button onclick="document.getElementById('checkoutPanel').style.display='none'">Terug</button>
-
-    <p style="font-size:12px;color:#777;margin-top:15px;">
+<section class="about" id="over">
+    <h2>OVER VÉRRO</h2>
+    <p>
+        VÉRRO staat voor een moderne streetwear uitstraling.
+        Ontdek onze collectie met jassen, hoodies, truien,
+        broeken, jeans, sneakers en complete outfits.
     </p>
-</div>
-<section class="notice" id="over">
-VÉRRO — onafhankelijke fashioncollectie. Geen officiële merkartikelen.
 </section>
-<footer>VÉRRO</footer>
+
+<footer>
+    VÉRRO — PREMIUM STREETWEAR
+</footer>
 
 <script>
-let cart = [];
-let discountApplied = false;
+    function updateCartCount() {
+        let cart = [];
 
-
-function render() {
-    const items = document.getElementById('items');
-    const total = cart.reduce((sum, p) => sum + p.price, 0);
-    const discount = discountApplied ? total * 0.20 : 0;
-    const shipping = discountApplied ? 0 : 4.95;
-const finalTotal = total - discount + shipping;
-
-    items.innerHTML = cart.length
-        ? cart.map((p, i) =>
-            `<p>${p.name} — €${p.price.toFixed(2)}
-            <button onclick="removeItem(${i})">Verwijderen</button></p>`
-        ).join('')
-        : 'Je winkelmandje is leeg.';
-
-    document.getElementById('total').innerHTML =
-    `Subtotaal: €${total.toFixed(2)}<br>
-     Korting: -€${discount.toFixed(2)}<br>
-     Verzending: ${shipping === 0 ? 'Gratis' : '€' + shipping.toFixed(2)}<br>
-     <strong>Totaal: €${finalTotal.toFixed(2)}</strong>`;
-}
-
-function add(name, price, button) {
-    cart.push({name, price});
-    document.getElementById('count').textContent = cart.length;
-    render();
-
-    const oldText = button.textContent;
-    button.textContent = 'Toegevoegd ✓';
-    button.style.background = '#287a43';
-
-    setTimeout(() => {
-        button.textContent = oldText;
-        button.style.background = '#171717';
-    }, 1500);
-}
-function removeItem(i) {
-    cart.splice(i, 1);
-    document.getElementById('count').textContent = cart.length;
-    render();
-}
-function checkout() {
-    if (cart.length === 0) {
-        alert('Je winkelmandje is leeg!');
-        return;
-    }
-
-    localStorage.setItem('verroCart', JSON.stringify(cart));
-    localStorage.setItem('verroDiscount', discountApplied ? 'yes' : 'no');
-
-    window.location.href = '/afrekenen';
-}
-function toggleCart() {
-    const panel = document.getElementById('cartPanel');
-
-    if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-    } else {
-        panel.style.display = 'block';
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
-function applyDiscount() {
-    const code = document.getElementById('discountCode').value.trim().toUpperCase();
-    const message = document.getElementById('discountMessage');
-
-    if (code === 'VERRO20') {
-        discountApplied = true;
-        message.textContent = '20% korting toegepast!';
-    } else {
-        discountApplied = false;
-        message.textContent = 'Deze kortingscode is niet geldig.';
-    }
-
-    render();
-}
-function placeOrder() {
-    const name = document.getElementById('customerName').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const city = document.getElementById('customerCity').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-
-    if (!name || !address || !city || !email) {
-        alert('Vul alle gegevens in!');
-        return;
-    }
-
-    if (!document.getElementById('customerEmail').checkValidity()) {
-        alert('Vul een geldig e-mailadres in!');
-        return;
-    }
-
-    const method = document.getElementById('paymentMethod').value;
-
-    document.getElementById('checkoutPanel').innerHTML = `
-        <h2>Bedankt voor je bestelling!</h2>
-        <p>Je bestelling is succesvol geplaatst in deze demo.</p>
-        <p>Naam: ${name}</p>
-        <p>Betaalmethode: ${method}</p>
-        <p><strong>Er is geen echte betaling uitgevoerd.</strong></p>
-    `;
-
-    cart = [];
-    discountApplied = false;
-    document.getElementById('count').textContent = '0';
-    render();
-}
-function closePopup() {
-    document.getElementById('locationPopup').style.display = 'none';
-}
-
-function shareLocation() {
-    const status = document.getElementById('popupStatus');
-
-    if (!navigator.geolocation) {
-        status.textContent = 'Locatie wordt niet ondersteund. Je kunt verder.';
-        setTimeout(closePopup, 1500);
-        return;
-    }
-
-    status.textContent = 'Je browser vraagt nu om toestemming.';
-
-    navigator.geolocation.getCurrentPosition(async position => {
         try {
-            const response = await fetch('/location', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    consent: true,
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                })
-            });
-
-            if (response.ok) {
-            } else {
-                status.textContent = 'Opslaan is niet gelukt. Je kunt verder.';
-            }
-        } catch (error) {
-            status.textContent = 'Verbindingsfout. Je kunt verder.';
+            cart = JSON.parse(localStorage.getItem("verroCart")) || [];
+        } catch {
+            cart = [];
         }
 
-        setTimeout(closePopup, 1500);
+        const count = cart.reduce((total, item) => {
+            return total + (Number(item.quantity) || 1);
+        }, 0);
 
-    }, () => {
-        status.textContent = 'Geen toestemming gegeven. Je kunt verder.';
-        setTimeout(closePopup, 1500);
-    });
-}
+        document.getElementById("count").textContent = count;
+    }
+
+    updateCartCount();
 </script>
+
 </body>
 </html>
