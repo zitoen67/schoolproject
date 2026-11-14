@@ -213,17 +213,16 @@ function removeItem(i) {
     document.getElementById('count').textContent = cart.length;
     render();
 }
-  function checkout() {
+function checkout() {
     if (cart.length === 0) {
         alert('Je winkelmandje is leeg!');
         return;
     }
 
-    document.getElementById('cartPanel').style.display = 'none';
-    document.getElementById('checkoutPanel').style.display = 'block';
-    document.getElementById('checkoutPanel').scrollIntoView({
-        behavior: 'smooth'
-    });
+    localStorage.setItem('verroCart', JSON.stringify(cart));
+    localStorage.setItem('verroDiscount', discountApplied ? 'yes' : 'no');
+
+    window.location.href = '/afrekenen';
 }
 function toggleCart() {
     const panel = document.getElementById('cartPanel');
