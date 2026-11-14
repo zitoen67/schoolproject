@@ -3,117 +3,86 @@ from flask import Flask, render_template, request, jsonify, abort
 app = Flask(__name__)
 
 categories = [
-    {"name": "Jassen", "slug": "Jassen"},
-    {"name": "Hoodies", "slug": "Hoodies"},
-    {"name": "Truien", "slug": "Truien"},
-    {"name": "T-shirts", "slug": "T-shirts"},
-    {"name": "Broeken", "slug": "Broeken"},
-    {"name": "Jeans", "slug": "Jeans"},
-    {"name": "Sneakers", "slug": "Sneakers"},
-    {"name": "Outfits", "slug": "Outfits"},
+    {"name": "Pistolen", "slug": "Pistolen"},
+    {"name": "Messen", "slug": "Messen"},
+    {"name": "Kogels", "slug": "Kogels"},
+    {"name": "Boksbeugels", "slug": "Boksbeugels"},
+    {"name": "Pistoolmagazijnen", "slug": "Pistoolmagazijnen"},
+    {"name": "Bommen", "slug": "Bommen"},
 ]
 
 product_names = {
-    "Jassen": [
-        "Black Puffer Jacket", "Urban Winter Jacket", "Oversized Bomber",
-        "Essential Puffer", "Streetwear Parka", "Classic Black Jacket"
+    "Pistolen": [
+        "Glock 17 Display Replica",
+        "Beretta 92 Display Replica",
+        "Colt 1911 Display Replica",
+        "Desert Eagle Display Replica",
+        "SIG Sauer P226 Display Replica",
+        "Walther PPK Display Replica",
+        "CZ 75 Display Replica",
+        "Browning Hi-Power Display Replica"
     ],
-    "Hoodies": [
-        "Essential Oversized Hoodie", "Dark Street Hoodie", "Heavyweight Hoodie",
-        "Core Logo Hoodie", "Relaxed Fit Hoodie", "Urban Zip Hoodie"
+    "Messen": [
+        "Classic Bowie Display",
+        "Tanto Display Knife",
+        "Karambit Display Prop",
+        "Hunting Knife Display",
+        "Combat Knife Display Prop",
+        "Butterfly Knife Display",
+        "Dagger Collectible",
+        "Survival Knife Display"
     ],
-    "Truien": [
-        "Premium Knit Sweater", "Basic Crewneck", "Oversized Knit",
-        "Minimal Sweater", "Heavy Cotton Sweater", "Relaxed Pullover"
+    "Kogels": [
+        "Brass Ammunition Display",
+        "Silver Bullet Collectible",
+        "Vintage Cartridge Display",
+        "Golden Bullet Prop",
+        "Military Ammunition Display",
+        "Classic Cartridge Set",
+        "Collector Bullet Display",
+        "Inert Ammunition Set"
     ],
-    "T-shirts": [
-        "Essential White Tee", "Oversized Black Tee", "Graphic Street Tee",
-        "Heavyweight T-shirt", "Boxy Fit Tee", "Minimal Logo Tee"
+    "Boksbeugels": [
+        "Chrome Knuckle Display",
+        "Black Metal Display Prop",
+        "Vintage Knuckle Collectible",
+        "Silver Collector Prop",
+        "Classic Display Knuckles",
+        "Matte Black Display",
+        "Steel Finish Collectible",
+        "Retro Knuckle Display"
     ],
-    "Broeken": [
-        "Black Cargo Pants", "Baggy Utility Pants", "Relaxed Track Pants",
-        "Wide Leg Trousers", "Urban Cargo Pants", "Essential Joggers"
+    "Pistoolmagazijnen": [
+        "Glock Magazine Display",
+        "Beretta Magazine Display",
+        "Colt Magazine Display",
+        "SIG Sauer Magazine Display",
+        "Walther Magazine Display",
+        "CZ Magazine Display",
+        "Browning Magazine Display",
+        "Universal Magazine Display"
     ],
-    "Jeans": [
-        "Light Blue Baggy Jeans", "Washed Black Jeans", "Grey Loose Jeans",
-        "Dark Blue Denim", "Relaxed Straight Jeans", "Vintage Baggy Jeans"
-    ],
-    "Sneakers": [
-        "Classic White Sneakers", "Black Street Sneakers", "Retro Runner",
-        "Minimal Leather Sneakers", "Urban High Tops", "Everyday Trainers"
-    ],
-    "Outfits": [
-        "Black Essential Set", "Grey Tracksuit Set", "Urban Street Outfit",
-        "Oversized Everyday Set", "Neutral Matching Set", "All Black Outfit"
+    "Bommen": [
+        "Vintage Bomb Display Prop",
+        "Classic Grenade Display",
+        "Industrial Explosive Display",
+        "Retro Game Bomb Prop",
+        "Military Collectible Display",
+        "Fictional Timer Prop",
+        "Vintage Ordnance Display",
+        "Museum Bomb Replica"
     ],
 }
 
+# Tijdelijke afbeeldingen met productnamen.
 product_images = {
-    "Jassen": [
-        "photo-1544923246-77307dd654cb",
-        "photo-1591047139829-d91aecb6caea",
-        "photo-1551028719-00167b16eac5",
-        "photo-1548126032-079a0fb0099d",
-        "photo-1539533018447-63fcce2678e3",
-        "photo-1591369822096-ffd140ec948f"
-    ],
-    "Hoodies": [
-        "photo-1556821840-3a63f95609a7",
-        "photo-1578681994506-b8f463449011",
-        "photo-1556821840-3a63f95609a7",
-        "photo-1556821840-3a63f95609a7",
-        "photo-1578768079052-aa76e52ff62e",
-        "photo-1556821840-3a63f95609a7"
-    ],
-    "Truien": [
-        "photo-1618354691373-d851c5c3a990",
-        "photo-1576566588028-4147f3842f27",
-        "photo-1618354691438-25bc04584c23",
-        "photo-1620799140408-edc6dcb6d633",
-        "photo-1576566588028-4147f3842f27",
-        "photo-1618354691373-d851c5c3a990"
-    ],
-    "T-shirts": [
-        "photo-1521572163474-6864f9cf17ab",
-        "photo-1503341504253-dff4815485f1",
-        "photo-1521572163474-6864f9cf17ab",
-        "photo-1503341504253-dff4815485f1",
-        "photo-1521572163474-6864f9cf17ab",
-        "photo-1503341504253-dff4815485f1"
-    ],
-    "Broeken": [
-        "photo-1473966968600-fa801b869a1a",
-        "photo-1517438476312-10d79c077509",
-        "photo-1473966968600-fa801b869a1a",
-        "photo-1517438476312-10d79c077509",
-        "photo-1473966968600-fa801b869a1a",
-        "photo-1517438476312-10d79c077509"
-    ],
-    "Jeans": [
-        "photo-1542272604-787c3835535d",
-        "photo-1541099649105-f69ad21f3246",
-        "photo-1542272604-787c3835535d",
-        "photo-1541099649105-f69ad21f3246",
-        "photo-1542272604-787c3835535d",
-        "photo-1541099649105-f69ad21f3246"
-    ],
-    "Sneakers": [
-        "photo-1542291026-7eec264c27ff",
-        "photo-1495555961986-6d4c1ecb7be3",
-        "photo-1542291026-7eec264c27ff",
-        "photo-1495555961986-6d4c1ecb7be3",
-        "photo-1542291026-7eec264c27ff",
-        "photo-1495555961986-6d4c1ecb7be3"
-    ],
-    "Outfits": [
-        "photo-1515886657613-9f3515b0c78f",
-        "photo-1529139574466-a303027c1d8b",
-        "photo-1515886657613-9f3515b0c78f",
-        "photo-1529139574466-a303027c1d8b",
-        "photo-1515886657613-9f3515b0c78f",
-        "photo-1529139574466-a303027c1d8b"
-    ],
+    category: [
+        f"https://placehold.co/900x1100/111111/eeeeee?text={name.replace(' ', '+')}"
+        for name in names
+    ]
+    for category, names in product_names.items()
 }
+
 
 products = []
 product_id = 1
