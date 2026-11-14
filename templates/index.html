@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VÉRRO — Premium Fashion</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;color:#171717;background:#fff}
+header{height:76px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee}
+.logo{font-size:29px;font-weight:bold;letter-spacing:7px}
+nav{display:flex;gap:28px}
+nav a{color:#222;text-decoration:none;font-size:12px;letter-spacing:1px}
+.cart{border:0;background:none;font-size:14px;cursor:pointer}
+.hero{min-height:480px;background:linear-gradient(90deg,#171717,#555);color:white;display:flex;align-items:center;padding:8%}
+.hero p{letter-spacing:4px;font-size:12px;margin-bottom:22px}
+.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.05;margin-bottom:25px}
+.hero a{display:inline-block;background:white;color:black;text-decoration:none;padding:16px 26px;font-size:12px;letter-spacing:2px}
+.section{padding:65px 7%}
+.section h2{font-size:25px;letter-spacing:3px;margin-bottom:30px}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product img{width:100%;height:340px;object-fit:cover;background:#eee}
+.product h3{font-size:15px;margin:15px 0 8px}
+.price{color:#777;font-size:14px}
+.product button{margin-top:13px;padding:12px 17px;background:#171717;color:white;border:0;cursor:pointer}
+.product button:hover{background:#555}
+#cartPanel{display:none;padding:25px 7%;background:#f5f4f1}
+#cartPanel p{margin:10px 0}
+#cartPanel button{padding:8px 14px;cursor:pointer}
+footer{background:#171717;color:white;text-align:center;padding:35px;letter-spacing:4px}
+.notice{text-align:center;padding:25px;color:#777;font-size:12px}
+@media(max-width:700px){
+header{padding:0 5%}nav{gap:10px}nav a{font-size:10px}
+.products{grid-template-columns:1fr 1fr}
+.product img{height:230px}.section{padding:40px 5%}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">VÉRRO</div>
+<nav>
+<a href="#collectie">COLLECTIE</a>
+<a href="#over">OVER ONS</a>
+</nav>
+<button class="cart" onclick="toggleCart()">WINKELMAND (<span id="count">0</span>)</button>
+</header>
+
+<section class="hero">
+<div>
+<p>VÉRRO — PREMIUM FASHION</p>
+<h1>STYLE THAT<br>SPEAKS.</h1>
+<a href="#collectie">ONTDEK DE COLLECTIE</a>
+</div>
+</section>
+
+<section class="section" id="collectie">
+<h2>DE COLLECTIE</h2>
+<div class="products">
+<div class="product">
+<img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Winterjas">
+<h3>Premium Winter Jacket</h3><p class="price">€89,95</p>
+<button onclick="add('Premium Winter Jacket',89.95)">Toevoegen</button>
+</div>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Trui">
+<h3>Essential Sweater</h3><p class="price">€49,95</p>
+<button onclick="add('Essential Sweater',49.95)">Toevoegen</button>
+</div>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=700" alt="Streetwear">
+<h3>Premium Streetwear</h3><p class="price">€59,95</p>
+<button onclick="add('Premium Streetwear',59.95)">Toevoegen</button>
+</div>
+</div>
+</section>
+
+<div id="cartPanel">
+<h2>Jouw winkelmandje</h2>
+<div id="items">Je winkelmandje is leeg.</div>
+<p id="total">Totaal: €0,00</p>
+<button onclick="toggleCart()">Sluiten</button>
+</div>
+
+<section class="notice" id="over">
+VÉRRO — onafhankelijke fashioncollectie. Geen officiële merkartikelen.
+</section>
+<section class="section" id="locatie">
+  <h2>LOCATIEDELING</h2>
+  <p>Voor deze demonstratie kun je vrijwillig je GPS-locatie delen.</p>
+  <button onclick="shareLocation()">Deel mijn locatie</button>
+  <p id="locationStatus"></p>
+</section>
+<footer>VÉRRO</footer>
+
+<script>
+let cart=[];
+function add(name,price){
+cart.push({name,price});
+document.getElementById('count').textContent=cart.length;
+render();
+}
+function render(){
+let items=document.getElementById('items');
+let total=cart.reduce((s,p)=>s+p.price,0);
+items.innerHTML=cart.length?cart.map((p,i)=>
+`<p>${p.name} — €${p.price.toFixed(2)} <button onclick="removeItem(${i})">Verwijderen</button></p>`
+).join(''):'Je winkelmandje is leeg.';
+document.getElementById('total').textContent='Totaal: €'+total.toFixed(2);
+}
+function removeItem(i){
+cart.splice(i,1);
+document.getElementById('count').textContent=cart.length;
+render();
+}
+function toggleCart(){
+let panel=document.getElementById('cartPanel');
+panel.style.display=panel.style.display==='block'?'none':'block';
+}
+function shareLocation() {
+  const status = document.getElementById('locationStatus');
+
+  if (!navigator.geolocation) {
+    status.textContent = 'Locatie wordt niet ondersteund.';
+    return;
+  }
+
+  status.textContent = 'Locatietoestemming wordt gevraagd...';
+
+  navigator.geolocation.getCurrentPosition(async position => {
+    try {
+      const response = await fetch('/location', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          consent: true,
+          session_id: crypto.randomUUID(),
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        })
+      });
+
+      status.textContent = response.ok
+        ? 'Je locatie is opgeslagen.'
+        : 'Opslaan is niet gelukt.';
+    } catch {
+      status.textContent = 'Verbindingsfout.';
+    }
+  }, () => {
+    status.textContent = 'Locatietoestemming niet gegeven.';
+  });
+}
+</script>
+</body>
+</html>
