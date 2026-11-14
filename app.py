@@ -146,7 +146,30 @@ def order():
         "message": "Je demo-bestelling is ontvangen!"
     })
 
+@app.route("/location", methods=["POST"])
+def receive_location():
+    data = request.get_json(silent=True)
 
+    if not data or data.get("consent") is not True:
+        return jsonify({"error": "Geen toestemming ontvangen"}), 400
+
+    try:
+        latitude = float(data.get("latitude"))
+        longitude = float(data.get("longitude"))
+
+        if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
+            raise ValueError("Ongeldige coördinaten")
+
+    except (TypeError, ValueError):
+        return jsonify({"error": "Ongeldige locatie"}), 400
+
+    app.logger.info(
+        "Locatie ontvangen met toestemming: breedtegraad=%s, lengtegraad=%s",
+        latitude,
+        longitude
+    )
+
+    return jsonify({"message": "Locatie ontvangen"}), 200
 @app.errorhandler(404)
 def page_not_found(error):
     return "Deze pagina bestaat niet.", 404
