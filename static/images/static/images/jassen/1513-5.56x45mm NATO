@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+            <meta charset="UTF-8">
+    <title>5.56x45mm NATO | Weaponsystems.net</title>
+	
+<!--CAROUSEL-->
+
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!--END CAROUSEL-->
+	
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="/resources/css/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/header.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/carousel.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="https://use.fontawesome.com/b41da22bf6.js"></script>
+
+    <meta property="og:title" content="5.56x45mm NATO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content=https://weaponsystems.net/system/1513-5.56x45mm+NATO />
+    <meta property="og:image" content=""/>
+    <meta property="og:image:width" content="820"/>
+    <meta property="og:image:height" content="500"/>
+    <meta property="og:description"
+          content="" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Weaponsystems.net" />
+
+    <meta name="viewport" content="width=1000">
+
+
+    <!--<meta http-equiv="refresh" content="3" >-->
+	<!-- Cookie Consent by https://www.PrivacyPolicies.com -->
+	<script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/3.0.0/cookie-consent.js"></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+		cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","website_name":"WeaponSystems.net","cookies_policy_url":"https://weaponsystems.net/cookiespolicy"});
+		});
+	</script>
+
+	<!-- Google Analytics -->
+	<script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=UA-59965-2"></script>
+	 
+    <script type="text/plain" cookie-consent="tracking">
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-59965-2');
+	</script>
+	
+	<!-- end of Google Analytics-->
+
+	<noscript><a href="https://www.PrivacyPolicies.com/cookie-consent/">Cookie Consent by Privacy Policies Generator</a></noscript>
+
+    
+     
+    <script type="text/plain" cookie-consent="tracking">
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-59965-2');
+	</script>
+		
+<!-- End Cookie Consent -->
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59965-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-59965-2');
+</script>
+-->
+
+
+	
+</head>
+<body>
+<!-- Start of Header -->
+<header>
+    <div class="container">
+        <div id="logo">
+            <h1><a href="/"><i class="fa fa-fighter-jet" aria-hidden="true"></i> WeaponSystems.net</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="active"><a href="/" accesskey="1" title=""><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                
+				
+				<div class="dropdown">
+					<li><a href="/search" accesskey="2" title=""><i class="fa fa-search" aria-hidden="true"></i> Search</a></li>
+<!--			  			<div class="dropdown-content">-->
+<!--    						<p>Test</p>-->
+<!--							<p>Test</p>-->
+<!--							<p>Test</p>-->
+<!--							<p>Test</p>-->
+<!--						</div>-->
+				</div>
+				
+								<div class="dropdown">
+					<li><a href="/menu" accesskey="3" title=""><i class="fa fa-globe" aria-hidden="true"></i> Categories</a></li>
+
+				</div>
+				
+				<div class="dropdown">
+					<li><a href="/about" accesskey="4" title=""><i class="fa fa-question" aria-hidden="true"></i> About</a></li>
+<!--			  			<div class="dropdown-content">-->
+<!--    						<p>Who are we?</p>-->
+<!--							<p>Disclaimer</p>-->
+<!--						</div>-->
+				</div>	
+				
+				<div class="dropdown">
+					<li><a href="/contact" accesskey="5" title=""><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
+<!--			  			<div class="dropdown-content">-->
+<!--    						<p>Contact Form</p>-->
+<!--							<p>E-mail</p>-->
+<!--						</div>-->
+				</div>					
+                
+                
+                
+			</ul>
+			
+			
+			
+        </div>
+    </div>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setCookieDomain", "*.weaponsystems.net"]);
+  _paq.push(["setDomains", ["*.weaponsystems.net"]]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://analytics.weaponsystems.net/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+</header>
+<!-- End of Header -->
+    <!-- Keep distance from header / menu buttons -->
+    <div id="header-distance-keeper"></div>
+
+    <!-- Start the main portion -->
+    <div id="wrapper">
+        <div id="system-title" class="container"><h1>5.56x45mm NATO</h1><br/>
+            <h2>.223 Remington</h2>
+            <!--<a href="https://www.weaponsystems.net/weaponsystem/.html" target="_blank">Link to OLD (current) site</a></div>-->
+            <br/>
+
+
+                            <div class="columncontainer">
+                    <h2>Overview</h2>
+                    <hr/>
+                                                                                                        <!-- Single Photo -->
+                                                                    <div class="photobox">
+                                        <img src="https://photo.weaponsystems.net/image/s-carousel/n-am_sa_556x45_p02.jpg/--/img/ws/am_sa_556x45_p02.jpg"
+                                             width="100%" alt=""/>
+                                        <h4 style="text-align: center">5.56x45mm NATO</h4>
+                                        <p>A belt of 5.56x45mm NATO rounds. Note the four to one ratio of green tip SS109 to red tip L110 tracer.<br/>
+											<i>Source: US Marine Corps - </i>
+                                        <em>&copy; Public domain</em></p>
+                                    </div>
+                                
+
+
+
+                                                                                                                                    <div class="generalFactsTableItemBox">
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Origin
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                United States
+                                                                                                                            
+                                                                                                                                                                                                                </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Type
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            Rifle cartridge
+                                                                                                                                                                                                                </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Entered service
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            Mid 1960&#039;s
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Status
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            In service
+                                                                                                                                                                                                                </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Development
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            Late 1950&#039;s (M193)
+                                                                                                                                                                                <br/>
+                                                                                                                            
+                                                                                                                            Early 1980&#039;s (NATO)
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Developer
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                United States
+                                                                                -
+                                                                                                                            Eugene Stoner (M193)
+                                                                                                                                                                                <br/>
+                                                                                                                            Belgium
+                                                                                -
+                                                                                                                            Fabrique Nationale (NATO)
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Production
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            1964 - present (M193)
+                                                                                                                                                                                <br/>
+                                                                                                                            
+                                                                                                                            1984 - present (NATO)
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Producer
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            Produced in over 35 nations
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Unit cost
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            $ 0.26 for M855 in 2005
+                                                                                                                                                                                <br/>
+                                                                                                                            
+                                                                                                                            $ 0.30 for M856 in 2005
+                                                                                                                                                                                <br/>
+                                                                                                                            
+                                                                                                                            $ 1.44 for M995 in 2005
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Number produced
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            Produced in very large quantities
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                    <div class="generalFactsTableRow">
+                                        <div class="generalFactsTableCellLeft">
+                                            Designations
+                                        </div>
+                                        <div class="generalFactsTableCellRight">
+                                                                                
+                                                                                                                            .223 Remington
+                                                                                                                                                                                                            </div>
+                                    </div>
+                                                                                                
+                            </div>
+                                                            </div>
+                            <div class="columncontainer">
+                    <h2>Description</h2>
+                    <hr/>
+                                                                        <div class="textbox">
+                                <h4 style="text-align: center">Introduction</h4>
+                                <p>The 5.56x45mm round is an early Cold War era rifle cartridge of US origin. The civilian designation for the 5.56x45mm round is .223 Remington. The military 5.56x45mm round was developed from the older .222 Remington in the late 1950&#039;s by Eugene Stoner for use in his AR-15 assault rifle. Originaly the older .222 Remington round was used in the AR-15, but the US military demanded a slightly heavier bullet which in turn required a larger case. The AR-15 and new bullet were adopted as the M16 and 5.56x45mm M193. In the early 1980&#039;s the bullet design was updated by Fabrique Nationale in order to improve the reliability and lethality of the M16. This resulted in the M16A2 and the 5.56x45mm NATO round.</p>
+                            </div>
+                                                                                                <div class="textbox">
+                                <h4 style="text-align: center">Design</h4>
+                                <p>The 5.56x45mm round uses a small spitzer bullet in a bottlenecked rimless brass case. Compared to older rounds such as the 7.62x51mm NATO this results in a much higher velocity, which partially offsets the projectile&#039;s limited weight with increased kinetic energy. The 5.56x45mm ammunition is divided into two categories. These are the M193 pattern and NATO pattern ammunition. The older M193 bullets are lighter, have a higher muzzle velocity and require a 1 in 12 inch rifling. The NATO ammunition uses heavier bullets that require a 1 in 7 inch rifling. Ammunition can be interchanged but can result in reduced performance in both cases. Some rifles uses and intermediary 1 in 9 inch twist rate to cater both types of ammunition.</p>
+                            </div>
+                                                                                                <div class="textbox">
+                                <h4 style="text-align: center">Weapon systems</h4>
+                                <p>The rifle that introduced the M193 round was the M16A1, which is also the most produced M193 weapon system. Early versions of the Galil, FAMAS, HK 33 and SG-540 were also chambered for the M193 round. The improved M16A2 and derivatives such as the M4 carbine were among the first weapons to use the NATO round. Other well known weapons that use the NATO round are the G36, SA80, FNC, HK 416, Tavor and SG-550. The NATO round is also used in various light machine guns such as the Minimi, MG4 and Ultimax.</p>
+                            </div>
+                                                                                                <div class="textbox">
+                                <h4 style="text-align: center">Firepower</h4>
+                                <p>The M193 and NATO rounds have a similar accuracy, but the NATO round performs better at longer ranges. The M193 round has a muzzle velocity of 975 m/s and an energy of 1.700 J. At 400 meters these figures are reduced to 520 m/s and less than 500 J. The NATO round has a muzzle velocity of 930 m/s and an energy of 1.700 J. At 400 meters these figures as reduced to 575 m/s and 650 J. At ranges up to 125 m the NATO round is certain to fragment and is considered potentially more lethal than the larger and heavier 7.62x39mm Soviet round. At ranges over 200 meters the NATO round is known to be less lethal than heavier rounds. The standard NATO round will penetrate 3.5mm mild steel at over 600 meters.</p>
+                            </div>
+                                                                                                <div class="textbox">
+                                <h4 style="text-align: center">Users</h4>
+                                <p>The original M193 round was extensively used by the USA during the Vietnam war. It was also in use with various nations around the world, mostly in South America, Asia and Africa. Notable Western users include France and Israel. Since many weapons chambered for the M193 round remain in use outside the USA the M193 ammunition also remains in production. The NATO version of the 5.56x45mm round is in widespread use around the world. It is not only the most widely used round by NATO forces it is also actively used in the Middle East, Asia, South America and Africa.</p>
+                            </div>
+                                                            </div>
+                            <div class="columncontainer">
+                    <h2>5.56x45mm M193</h2>
+                    <hr/>
+                                                                                                        <!-- Single Photo -->
+                                                                    <div class="photobox">
+                                        <img src="https://photo.weaponsystems.net/image/s-carousel/n-am_sa_556x45_p03.jpg/--/img/ws/am_sa_556x45_p03.jpg"
+                                             width="100%" alt=""/>
+                                        <h4 style="text-align: center">5.56x45mm M193</h4>
+                                        <p>Detail view of 5.56x45mm M193 cartridge.<br/>
+											<i>Source: Grasyl - </i>
+                                        <em>&copy; CC BY-SA 4.0</em></p>
+                                    </div>
+                                
+
+
+
+                                                                                                                                    <div class="textbox">
+                                <h4 style="text-align: center"></h4>
+                                <p>The original 5.56x45mm round was designed in the United States and is known as the M193 family. This round was used in the early version of the M16 assault rifle and various other weapons. Compared to the improved NATO round it has a lighter bullet, uses a more fouling propellant, has a higher muzzle velocity and uses a longer rifling twist rate. Ammunition of the M193 pattern is or was produced in many nations.</p>
+                            </div>
+                                                                                                                                <!-- Tablebox Small -->
+                                <div class="tablebox_small">
+                                    <h4 style="text-align: center"></h4>
+
+
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm M193
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The M193 is the standard FMJ round that is optimized for a 1 in 12 inch twist rate.
+                                            </div>
+                                        </div>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm M195
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The M195 is a blank round with more propellant and is used for firing rifle grenades.
+                                            </div>
+                                        </div>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm M196
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The M196 is a a tracer round that is visible from 70 to 450 meters.
+                                            </div>
+                                        </div>
+                                                                </div>
+                                                                                                                            <!-- Factsheets -->
+                            <div class="factsheetsbox" id="factsheetsbox-13852">
+								<div class="factsheetsTitlebox" style="column-span:all">
+                                    <span class="factsheetsSectionTitle">Facts</span>
+								                                    <span class="factsheetsTitle  active "
+                                          onclick='switchTabs(event, "factsheetsbox-13852", "factsheet-2220")'>
+                                        5.56mm M193
+                                    </span>
+
+									                                    <span class="factsheetsTitle "
+                                          onclick='switchTabs(event, "factsheetsbox-13852", "factsheet-2221")'>
+                                        5.56mm M196
+                                    </span>
+
+									 <!-- end of factsheet tabs-->
+								</div> 
+								
+								
+                                								<div id="factsheet-2220"
+                                     class="factsheetsTab"
+                                         >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">United States</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">FMJ</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">11.79 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Plain tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Lead core ball round</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">3.63 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">No</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">52.000 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">975 m/s</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.725 J</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                								<div id="factsheet-2221"
+                                     class="factsheetsTab"
+                                         style="display:none"  >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">United States</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">FMJ-T</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">11.49 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Red tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Lead core ball round with tracer</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">3.5 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">Red tracer, visible from 70 to 450 m</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">52.000 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">975 m/s</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.660 J</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                 <!-- end of factsheet -->
+                            </div>
+                                                            </div>
+                            <div class="columncontainer">
+                    <h2>5.56x45mm NATO</h2>
+                    <hr/>
+                                                                                                        <!-- Single Photo -->
+                                                                    <div class="photobox">
+                                        <img src="https://photo.weaponsystems.net/image/s-carousel/n-am_sa_556x45_p04.jpg/--/img/ws/am_sa_556x45_p04.jpg"
+                                             width="100%" alt=""/>
+                                        <h4 style="text-align: center">5.56x45mm NATO</h4>
+                                        <p>Close-up of two 5.56x45mm NATO type SS109 / M855 rounds.<br/>
+											<i>Source: www.aresmaxima.com - </i>
+                                        <em>&copy; Copyright lies with original owner</em></p>
+                                    </div>
+                                
+
+
+
+                                                                                                                                    <div class="textbox">
+                                <h4 style="text-align: center"></h4>
+                                <p>The 5.56x45mm NATO round is an improved version of the M193 round that was developed in Belgium. Compared to the older M193 the SS109 uses a heavier and more effective bullet, uses a cleaner propellant, has a lower muzzle velocity and uses a faster rifling twist rate. The NATO standard FMJ round achieves best accuracy with a 1 in 9 inch rifling, although a 1 in 7 inch rifling is most common since that is required to stabilize the tracer version.</p>
+                            </div>
+                                                                                                <div class="textbox">
+                                <h4 style="text-align: center"></h4>
+                                <p>NATO standard SS109 equivalent ammunition is produced in the USA as the M855 (ball) and M856 (tracer), in Canada as the C77 (ball), C78 (tracer) and C79 (blank), in France as the ON (ball) and TN (tracer), in Greece as the GRM562 (tracer) and GRM563 (ball), in South Korea as the K100 (ball) and K101 (tracer), in the United Kingdom as the L1A1 (blank), L2A1 (tracer) and L15A1 (ball) and in various other nations under designations similar as those already described.</p>
+                            </div>
+                                                                                                                                <!-- Tablebox Small -->
+                                <div class="tablebox_small">
+                                    <h4 style="text-align: center"></h4>
+
+
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm SS109
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The SS109 is the NATO standard FMJ round, produced by many nations with minute differences.
+                                            </div>
+                                        </div>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm L110
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The L110 is the NATO standard FMJ tracer round. Projects red tracer up to 600 meters.
+                                            </div>
+                                        </div>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm M995
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The M995 is an AP round adopted by the US that is based on the SS109. Designed by Nammo of Sweden and type standardized in 1996.
+                                            </div>
+                                        </div>
+                                                                </div>
+                                                                                                                            <!-- Factsheets -->
+                            <div class="factsheetsbox" id="factsheetsbox-13841">
+								<div class="factsheetsTitlebox" style="column-span:all">
+                                    <span class="factsheetsSectionTitle">Facts</span>
+								                                    <span class="factsheetsTitle  active "
+                                          onclick='switchTabs(event, "factsheetsbox-13841", "factsheet-2222")'>
+                                        5.56mm SS109
+                                    </span>
+
+									                                    <span class="factsheetsTitle "
+                                          onclick='switchTabs(event, "factsheetsbox-13841", "factsheet-2223")'>
+                                        5.56mm L110
+                                    </span>
+
+									                                    <span class="factsheetsTitle "
+                                          onclick='switchTabs(event, "factsheetsbox-13841", "factsheet-2224")'>
+                                        5.56mm M995
+                                    </span>
+
+									 <!-- end of factsheet tabs-->
+								</div> 
+								
+								
+                                								<div id="factsheet-2222"
+                                     class="factsheetsTab"
+                                         >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">Belgium</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">FMJ</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">12.31 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Green tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Lead core with steel penetrator</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">4.00 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">No</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">55.000 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">930 m/s</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.730 J</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Penetration</div>
+										<div class="factsheetsboxCellRight">3.5 mm mild steel at over 600 m</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9 mm mild steel at 160 m</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                								<div id="factsheet-2223"
+                                     class="factsheetsTab"
+                                         style="display:none"  >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">Belgium</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">FMJ-T</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">12.38 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Red tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Lead core with steel penetrator and tracer</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">4.00 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">Red tracer up to 600 m</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">55.000 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">890 m/s</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.585 J</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                								<div id="factsheet-2224"
+                                     class="factsheetsTab"
+                                         style="display:none"  >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">United States</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">AP</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">11.66 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Black tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Tungsten carbine penetrator</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">3.37 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">No</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">50.250 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">1.030 m/s</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.790 J</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Penetration</div>
+										<div class="factsheetsboxCellRight">12 mm class 300HB RHA at 100 m</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Accuracy</div>
+										<div class="factsheetsboxCellRight">SD &lt;200 mm at 550 m</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                 <!-- end of factsheet -->
+                            </div>
+                                                            </div>
+                            <div class="columncontainer">
+                    <h2>5.56x45mm Enhanced Performance</h2>
+                    <hr/>
+                                                                                                        <!-- Single Photo -->
+                                                                    <div class="photobox">
+                                        <img src="https://photo.weaponsystems.net/image/s-carousel/n-am_sa_556x45_p01.jpg/--/img/ws/am_sa_556x45_p01.jpg"
+                                             width="100%" alt=""/>
+                                        <h4 style="text-align: center">5.56x45mm M855A1 EPR</h4>
+                                        <p>5.56x45mm M855A1 Enhanced Performance Round with the stacked cone penetrator bullit design shown alonside.<br/>
+											<i>Source: US Army - </i>
+                                        <em>&copy; Public domain</em></p>
+                                    </div>
+                                
+
+
+
+                                                                                                                                    <div class="textbox">
+                                <h4 style="text-align: center"></h4>
+                                <p>The United States has developed several enhanced performance 5.56x45mm NATO rounds to improve performance at both short range and long range. These rounds are optimized to be fired from carbine length and even shorter barrels. Whereas, the NATO rounds were intended to be primarily fired from rifle length barrels.</p>
+                            </div>
+                                                                                                                                <!-- Tablebox Small -->
+                                <div class="tablebox_small">
+                                    <h4 style="text-align: center"></h4>
+
+
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm M855A1
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The M855A1 Enhanced Performance Round is an improved of the original M855.It has a copper core within the steel penetrator instead of lead. Has better penetration and wounding effects. Reportedly more effective than standard ammunition when fired from carbine sized barrels.
+                                            </div>
+                                        </div>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm Mk 262
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The Mk 262 uses a much heavier projectile with hollow point and boat tail. Improved lethality and better long range performance. The Mk 262 Mod 0 was adopted in 2002.
+                                            </div>
+                                        </div>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    5.56mm Mk 318
+                                                                                            </div>
+                                            <div class="tableblock-3">
+                                                The Mk 318 uses a bullet of a similar design as the Mk 262, but with a similar weight as the original NATO round. It reportely has an improved lethality and better accuracy.
+                                            </div>
+                                        </div>
+                                                                </div>
+                                                                                                                            <!-- Factsheets -->
+                            <div class="factsheetsbox" id="factsheetsbox-13858">
+								<div class="factsheetsTitlebox" style="column-span:all">
+                                    <span class="factsheetsSectionTitle">Facts</span>
+								                                    <span class="factsheetsTitle  active "
+                                          onclick='switchTabs(event, "factsheetsbox-13858", "factsheet-2225")'>
+                                        5.56mm M855A1
+                                    </span>
+
+									                                    <span class="factsheetsTitle "
+                                          onclick='switchTabs(event, "factsheetsbox-13858", "factsheet-2226")'>
+                                        5.56mm Mk 262
+                                    </span>
+
+									 <!-- end of factsheet tabs-->
+								</div> 
+								
+								
+                                								<div id="factsheet-2225"
+                                     class="factsheetsTab"
+                                         >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">United States</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">FMJ</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">12.31 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Green tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Copper core with steel stacked cone penetrator</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">4.0 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">No</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">60.000 to 65.000 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">980 m/s from 20 inch barrel</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.920 J</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Penetration</div>
+										<div class="factsheetsboxCellRight">9 mm mild steel at 350 m</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                								<div id="factsheet-2226"
+                                     class="factsheetsTab"
+                                         style="display:none"  >
+                                    								<div class="factsheetsboxSection">
+                                	<b>General</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Origin</div>
+										<div class="factsheetsboxCellRight">United States</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Rifle cartridge</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Overall</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition class</div>
+										<div class="factsheetsboxCellRight">5.56x45mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Ammunition type</div>
+										<div class="factsheetsboxCellRight">FMJ</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total weight</div>
+										<div class="factsheetsboxCellRight">12 to 13 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Total length</div>
+										<div class="factsheetsboxCellRight">57 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Color/markings</div>
+										<div class="factsheetsboxCellRight">Green tip</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Projectile</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">5.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Hollow point boat tail</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Weight</div>
+										<div class="factsheetsboxCellRight">5.0 g</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Tracer</div>
+										<div class="factsheetsboxCellRight">No</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Case</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Type</div>
+										<div class="factsheetsboxCellRight">Bottlenecked, rimless</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Length</div>
+										<div class="factsheetsboxCellRight">44.7 mm</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Diameter</div>
+										<div class="factsheetsboxCellRight">6.4 mm neck</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft"></div>
+										<div class="factsheetsboxCellRight">9.6 mm rim</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Primer</div>
+										<div class="factsheetsboxCellRight">Centerfire</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Pressure</div>
+										<div class="factsheetsboxCellRight">55.000 PSI</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                    								<div class="factsheetsboxSection">
+                                	<b>Performance</b>
+
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle velocity</div>
+										<div class="factsheetsboxCellRight">840 m/s from 20 inch barrel</div>
+									</div>
+                                        									<div class="factsheetsboxRow">
+										<div class="factsheetsboxCellLeft">Muzzle energy</div>
+										<div class="factsheetsboxCellRight">1.760 J</div>
+									</div>
+                                         <!-- end of fact -->
+									</div>
+                                     <!-- end of section -->
+								</div>
+                                 <!-- end of factsheet -->
+                            </div>
+                                                            </div>
+                            <div class="columncontainer">
+                    <h2>Related articles</h2>
+                    <hr/>
+                                                                                                        <!-- Tablebox Large -->
+                                <div class="tablebox_large">
+                                    <h4 style="text-align: center"></h4>
+                                                                            <div class="tablerow">
+                                            <div class="tableblock-1">
+                                                                                                    <img src="https://photo.weaponsystems.net/image/s-carousel/n-am_sa_545x39mm_p03.jpg/--/img/ws/am_sa_545x39mm_p03.jpg"
+                                                         width="240" alt=""/>
+                                                                                            </div>
+
+                                            <div class="tableblock-2">
+                                                <h4>5.45x39mm Soviet</h4>
+                                                <p>Soviet counterpart to the 5.56mm is the 5.45x39mm Soviet, developed by necking down the 7.62x39mm cartridge.</p>
+                                            </div>
+                                                                                            <div class="tableblock-1">
+                                                <a href="/system/1512-5.45x39mm Soviet">Read
+                                                    more about 5.45x39mm Soviet</a>
+                                            </div>
+                                                                                    </div>
+                                                                    </div>
+                                                                                        </div>
+                        </div>
+        </div>
+    </div>
+    <!-- Start of Footer -->
+<div id="copyright" class="container">
+    <p>&copy WeaponSystems.net | All rights reserved.</p>
+</div>
+<!-- End of Footer -->
+
+<!-- Loading the javascript -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="/resources/js/header.js"></script>
+<script src="/resources/js/jquery.scrollTo.js"></script>
+
+<script>
+    $( document ).ready(function() {
+        initHeaderResizer();
+    })
+</script>
+    <script src="/resources/js/tabs.js"></script>
+</body>
+</html>
