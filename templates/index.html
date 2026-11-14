@@ -19,6 +19,23 @@ nav a{color:#222;text-decoration:none;font-size:12px;letter-spacing:1px}
 .section{padding:65px 7%}
 .section h2{font-size:25px;letter-spacing:3px;margin-bottom:30px}
 .products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+   padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.categoryCard span {
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+@media(max-width:700px) {
+    .categoryGrid { grid-template-columns: repeat(2, 1fr); }
+}
 .product img{width:100%;height:340px;object-fit:cover;background:#eee}
 .product h3{font-size:15px;margin:15px 0 8px}
 .price{color:#777;font-size:14px}
@@ -88,52 +105,18 @@ nav a{font-size:10px}
 </section>
 
 <section class="section" id="collectie">
-<h2>DE COLLECTIE</h2>
-<div class="products">
+    <h2>SHOP PER CATEGORIE</h2>
 
-<div class="product">
-<img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700" alt="Winterjas">
-<h3>Premium Winter Jacket</h3>
-<p class="price">€89,95</p>
-<button onclick="add('Premium Winter Jacket',89.95,this)">Toevoegen</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700" alt="Trui">
-<h3>Essential Sweater</h3>
-<p class="price">€49,95</p>
-<button onclick="add('Essential Sweater',49.95,this)">Toevoegen</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=700" alt="Streetwear">
-<h3>Premium Streetwear</h3>
-<p class="price">€59,95</p>
-<button onclick="add('Premium Streetwear',59.95,this)">Toevoegen</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=700" alt="Sneakers">
-<h3>Essential Sneakers</h3>
-<p class="price">€69,95</p>
-<button onclick="add('Essential Sneakers',69.95,this)">Toevoegen</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700" alt="Fashion outfit">
-<h3>Premium Outfit</h3>
-<p class="price">€89,95</p>
-<button onclick="add('Premium Outfit',89.95,this)">Toevoegen</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700" alt="Fashion kleding">
-<h3>Urban Style Outfit</h3>
-<p class="price">€74,95</p>
-<button onclick="add('Urban Style Outfit',74.95,this)">Toevoegen</button>
-</div>
-
-</div>
+    <div class="categoryGrid">
+        <a href="/producten?categorie=Jassen" class="categoryCard">JASSEN <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=Hoodies" class="categoryCard">HOODIES <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=Truien" class="categoryCard">TRUIEN <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=T-shirts" class="categoryCard">T-SHIRTS <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=Broeken" class="categoryCard">BROEKEN <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=Jeans" class="categoryCard">JEANS <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=Sneakers" class="categoryCard">SNEAKERS <span>ONTDEK →</span></a>
+        <a href="/producten?categorie=Outfits" class="categoryCard">COMPLETE OUTFITS <span>ONTDEK →</span></a>
+    </div>
 </section>
 
 <div id="cartPanel">
