@@ -42,6 +42,11 @@
 
 <main>
     <h1>Afrekenen</h1>
+    <div id="orderSummary" style="margin:20px 0;padding:18px;background:#f7f7f7;">
+    <h3>Jouw bestelling</h3>
+    <div id="orderItems"></div>
+    <p id="orderTotal" style="margin-top:15px;font-weight:bold;"></p>
+</div>
     <p class="intro">Vul je gegevens in voor je demo-bestelling.</p>
 
     <form id="checkoutForm">
@@ -77,13 +82,80 @@
 </main>
 
 <script>
+const cart = JSON.parse(localStorage.getItem('verroCart') || '[]');
+const discountApplied = localStorage.getItem('verroDiscount') === 'yes';
+
+const itemsElement = document.getElementById('orderItems');
+const totalElement = document.getElementById('orderTotal');
+
+if (cart.length === 0) {
+    itemsElement.textContent = 'Je winkelmandje is leeg.';
+    totalElement.textContent = '';
+    document.querySelector('button[type="submit"]').disabled = true;
+} else {
+    itemsElement.innerHTML = cart.map(item => `
+        <p>${item.name} — €${Number(item.price).toFixed(2)}</p>
+    `).join('');
+
+    const subtotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
+    const discount = discountApplied ? subtotal * 0.20 : 0;
+    const shipping = discountApplied ? 0 : 4.95;
+    const total = subtotal - discount + shipping;
+
+    totalElement.textContent = 'Totaal: €' + total.toFixed(2);
+}
+
 document.getElementById("checkoutForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const message = document.getElementById("message");
-    message.textContent = "Dit is nog niet gekoppeld aan een winkelmandje.";
+    if (cart.length === 0) {
+        alert('Je winkelmandje is leeg.');
+        return;
+    }
 
-    // De bestelling wordt pas verzonden zodra de winkelmandkoppeling is gemaakt.
+    const name = document.getElementById("name").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const paymentMethod = document.getElementById("paymentMethod").value;
+
+    const subtotal = cart.reduce((sum, item) => sum + Number(item.price), 0);
+    const discount = discountApplied ? subtotal * 0.20 : 0;
+    const shipping = discountApplied ? 0 : 4.95;
+    const total = subtotal - discount + shipping;
+
+    const message = document.getElementById("message");
+    message.textContent = "Bestelling wordt verwerkt...";
+
+    try {
+        const response = await fetch('/order', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name,
+                address,
+                city,
+                email,
+                paymentMethod,
+                items: cart,
+                total: '€' + total.toFixed(2)
+            })
+        });
+
+        if (!response.ok) throw new Error();
+
+        localStorage.removeItem('verroCart');
+        localStorage.removeItem('verroDiscount');
+
+        document.querySelector('main').innerHTML = `
+            <h1>Bedankt voor je bestelling!</h1>
+            <p>Je demobestelling is ontvangen.</p>
+            <p>Er is geen echte betaling uitgevoerd.</p>
+            <a href="/producten">Verder winkelen</a>
+        `;
+    } catch (error) {
+        message.textContent = "Er ging iets mis. Probeer opnieuw.";
+    }
 });
 </script>
 </body>
