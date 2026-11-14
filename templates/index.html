@@ -191,8 +191,13 @@ function removeItem(i) {
 
 function toggleCart() {
     const panel = document.getElementById('cartPanel');
-    panel.style.display =
-        panel.style.display === 'block' ? 'none' : 'block';
+
+    if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+    } else {
+        panel.style.display = 'block';
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 function applyDiscount() {
