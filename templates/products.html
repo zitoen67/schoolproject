@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collectie | VÉRRO</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; color: #171717; }
-        header {
-            height: 76px; padding: 0 7%; display: flex;
-            align-items: center; justify-content: space-between;
-            border-bottom: 1px solid #eee;
-        }
-        .logo { font-size: 27px; font-weight: bold; letter-spacing: 5px; }
-        a { color: inherit; text-decoration: none; }
-        .back { font-size: 14px; }
-        main { padding: 55px 7%; }
-        h1 { font-size: 36px; margin-bottom: 12px; }
-        .intro { color: #777; margin-bottom: 35px; }
-        .categories {
-            display: flex; flex-wrap: wrap; gap: 12px;
-            margin-bottom: 40px;
-        }
-        .categories button {
-            border: 1px solid #ddd; background: white;
-            padding: 11px 19px; cursor: pointer;
-        }
-        .categories button.active,
-        .categories button:hover { background: #171717; color: white; }
-        .products {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-        }
-        .product { cursor: pointer; }
-        .product img {
-            width: 100%; aspect-ratio: 3/4; object-fit: cover;
-            background: #f2f2f2;
-        }
-        .product h3 { font-size: 16px; margin-top: 13px; }
-        .product p { color: #777; margin-top: 7px; }
-        @media(max-width: 800px) {
-            .products { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collectie | VÉRRO</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; color: #171717; }
+header {
+    height: 76px; padding: 0 7%; display: flex;
+    align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+.logo { font-size: 27px; font-weight: bold; letter-spacing: 5px; }
+a { color: inherit; text-decoration: none; }
+.back { font-size: 14px; }
+main { padding: 55px 7%; }
+h1 { font-size: 36px; margin-bottom: 12px; }
+.intro { color: #777; margin-bottom: 35px; }
+.categories {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 40px;
+}
+.categories button {
+    border: 1px solid #ddd; background: white;
+    padding: 11px 19px; cursor: pointer;
+}
+.categories button.active,
+.categories button:hover { background: #171717; color: white; }
+.products {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+.product img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover;
+    background: #f2f2f2;
+}
+.product h3 { font-size: 16px; margin-top: 13px; }
+.product p { color: #777; margin-top: 7px; }
+@media(max-width: 800px) {
+    .products { grid-template-columns: repeat(2, 1fr); }
+    main { padding: 35px 5%; }
+}
+</style>
 </head>
 <body>
 <header>
@@ -51,8 +51,8 @@
 </header>
 
 <main>
-    <h1>Onze collectie</h1>
-    <p class="intro">Ontdek jouw nieuwe favoriete outfit.</p>
+    <h1>Streetwear collectie</h1>
+    <p class="intro">Oversized fits. Baggy styles. Pure street attitude.</p>
 
     <div class="categories">
         <button class="active" onclick="filterProducts('Alle', this)">Alles</button>
@@ -71,22 +71,69 @@
 
 <script>
 const products = [
-    {name:"Premium Winter Jacket", price:89.95, category:"Jassen", image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=700"},
-    {name:"Urban Puffer Jacket", price:99.95, category:"Jassen", image:"https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700"},
-    {name:"Essential Hoodie", price:54.95, category:"Hoodies", image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
-    {name:"Street Hoodie", price:59.95, category:"Hoodies", image:"https://images.unsplash.com/photo-1578681994506-b8f463449011?w=700"},
-    {name:"Classic Sweater", price:49.95, category:"Truien", image:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700"},
-    {name:"Premium Knit", price:64.95, category:"Truien", image:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=700"},
-    {name:"Basic T-shirt", price:24.95, category:"T-shirts", image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
-    {name:"Oversized T-shirt", price:29.95, category:"T-shirts", image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=700"},
-    {name:"Cargo Pants", price:59.95, category:"Broeken", image:"https://images.unsplash.com/photo-1517438476312-10d79c077509?w=700"},
-    {name:"Relaxed Pants", price:54.95, category:"Broeken", image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700"},
-    {name:"Classic Jeans", price:64.95, category:"Jeans", image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700"},
-    {name:"Relaxed Jeans", price:69.95, category:"Jeans", image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=700"},
-    {name:"Essential Sneakers", price:79.95, category:"Sneakers", image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
-    {name:"Urban Sneakers", price:89.95, category:"Sneakers", image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?w=700"},
-    {name:"Complete Street Outfit", price:119.95, category:"Outfits", image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700"},
-    {name:"Everyday Outfit", price:109.95, category:"Outfits", image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700"}
+    // JASSEN
+    {name:"Black Puffer Jacket",price:99.95,category:"Jassen",image:"https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700"},
+    {name:"Urban Winter Jacket",price:89.95,category:"Jassen",image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=700"},
+    {name:"Oversized Bomber",price:84.95,category:"Jassen",image:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=700"},
+    {name:"Street Puffer",price:109.95,category:"Jassen",image:"https://images.unsplash.com/photo-1544923246-77307dd654cb?w=700"},
+    {name:"Dark Winter Coat",price:94.95,category:"Jassen",image:"https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=700"},
+    {name:"Essential Bomber",price:79.95,category:"Jassen",image:"https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=700"},
+
+    // HOODIES
+    {name:"Oversized Black Hoodie",price:59.95,category:"Hoodies",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+    {name:"Heavyweight Street Hoodie",price:64.95,category:"Hoodies",image:"https://images.unsplash.com/photo-1578681994506-b8f463449011?w=700"},
+    {name:"Dark Essential Hoodie",price:54.95,category:"Hoodies",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+    {name:"Urban Grey Hoodie",price:59.95,category:"Hoodies",image:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700"},
+    {name:"Relaxed Fit Hoodie",price:62.95,category:"Hoodies",image:"https://images.unsplash.com/photo-1578681994506-b8f463449011?w=700"},
+    {name:"Premium Street Hoodie",price:69.95,category:"Hoodies",image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+
+    // TRUIEN
+    {name:"Dark Knit Sweater",price:54.95,category:"Truien",image:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700"},
+    {name:"Oversized Knit",price:64.95,category:"Truien",image:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=700"},
+    {name:"Urban Crewneck",price:49.95,category:"Truien",image:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=700"},
+    {name:"Premium Black Sweater",price:59.95,category:"Truien",image:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700"},
+    {name:"Relaxed Fit Knit",price:64.95,category:"Truien",image:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=700"},
+    {name:"Street Crewneck",price:52.95,category:"Truien",image:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=700"},
+
+    // T-SHIRTS
+    {name:"Oversized Black Tee",price:29.95,category:"T-shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
+    {name:"Heavyweight White Tee",price:29.95,category:"T-shirts",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=700"},
+    {name:"Street Graphic Tee",price:34.95,category:"T-shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
+    {name:"Relaxed Fit Tee",price:27.95,category:"T-shirts",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=700"},
+    {name:"Essential Dark Tee",price:24.95,category:"T-shirts",image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
+    {name:"Premium Street Tee",price:32.95,category:"T-shirts",image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=700"},
+
+    // BROEKEN
+    {name:"Black Cargo Pants",price:64.95,category:"Broeken",image:"https://images.unsplash.com/photo-1517438476312-10d79c077509?w=700"},
+    {name:"Baggy Utility Pants",price:69.95,category:"Broeken",image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700"},
+    {name:"Relaxed Track Pants",price:54.95,category:"Broeken",image:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=700"},
+    {name:"Dark Street Cargo",price:64.95,category:"Broeken",image:"https://images.unsplash.com/photo-1517438476312-10d79c077509?w=700"},
+    {name:"Oversized Joggers",price:49.95,category:"Broeken",image:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=700"},
+    {name:"Urban Utility Pants",price:69.95,category:"Broeken",image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=700"},
+
+    // JEANS
+    {name:"Baggy Black Jeans",price:69.95,category:"Jeans",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700"},
+    {name:"Relaxed Blue Jeans",price:64.95,category:"Jeans",image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=700"},
+    {name:"Wide Leg Denim",price:74.95,category:"Jeans",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700"},
+    {name:"Dark Baggy Denim",price:69.95,category:"Jeans",image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=700"},
+    {name:"Street Fit Jeans",price:64.95,category:"Jeans",image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=700"},
+    {name:"Loose Fit Denim",price:74.95,category:"Jeans",image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=700"},
+
+    // SNEAKERS
+    {name:"Classic Street Sneakers",price:89.95,category:"Sneakers",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
+    {name:"Black Urban Sneakers",price:94.95,category:"Sneakers",image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?w=700"},
+    {name:"Chunky Street Runners",price:99.95,category:"Sneakers",image:"https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=700"},
+    {name:"Everyday Sneakers",price:79.95,category:"Sneakers",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
+    {name:"Premium High Tops",price:104.95,category:"Sneakers",image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?w=700"},
+    {name:"Dark Runner Sneakers",price:89.95,category:"Sneakers",image:"https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=700"},
+
+    // COMPLETE OUTFITS
+    {name:"All Black Street Outfit",price:139.95,category:"Outfits",image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700"},
+    {name:"Urban Everyday Outfit",price:129.95,category:"Outfits",image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700"},
+    {name:"Oversized Layered Look",price:149.95,category:"Outfits",image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700"},
+    {name:"Dark Cargo Outfit",price:134.95,category:"Outfits",image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700"},
+    {name:"Premium Street Set",price:144.95,category:"Outfits",image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700"},
+    {name:"Relaxed Urban Look",price:139.95,category:"Outfits",image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700"}
 ];
 
 function showProducts(category) {
