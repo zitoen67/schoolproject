@@ -1,16 +1,9 @@
-from flask import Flask, render_template, request
-from datetime import datetime
+from flask import Flask, render_template, request, jsonify
+from datetime import datetime, timezone
+import logging
 
 app = Flask(__name__)
-
-@app.before_request
-def log_request():
-    if request.method == "GET":
-        with open("data.txt", "a", encoding="utf-8") as file:
-            file.write(
-                f"\nTijd: {datetime.now()}\n"
-                f"Pagina: {request.path}\n"
-            )
+logging.basicConfig(level=logging.INFO)
 
 @app.route("/")
 def home():
@@ -18,20 +11,23 @@ def home():
 
 @app.route("/location", methods=["POST"])
 def location():
-    data = request.get_json()
+    data = request.get_json(silent=True)
 
     if not data or data.get("consent") is not True:
-        return {"error": "Toestemming vereist"}, 400
+        return jsonify({"error": "Toestemming vereist"}), 400
 
-    with open("data.txt", "a", encoding="utf-8") as file:
-        file.write(
-            f"\nLocatie met toestemming ontvangen\n"
-            f"ID: {data.get('session_id')}\n"
-            f"Latitude: {data.get('latitude')}\n"
-            f"Longitude: {data.get('longitude')}\n"
-        )
+    latitude = data.get("latitude")
+    longitude = data.get("longitude")
 
-    return {"message": "Opgeslagen"}
+    if latitude is None or longitude is None:
+        return jsonify({"error": "Locatie ontbreekt"}), 400
+
+    app.logger.info("Locatie vrijwillig gedeeld")
+    app.logger.info("Tijd: %s", datetime.now(timezone.utc).isoformat())
+    app.logger.info("Latitude: %s", latitude)
+    app.logger.info("Longitude: %s", longitude)
+
+    return jsonify({"message": "Locatie ontvangen"})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
