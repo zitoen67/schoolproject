@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify, abort
-from urllib.parse import quote
 
 app = Flask(__name__)
 
@@ -49,15 +48,71 @@ product_names = {
     ],
 }
 
-image_search_terms = {
-    "Jassen": "black puffer jacket fashion",
-    "Hoodies": "oversized streetwear hoodie",
-    "Truien": "minimal knit sweater fashion",
-    "T-shirts": "oversized basic t shirt fashion",
-    "Broeken": "streetwear cargo pants fashion",
-    "Jeans": "baggy denim jeans fashion",
-    "Sneakers": "minimal streetwear sneakers",
-    "Outfits": "modern streetwear tracksuit outfit",
+product_images = {
+    "Jassen": [
+        "photo-1544923246-77307dd654cb",
+        "photo-1591047139829-d91aecb6caea",
+        "photo-1551028719-00167b16eac5",
+        "photo-1548126032-079a0fb0099d",
+        "photo-1539533018447-63fcce2678e3",
+        "photo-1591369822096-ffd140ec948f"
+    ],
+    "Hoodies": [
+        "photo-1556821840-3a63f95609a7",
+        "photo-1578681994506-b8f463449011",
+        "photo-1556821840-3a63f95609a7",
+        "photo-1556821840-3a63f95609a7",
+        "photo-1578768079052-aa76e52ff62e",
+        "photo-1556821840-3a63f95609a7"
+    ],
+    "Truien": [
+        "photo-1618354691373-d851c5c3a990",
+        "photo-1576566588028-4147f3842f27",
+        "photo-1618354691438-25bc04584c23",
+        "photo-1620799140408-edc6dcb6d633",
+        "photo-1576566588028-4147f3842f27",
+        "photo-1618354691373-d851c5c3a990"
+    ],
+    "T-shirts": [
+        "photo-1521572163474-6864f9cf17ab",
+        "photo-1503341504253-dff4815485f1",
+        "photo-1521572163474-6864f9cf17ab",
+        "photo-1503341504253-dff4815485f1",
+        "photo-1521572163474-6864f9cf17ab",
+        "photo-1503341504253-dff4815485f1"
+    ],
+    "Broeken": [
+        "photo-1473966968600-fa801b869a1a",
+        "photo-1517438476312-10d79c077509",
+        "photo-1473966968600-fa801b869a1a",
+        "photo-1517438476312-10d79c077509",
+        "photo-1473966968600-fa801b869a1a",
+        "photo-1517438476312-10d79c077509"
+    ],
+    "Jeans": [
+        "photo-1542272604-787c3835535d",
+        "photo-1541099649105-f69ad21f3246",
+        "photo-1542272604-787c3835535d",
+        "photo-1541099649105-f69ad21f3246",
+        "photo-1542272604-787c3835535d",
+        "photo-1541099649105-f69ad21f3246"
+    ],
+    "Sneakers": [
+        "photo-1542291026-7eec264c27ff",
+        "photo-1495555961986-6d4c1ecb7be3",
+        "photo-1542291026-7eec264c27ff",
+        "photo-1495555961986-6d4c1ecb7be3",
+        "photo-1542291026-7eec264c27ff",
+        "photo-1495555961986-6d4c1ecb7be3"
+    ],
+    "Outfits": [
+        "photo-1515886657613-9f3515b0c78f",
+        "photo-1529139574466-a303027c1d8b",
+        "photo-1515886657613-9f3515b0c78f",
+        "photo-1529139574466-a303027c1d8b",
+        "photo-1515886657613-9f3515b0c78f",
+        "photo-1529139574466-a303027c1d8b"
+    ],
 }
 
 products = []
@@ -69,9 +124,7 @@ for category_index, category in enumerate(categories):
     for number, product_name in enumerate(product_names[category_name]):
         price = 39.95 + (number * 10) + (category_index * 2)
 
-        search_term = quote(
-            image_search_terms[category_name] + f" {number + 1}"
-        )
+
 
         products.append({
             "id": product_id,
@@ -83,7 +136,7 @@ for category_index, category in enumerate(categories):
                 "Een stijlvolle toevoeging aan de VÉRRO collectie, "
                 "met een comfortabele pasvorm en moderne uitstraling."
             ),
-          "image": f"https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=900&auto=format&fit=crop",
+         "image": f"https://images.unsplash.com/{product_images[category_name][number]}?w=900&auto=format&fit=crop",
             "sizes": ["S", "M", "L", "XL"]
         })
 
