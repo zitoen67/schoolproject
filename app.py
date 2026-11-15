@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify, abort
-
+from datetime import datetime
+import smtplib
+from email.message import EmailMessage
+import os
 app = Flask(__name__)
 
 categories = [
@@ -145,17 +148,60 @@ def order():
     data = request.get_json(silent=True)
 
     if not data:
-        return jsonify({"error": "Geen bestelgegevens ontvangen"}), 400
+        return jsonify({"error": "Geen gegevens ontvangen"}), 400
 
-    required = ["name", "address", "city", "email", "paymentMethod", "items"]
+    required = ["name", "email", "items"]
 
     if any(not data.get(field) for field in required):
         return jsonify({"error": "Vul alle verplichte gegevens in"}), 400
 
     if not isinstance(data["items"], list) or not data["items"]:
-        return jsonify({"error": "Je winkelmand is leeg"}), 400
+        return jsonify({"error": "De winkelmand is leeg"}), 400
 
-    return jsonify({"message": "Je demo-bestelling is ontvangen!"})
+
+
+    order_number = datetime.now().strftime("%Y%m%d%H%M%S")
+
+    message = EmailMessage()
+    message["Subject"] = f"D-WEB bestelling {order_number}"
+    message["From"] = os.environ.get("SMTP_LOGIN")
+    message["To"] = os.environ.get("ADMIN_EMAIL")
+
+    message.set_content(
+        f"""
+Nieuwe D-WEB bestelling
+
+Bestelnummer: {order_number}
+Naam: {data['name']}
+E-mailadres: {data['email']}
+
+Producten:
+{chr(10).join(str(item) for item in data['items'])}
+
+
+"""
+    )
+
+    try:
+        with smtplib.SMTP(
+            os.environ.get("SMTP_SERVER"),
+            int(os.environ.get("SMTP_PORT", 587))
+        ) as server:
+            server.starttls()
+            server.login(
+                os.environ.get("SMTP_LOGIN"),
+                os.environ.get("SMTP_PASSWORD")
+            )
+            server.send_message(message)
+
+    except Exception:
+        app.logger.exception("e-mail kon niet worden verstuurd")
+        return jsonify({"error": "E-mail versturen is niet gelukt"}), 500
+
+    return jsonify({
+        "message": "Je bestelling is ontvangen!",
+        "orderNumber": order_number
+    })
 
 
 @app.route("/location", methods=["POST"])
