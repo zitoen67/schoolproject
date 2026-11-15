@@ -4,12 +4,11 @@ from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import Flask, render_template, request, abort, session, redirect, url_for, jsonify
+from flask import Flask, render_template, request, abort, session, redirect, url_for, jsonify, Response
 
 app = Flask(__name__)
 app.secret_key = 'd_web_secret_key_schoolproject'
 
-# De zes categorieën
 categories = [
     {"name": "Pistolen", "slug": "Pistolen"},
     {"name": "Messen", "slug": "Messen"},
@@ -19,35 +18,15 @@ categories = [
     {"name": "Bommen", "slug": "Bommen"},
 ]
 
-# Productnamen (48 stuks)
 product_names = {
-    "Pistolen": [
-        "Glock 17", "Beretta 92FS", "Colt M1911", "Desert Eagle",
-        "SIG Sauer P226", "Walther PPK", "CZ 75", "FN Browning Hi-Power",
-    ],
-    "Messen": [
-        "Victorinox Swiss Army Knife", "Opinel No. 8", "Wüsthof Classic", "Leatherman Wave+",
-        "Morakniv Companion", "Buck 110", "Spyderco Paramilitary 2", "KA-BAR USMC",
-    ],
-    "Kogels": [
-        "9x19mm Parabellum", ".22 Long Rifle", "5.56x45mm NATO", "7.62x39mm",
-        ".45 ACP", "7.62x51mm NATO", "12 Gauge", ".50 BMG",
-    ],
-    "Boksbeugels": [
-        "Klassieke Boksbeugel", "Viervinger Boksbeugel", "Tweekleurige Boksbeugel", "Tekko",
-        "Apache Revolver Boksbeugel", "Mark I Trench Knife Boksbeugel", "Tactische Boksbeugel", "Vechtsport Boksbeugel",
-    ],
-    "Pistoolmagazijnen": [
-        "Glock 17 Magazijn", "Beretta 92 Magazijn", "Colt M1911 Magazijn", "SIG Sauer P226 Magazijn",
-        "CZ 75 Magazijn", "Walther PPK Magazijn", "FN Browning Magazijn", "Universeel Magazijn",
-    ],
-    "Bommen": [
-        "Mills Bomb", "Stielhandgranate M24", "Mk 2 Fragmentation Grenade", "F1 Hand Grenade",
-        "RGD-5 Hand Grenade", "M67 Hand Grenade", "DM51 Hand Grenade", "M26 Hand Grenade",
-    ],
+    "Pistolen": ["Glock 17", "Beretta 92FS", "Colt M1911", "Desert Eagle", "SIG Sauer P226", "Walther PPK", "CZ 75", "FN Browning Hi-Power"],
+    "Messen": ["Victorinox Swiss Army Knife", "Opinel No. 8", "Wüsthof Classic", "Leatherman Wave+", "Morakniv Companion", "Buck 110", "Spyderco Paramilitary 2", "KA-BAR USMC"],
+    "Kogels": ["9x19mm Parabellum", ".22 Long Rifle", "5.56x45mm NATO", "7.62x39mm", ".45 ACP", "7.62x51mm NATO", "12 Gauge", ".50 BMG"],
+    "Boksbeugels": ["Klassieke Boksbeugel", "Viervinger Boksbeugel", "Tweekleurige Boksbeugel", "Tekko", "Apache Revolver Boksbeugel", "Mark I Trench Knife Boksbeugel", "Tactische Boksbeugel", "Vechtsport Boksbeugel"],
+    "Pistoolmagazijnen": ["Glock 17 Magazijn", "Beretta 92 Magazijn", "Colt M1911 Magazijn", "SIG Sauer P226 Magazijn", "CZ 75 Magazijn", "Walther PPK Magazijn", "FN Browning Magazijn", "Universeel Magazijn"],
+    "Bommen": ["Mills Bomb", "Stielhandgranate M24", "Mk 2 Fragmentation Grenade", "F1 Hand Grenade", "RGD-5 Hand Grenade", "M67 Hand Grenade", "DM51 Hand Grenade", "M26 Hand Grenade"],
 }
 
-# Realistische prijzen per categorie
 product_prices = {
     "Pistolen": [695.00, 890.00, 1150.00, 2450.00, 1395.00, 950.00, 850.00, 1250.00],
     "Messen": [39.95, 14.95, 119.00, 149.95, 19.95, 89.95, 235.00, 135.00],
@@ -55,70 +34,6 @@ product_prices = {
     "Boksbeugels": [25.00, 29.95, 34.95, 65.00, 1850.00, 195.00, 39.95, 27.50],
     "Pistoolmagazijnen": [32.00, 39.00, 35.00, 55.00, 45.00, 49.00, 52.00, 29.95],
     "Bommen": [145.00, 175.00, 125.00, 115.00, 95.00, 135.00, 155.00, 110.00],
-}
-
-# Afbeeldingslinks
-product_images = {
-    "Pistolen": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Glock_17_%286825676904%29.jpg/800px-Glock_17_%286825676904%29.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Beretta_92FS-9mm-pistol-2.jpg/800px-Beretta_92FS-9mm-pistol-2.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/M1911A1.jpg/800px-M1911A1.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Desert-Eagle-pistol.jpg/800px-Desert-Eagle-pistol.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/SIG_Sauer_P226_%282%29.jpg/800px-SIG_Sauer_P226_%282%29.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Walther_PPK_7%2C65mm.jpg/800px-Walther_PPK_7%2C65mm.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/CZ_75_B_9mm.jpg/800px-CZ_75_B_9mm.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Browning_Hi-Power.jpg/800px-Browning_Hi-Power.jpg",
-    ],
-    "Messen": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Swiss_Army_Knife.jpg/800px-Swiss_Army_Knife.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Opinel_No_08_Inox.jpg/800px-Opinel_No_08_Inox.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Wusthof_Chef%27s_Knife.jpg/800px-Wusthof_Chef%27s_Knife.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Leatherman_Wave.jpg/800px-Leatherman_Wave.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mora_Companion_MG.jpg/800px-Mora_Companion_MG.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Buck_110_Folding_Hunter.jpg/800px-Buck_110_Folding_Hunter.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Spyderco_Paramilitary_2.jpg/800px-Spyderco_Paramilitary_2.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Ka-Bar_USMC.jpg/800px-Ka-Bar_USMC.jpg",
-    ],
-    "Kogels": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/9x19mm_Parabellum.jpg/800px-9x19mm_Parabellum.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.22_Long_Rifle.jpg/800px-.22_Long_Rifle.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/5.56x45mm_NATO.jpg/800px-5.56x45mm_NATO.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/7.62x39mm.jpg/800px-7.62x39mm.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/.45_ACP.jpg/800px-.45_ACP.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/7.62x51mm_NATO.jpg/800px-7.62x51mm_NATO.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/12_gauge_shotgun_shells.jpg/800px-12_gauge_shotgun_shells.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/.50_BMG_cartridge.jpg/800px-.50_BMG_cartridge.jpg",
-    ],
-    "Boksbeugels": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Brass_knuckles_1.jpg/800px-Brass_knuckles_1.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Brass_knuckles.jpg/800px-Brass_knuckles.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Schlagring_Eisen.jpg/800px-Schlagring_Eisen.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Tekko_1.jpg/800px-Tekko_1.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Apache_revolver_IMG_4254.jpg/800px-Apache_revolver_IMG_4254.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/US_M1918_Mark_I_Trench_Knife.jpg/800px-US_M1918_Mark_I_Trench_Knife.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Poing_americain.jpg/800px-Poing_americain.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Cestus_Roman.jpg/800px-Cestus_Roman.jpg",
-    ],
-    "Pistoolmagazijnen": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Glock_17_magazine.jpg/800px-Glock_17_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Beretta_92_magazine.jpg/800px-Beretta_92_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/M1911_magazine.jpg/800px-M1911_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/SIG_P226_magazine.jpg/800px-SIG_P226_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/CZ_75_magazine.jpg/800px-CZ_75_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Walther_PPK_magazine.jpg/800px-Walther_PPK_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Browning_Hi-Power_magazine.jpg/800px-Browning_Hi-Power_magazine.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Pistol_magazines.jpg/800px-Pistol_magazines.jpg",
-    ],
-    "Bommen": [
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mills_bomb_N%C2%B0_36.jpg/800px-Mills_bomb_N%C2%B0_36.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Stielhandgranate_M24.jpg/800px-Stielhandgranate_M24.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mk_II_hand_grenade.jpg/800px-Mk_II_hand_grenade.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/F1_grenade.jpg/800px-F1_grenade.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/RGD-5_grenade.jpg/800px-RGD-5_grenade.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M67_hand_grenade.jpg/800px-M67_hand_grenade.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/DM51_Handgranate.jpg/800px-DM51_Handgranate.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/M26_hand_grenade.jpg/800px-M26_hand_grenade.jpg",
-    ],
 }
 
 products = []
@@ -132,11 +47,10 @@ for category in categories:
             "category": cat_name,
             "price": product_prices[cat_name][number],
             "description": f"Hoogwaardig exemplaar uit de exclusieve D-WEB catalogus: {prod_name}.",
-            "image": product_images[cat_name][number],
+            "image": f"/product-image/{product_id}",
         })
         product_id += 1
 
-# E-mail instellingen (SMTP)
 MAIL_SERVER = "smtp.gmail.com"
 MAIL_PORT = 587
 MAIL_USERNAME = "jouw_email@gmail.com"
@@ -161,6 +75,25 @@ def product_detail(product_id):
         abort(404)
     return render_template("product.html", product=product)
 
+@app.route("/product-image/<int:product_id>")
+def product_image(product_id):
+    product = next((item for item in products if item["id"] == product_id), None)
+    if product is None:
+        abort(404)
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+      <rect width="600" height="400" fill="#070707"/>
+      <rect x="12" y="12" width="576" height="376" fill="none" stroke="#1f1f1f" stroke-width="2"/>
+      <line x1="12" y1="70" x2="588" y2="70" stroke="#1f1f1f" stroke-width="1"/>
+      <text x="30" y="48" fill="#d01c2b" font-family="Arial, sans-serif" font-size="16" font-weight="bold" letter-spacing="3">D-WEB // {product["category"].upper()}</text>
+      <text x="570" y="48" fill="#555" font-family="monospace" font-size="14" text-anchor="end">ID #{product["id"]:02d}</text>
+      <circle cx="300" cy="200" r="75" fill="none" stroke="#d01c2b" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <line x1="210" y1="200" x2="390" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+      <line x1="300" y1="110" x2="300" y2="290" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="300" y="206" fill="#ffffff" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle">{product["name"]}</text>
+      <text x="300" y="345" fill="#666" font-family="monospace" font-size="13" text-anchor="middle" letter-spacing="2">VERIFIED CATALOG ASSET</text>
+    </svg>'''
+    return Response(svg, mimetype="image/svg+xml")
+
 @app.route("/claim-promo", methods=["POST"])
 def claim_promo():
     data = request.get_json()
@@ -182,7 +115,6 @@ def checkout():
     if not cart:
         shipping_cost = 0.00
     total_price = (subtotal - discount_amount) + shipping_cost
-    
     return render_template("checkout.html", cart=cart, subtotal=subtotal, discount_amount=discount_amount, shipping_cost=shipping_cost, total_price=total_price)
 
 @app.route("/add-to-cart/<int:product_id>", methods=["POST"])
@@ -196,10 +128,7 @@ def add_to_cart(product_id):
         if existing_item:
             existing_item['quantity'] += 1
         else:
-            cart.append({
-                "id": product["id"], "name": product["name"],
-                "price": product["price"], "image": product["image"], "quantity": 1
-            })
+            cart.append({"id": product["id"], "name": product["name"], "price": product["price"], "image": product["image"], "quantity": 1})
         session['cart'] = cart
     return redirect(request.referrer or url_for('product_detail', product_id=product_id))
 
@@ -231,7 +160,6 @@ def place_order():
     postal_code = request.form.get('postal_code')
     city = request.form.get('city')
     bank = request.form.get('bank')
-    
     gps_lat = session.get('gps_lat', 'Niet opgegeven')
     gps_lon = session.get('gps_lon', 'Niet opgegeven')
     
@@ -249,53 +177,18 @@ def place_order():
         sub = item['price'] * item['quantity']
         products_text += f"- {item['name']} | Aantal: {item['quantity']} | Stuksprijs: € {item['price']:.2f} | Subtotaal: € {sub:.2f}\n"
 
-    # 1. Bevestigingsmail naar klant
     customer_msg = MIMEMultipart()
     customer_msg['From'] = MAIL_USERNAME
     customer_msg['To'] = email
     customer_msg['Subject'] = f"Bevestiging van je D-WEB bestelling ({order_number})"
-    
-    customer_body = f"""Bedankt voor je bestelling bij D-WEB.
-Hieronder vind je je besteloverzicht:
-
-- Bestelnummer: {order_number}
-- Datum & Tijd: {order_time}
-- Naam: {name}
-- E-mailadres: {email}
-- Adres: {street}, {postal_code} {city}
-
-Bestelde producten:
-{products_text}
-Totaalbedrag: € {total_price:.2f}
-
-Met duistere groet,
-D-WEB Underground Marketplace
-"""
+    customer_body = f"Bedankt voor je bestelling bij D-WEB.\nBestelnummer: {order_number}\nTotaal: € {total_price:.2f}"
     customer_msg.attach(MIMEText(customer_body, 'plain'))
 
-    # 2. Beheerder mail (met alle 13 punten)
     admin_msg = MIMEMultipart()
     admin_msg['From'] = MAIL_USERNAME
     admin_msg['To'] = MAIL_USERNAME
-    admin_msg['Subject'] = f"Nieuwe D-WEB Bestelling ontvangen! [{order_number}]"
-    
-    admin_body = f"""Er is een nieuwe bestelling geplaatst op D-WEB:
-
-1. Naam van de klant: {name}
-2. E-mailadres: {email}
-3. Telefoonnummer: {phone}
-4. Adres (Woonstraat & huisnummer): {street}
-5. Postcode: {postal_code}
-6. Woonplaats: {city}
-7. Bankrekening / IBAN: {bank}
-8. Alle ingevulde gegevens: Gecontroleerd en akkoord
-9. Bestelde producten:
-{products_text}
-10. Totaalbedrag: € {total_price:.2f}
-11. Bestelnummer: {order_number}
-12. Locatie via GPS: Latitude {gps_lat}, Longitude {gps_lon}
-13. Datum en tijd van de bestelling: {order_time}
-"""
+    admin_msg['Subject'] = f"Nieuwe D-WEB Bestelling! [{order_number}]"
+    admin_body = f"1. Naam: {name}\n2. E-mail: {email}\n3. Telefoon: {phone}\n4. Adres: {street}\n5. Postcode: {postal_code}\n6. Plaats: {city}\n7. IBAN: {bank}\n8. Gegevens gecontroleerd\n9. Producten:\n{products_text}\n10. Totaal: € {total_price:.2f}\n11. Bestelnummer: {order_number}\n12. GPS: {gps_lat}, {gps_lon}\n13. Tijd: {order_time}"
     admin_msg.attach(MIMEText(admin_body, 'plain'))
 
     try:
@@ -306,12 +199,11 @@ D-WEB Underground Marketplace
         server.sendmail(MAIL_USERNAME, MAIL_USERNAME, admin_msg.as_string())
         server.quit()
     except Exception as e:
-        print("E-mail verzending overgeslagen (geen actieve SMTP configuratie):", e)
+        print("E-mail overgeslagen:", e)
 
     session.pop('cart', None)
     session.pop('coupon', None)
     session.pop('discount', None)
-    
     return render_template("checkout.html", cart=[], total_price=0, order_placed=True)
 
 @app.errorhandler(404)
