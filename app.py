@@ -13,73 +13,65 @@ categories = [
 
 product_names = {
     "Pistolen": [
-        "Glock 17",
-        "Beretta 92FS",
-        "Colt M1911",
-        "Desert Eagle",
-        "SIG Sauer P226",
-        "Walther PPK",
-        "CZ 75",
-        "FN Browning Hi-Power"
+        "Historische pistoolpresentatie",
+        "Vintage pistooldisplay",
+        "Pistoolmuseumdisplay",
+        "Historische wapenillustratie",
+        "Pistoolwanddecoratie",
+        "Militaire geschiedenisprint",
+        "Historische collectiepresentatie",
+        "Pistoolvormige decoratie",
     ],
     "Messen": [
         "Victorinox Swiss Army Knife",
-        "Buck 110 Folding Hunter",
-        "KA-BAR USMC Fighting Knife",
         "Opinel No. 8",
+        "Wüsthof Classic Chef's Knife",
         "Leatherman Wave+",
         "Morakniv Companion",
-        "Spyderco Paramilitary 2",
-        "Wüsthof Classic Chef's Knife"
+        "Buck 110 Heritage Display",
+        "Spyderco Design Display",
+        "Historische messenprint",
     ],
     "Kogels": [
-        "9×19mm Parabellum",
-        ".22 Long Rifle",
-        "5.56×45mm NATO",
-        "7.62×39mm",
-        ".45 ACP",
-        "7.62×51mm NATO",
-        "12 Gauge",
-        ".50 BMG"
+        "9mm munitiegeschiedenisprint",
+        ".22 kaliber geschiedenisdisplay",
+        "5.56 NATO geschiedenisprint",
+        "7.62 kaliber museumdisplay",
+        ".45 ACP geschiedenisprint",
+        "12 Gauge geschiedenisdisplay",
+        "Historische munitieposter",
+        "Munitiecollectie presentatie",
     ],
     "Boksbeugels": [
-        "Klassieke Viervinger-boksbeugel",
-        "tweekleurige boksbeugel",
-        "Mark I Trench Knife",
-        "Apache Revolver",
-        "Tekko",
-        "Tweevinger-boksbeugel",
-        "G10 Boksbeugel",
-        "Boksbeugel-mes"
+        "Historische boksbeugelillustratie",
+        "Boksbeugel museumdisplay",
+        "Vintage vechtsportposter",
+        "Historische vechtsportprint",
+        "Metalen vechtsportdecoratie",
+        "Underground designprint",
+        "Historische collectieposter",
+        "Vechtsport wanddecoratie",
     ],
     "Pistoolmagazijnen": [
-        "Double-Stack Magazijn",
-        "Single-Stack Magazijn",
-        "Glock OEM Polymeer Magazijn",
-        "Mec-Gar Stalen Magazijn",
-        "Extended Magazijn",
-        "Drum Magazijn",
-        "Vast Intern Magazijn",
-        "1.5-Stack"
+        "Historische magazijnillustratie",
+        "Magazijn museumdisplay",
+        "Vintage wapenonderdelenposter",
+        "Historische onderdelenprint",
+        "Militaire geschiedenisdisplay",
+        "Wapenhistorie wanddecoratie",
+        "Technische onderdelenillustratie",
+        "Historische collectieposter",
     ],
     "Bommen": [
-        "Buskruitbom",
-        "Mills-bom",
-        "Stielhandgranate",
-        "Tallboy",
-        "Little Boy & Fat Man",
-        "Tsar Bomba",
-        "JDAM",
-        "MOAB"
+        "Historische Mills-granaat illustratie",
+        "Stielhandgranate museumprint",
+        "Historische Tallboy-poster",
+        "Little Boy geschiedenisprint",
+        "Fat Man geschiedenisprint",
+        "Tsar Bomba informatieposter",
+        "MOAB geschiedenisillustratie",
+        "Historische luchtvaartposter",
     ],
-    }
-
-product_images = {
-    category: [
-        f"https://placehold.co/900x1100/111111/eeeeee?text={name.replace(' ', '+')}"
-        for name in names
-    ]
-    for category, names in product_names.items()
 }
 
 products = []
@@ -89,21 +81,19 @@ for category_index, category in enumerate(categories):
     category_name = category["name"]
 
     for number, product_name in enumerate(product_names[category_name]):
-        price = 39.95 + (number * 10) + (category_index * 2)
-
-
-
         products.append({
             "id": product_id,
             "name": product_name,
             "category": category_name,
-            "price": round(price, 2),
+            "price": round(9.95 + number * 5 + category_index * 2, 2),
             "description": (
-                f"{product_name} — onderdeel van de exclusieve D-WEB collectie. "
-                "Een opvallend verzamelobject met een donkere, industriële uitstraling. "
-                "Voor liefhebbers van underground design en bijzondere collectibles."
+                f"{product_name} — onderdeel van de D-WEB collectie. "
+                "Een historisch geïnspireerd decoratief object "
+                "voor liefhebbers van geschiedenis en industrieel design."
             ),
-            "image": product_images[category_name][number],
+            "image": (
+                f"/static/images/products/product_{product_id:02d}.jpg"
+            ),
         })
 
         product_id += 1
@@ -157,48 +147,72 @@ def order():
     data = request.get_json(silent=True)
 
     if not data:
-        return jsonify({"error": "Geen bestelgegevens ontvangen"}), 400
+        return jsonify({
+            "error": "Geen bestelgegevens ontvangen"
+        }), 400
 
-    required = ["name", "address", "city", "email", "paymentMethod", "items"]
+    required = [
+        "name", "address", "city",
+        "email", "paymentMethod", "items"
+    ]
 
     if any(not data.get(field) for field in required):
-        return jsonify({"error": "Vul alle verplichte gegevens in"}), 400
+        return jsonify({
+            "error": "Vul alle verplichte gegevens in"
+        }), 400
 
-    if not isinstance(data["items"], list) or len(data["items"]) == 0:
-        return jsonify({"error": "Je winkelmand is leeg"}), 400
+    if not isinstance(data["items"], list) or not data["items"]:
+        return jsonify({
+            "error": "Je winkelmand is leeg"
+        }), 400
 
     return jsonify({
         "message": "Je demo-bestelling is ontvangen!"
     })
+
 
 @app.route("/location", methods=["POST"])
 def receive_location():
     data = request.get_json(silent=True)
 
     if not data or data.get("consent") is not True:
-        return jsonify({"error": "Geen toestemming ontvangen"}), 400
+        return jsonify({
+            "error": "Geen toestemming ontvangen"
+        }), 400
 
     try:
         latitude = float(data.get("latitude"))
         longitude = float(data.get("longitude"))
 
-        if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
+        if not (-90 <= latitude <= 90 and
+                -180 <= longitude <= 180):
             raise ValueError("Ongeldige coördinaten")
 
     except (TypeError, ValueError):
-        return jsonify({"error": "Ongeldige locatie"}), 400
+        return jsonify({
+            "error": "Ongeldige locatie"
+        }), 400
 
     app.logger.info(
-        "Locatie ontvangen met toestemming: breedtegraad=%s, lengtegraad=%s",
+        "Locatie ontvangen met toestemming: "
+        "breedtegraad=%s, lengtegraad=%s",
         latitude,
         longitude
     )
 
-    return jsonify({"message": "Locatie ontvangen"}), 200
+    return jsonify({
+        "message": "Locatie ontvangen"
+    }), 200
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return "Deze pagina bestaat niet.", 404
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )
