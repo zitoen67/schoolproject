@@ -100,6 +100,8 @@ def claim_promo():
     if data:
         session['gps_lat'] = data.get('lat')
         session['gps_lon'] = data.get('lon')
+        print(f"\n[GPS ONTVANGEN] Latitude: {session['gps_lat']}, Longitude: {session['gps_lon']}\n")
+    
     session['coupon'] = "DWEB20"
     session['discount'] = 0.20
     return jsonify({"status": "success"})
@@ -212,4 +214,4 @@ def page_not_found(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=True)
