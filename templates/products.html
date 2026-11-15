@@ -1,360 +1,293 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collectie | D-WEB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-WEB | Collectie</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            color: #f5f5f5;
-            background: #101010;
-        }
+body {
+    background: #030303;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
 
-        header {
-            height: 76px;
-            padding: 0 7%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #292929;
-        }
+header {
+    height: 75px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #080808;
+    border-bottom: 1px solid #1c1c1c;
+}
 
-        .logo {
-            color: white;
-            text-decoration: none;
-            font-size: 27px;
-            font-weight: bold;
-            letter-spacing: 5px;
-        }
+.logo {
+    color: #d01c2b;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
 
-        nav {
-            display: flex;
-            gap: 28px;
-        }
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
 
-        nav a, .cartLink {
-            color: #ddd;
-            text-decoration: none;
-            font-size: 13px;
-        }
+nav a:hover {
+    color: #d01c2b;
+}
 
-        .pageTitle {
-            padding: 65px 7% 35px;
-            text-align: center;
-        }
+.container {
+    padding: 65px 7%;
+}
 
-        .pageTitle p {
-            color: #999;
-            font-size: 11px;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        }
+.section-title {
+    font-size: 25px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
 
-        .pageTitle h1 {
-            font-size: 38px;
-            letter-spacing: 3px;
-        }
+.section-subtitle {
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 13px;
+}
 
-        .categoryButtons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 10px 5% 30px;
-        }
+.filter-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
 
-        .categoryButtons a {
-            padding: 11px 18px;
-            border: 1px solid #383838;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 12px;
-            transition: .2s;
-        }
+.filter-btn {
+    padding: 10px 20px;
+    background: #090909;
+    border: 1px solid #1c1c1c;
+    color: #bbb;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
 
-        .categoryButtons a:hover,
-        .categoryButtons a.active {
-            background: white;
-            color: black;
-            border-color: white;
-        }
+.filter-btn:hover, .filter-btn.active {
+    border-color: #d01c2b;
+    color: #d01c2b;
+}
 
-        .searchArea {
-            max-width: 400px;
-            margin: 0 auto 35px;
-            padding: 0 15px;
-        }
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
 
-        .searchArea input {
-            width: 100%;
-            padding: 14px;
-            background: #1b1b1b;
-            border: 1px solid #383838;
-            color: white;
-            font-size: 13px;
-            outline: none;
-        }
+.product-card {
+    background: #090909;
+    border: 1px solid #1c1c1c;
+    overflow: hidden;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
 
-        .productGrid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 35px 20px;
-            padding: 0 7% 80px;
-        }
+.product-card:hover {
+    border-color: #d01c2b;
+    transform: translateY(-4px);
+}
 
-        .product {
-            min-width: 0;
-        }
+.cart-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #9c0f1c;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 10px;
+    letter-spacing: 1px;
+    border: 1px solid #d01c2b;
+    z-index: 2;
+}
 
-        .product a {
-            color: inherit;
-            text-decoration: none;
-        }
+.product-img-container {
+    width: 100%;
+    height: 210px;
+    background: radial-gradient(circle at center, #141414 0%, #050505 100%);
+    padding: 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #1a1a1a;
+}
 
-        .productImage {
-            width: 100%;
-            height: 340px;
-            object-fit: cover;
-            background: #222;
-            display: block;
-            transition: .3s;
-        }
+.product-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: contrast(1.08) brightness(0.9);
+    transition: transform 0.25s, filter 0.25s;
+}
 
-        .product a:hover .productImage {
-            opacity: .8;
-        }
+.product-card:hover img {
+    transform: scale(1.05);
+    filter: contrast(1.12) brightness(1);
+}
 
-        .product h3 {
-            font-size: 14px;
-            font-weight: 500;
-            margin: 15px 0 8px;
-        }
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
 
-        .product .category {
-            color: #999;
-            font-size: 11px;
-            margin-bottom: 8px;
-        }
+.product-category {
+    color: #d01c2b;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
 
-        .price {
-            font-size: 14px;
-            font-weight: bold;
-        }
+.product-card h3 {
+    font-size: 16px;
+    color: #eee;
+    margin-bottom: 10px;
+}
 
-        .noResults {
-            display: none;
-            text-align: center;
-            padding: 50px 15px;
-            color: #999;
-            grid-column: 1 / -1;
-        }
+.product-card p {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
 
-        footer {
-            background: #080808;
-            color: #aaa;
-            text-align: center;
-            padding: 35px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            border-top: 1px solid #292929;
-        }
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
 
-        @media(max-width: 950px) {
-            .productGrid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
 
-        @media(max-width: 650px) {
-            header {
-                padding: 0 5%;
-            }
+.details-btn {
+    padding: 8px 15px;
+    background: #9c0f1c;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
 
-            nav {
-                display: none;
-            }
+.details-btn:hover {
+    background: #d01c2b;
+}
 
-            .pageTitle {
-                padding-top: 45px;
-            }
+footer {
+    background: #080808;
+    border-top: 1px solid #1c1c1c;
+    padding: 35px 7%;
+    text-align: center;
+    color: #555;
+    font-size: 12px;
+    margin-top: 60px;
+}
 
-            .pageTitle h1 {
-                font-size: 29px;
-            }
+footer strong {
+    color: #d01c2b;
+    letter-spacing: 3px;
+}
 
-            .productGrid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px 12px;
-                padding: 0 4% 55px;
-            }
+@media(max-width: 1100px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-            .productImage {
-                height: 230px;
-            }
-
-            .product h3 {
-                font-size: 12px;
-            }
-
-            .categoryButtons {
-                gap: 7px;
-            }
-
-            .categoryButtons a {
-                padding: 9px 12px;
-                font-size: 11px;
-            }
-        }
-    </style>
+@media(max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <a href="/" class="logo">D-WEB</a>
-
+    <div class="logo">D-WEB</div>
     <nav>
         <a href="/">HOME</a>
         <a href="/producten">COLLECTIE</a>
+        <a href="/afrekenen">WINKELMAND</a>
     </nav>
-
-    <a href="/afrekenen" class="cartLink">
-        WINKELMAND <span id="cartCount">0</span>
-    </a>
 </header>
 
-<section class="pageTitle">
-    <p>D-WEB COLLECTION</p>
-    <h1>ONZE COLLECTIE</h1>
+<section class="container">
+    <h2 class="section-title">VOLLEDIGE COLLECTIE</h2>
+    <p class="section-subtitle">Bekijk alle beschikbare objecten binnen de D-WEB catalogus.</p>
+
+    <div class="filter-bar">
+        <a href="/producten" class="filter-btn {% if not selected_category %}active{% endif %}">Alles</a>
+        {% for cat in categories %}
+            <a href="/producten?categorie={{ cat.name }}" class="filter-btn {% if selected_category == cat.name %}active{% endif %}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+
+    {% set cart = session.get('cart', []) %}
+
+    <div class="product-grid">
+        {% for product in products %}
+        {% set current_item = cart | selectattr('id', 'equalto', product.id) | first %}
+        
+        <div class="product-card">
+            {% if current_item %}
+                <div class="cart-badge">{{ current_item.quantity }} IN MAND</div>
+            {% endif %}
+
+            <div class="product-img-container">
+                <img src="{{ product.image }}" alt="{{ product.name }}">
+            </div>
+            <div class="product-info">
+                <span class="product-category">{{ product.category }}</span>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <div class="product-footer">
+                    <span class="price">€ {{ "%.2f"|format(product.price) }}</span>
+                    <a href="/product/{{ product.id }}" class="details-btn">BEKIJK</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
-<div class="categoryButtons">
-    <a href="/producten"
-       class="{% if not selected_category %}active{% endif %}">
-        Alles
-    </a>
-
-    {% for category in categories %}
-        <a
-            href="/producten?categorie={{ category.slug|urlencode }}"
-            class="{% if selected_category == category.slug %}active{% endif %}"
-        >
-            {{ category.name }}
-        </a>
-    {% endfor %}
-</div>
-
-<div class="searchArea">
-    <input
-        type="search"
-        id="searchInput"
-        placeholder="Zoek een product..."
-    >
-</div>
-
-<main class="productGrid" id="productGrid">
-
-    {% for product in products %}
-        <article
-            class="product"
-            data-category="{{ product.category }}"
-            data-name="{{ product.name|lower }}"
-        >
-            <a href="/product/{{ product.id }}">
-                <img
-                    class="productImage"
-                    src="{{ product.image }}"
-                    alt="{{ product.name }}"
-                    loading="lazy"
-                >
-
-                <h3>{{ product.name }}</h3>
-
-                <p class="category">{{ product.category }}</p>
-
-                <p class="price">
-                    € {{ "%.2f"|format(product.price) }}
-                </p>
-            </a>
-        </article>
-    {% endfor %}
-
-    <p class="noResults" id="noResults">
-        Geen producten gevonden.
-    </p>
-
-</main>
-
 <footer>
-    D-WEB — COLLECTION
+    <strong>D-WEB</strong>
+    <p style="margin-top:12px;">
+        UNDERGROUND MARKETPLACE © 2026
+    </p>
 </footer>
-
-<script>
-    const selectedCategory = {{ selected_category|tojson }};
-
-    function getCart() {
-        try {
-            return JSON.parse(localStorage.getItem("verroCart")) || [];
-        } catch {
-            return [];
-        }
-    }
-
-    function updateCartCount() {
-        const cart = getCart();
-
-        const count = cart.reduce((total, item) => {
-            return total + (Number(item.quantity) || 1);
-        }, 0);
-
-        document.getElementById("cartCount").textContent = count;
-    }
-
-    function filterProducts() {
-        const search = document
-            .getElementById("searchInput")
-            .value
-            .toLowerCase();
-
-        const cards = document.querySelectorAll(".product");
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-            const matchesCategory =
-                !selectedCategory ||
-                card.dataset.category === selectedCategory;
-
-            const matchesSearch =
-                card.dataset.name.includes(search);
-
-            const visible = matchesCategory && matchesSearch;
-
-            card.style.display = visible ? "" : "none";
-
-            if (visible) visibleCount++;
-        });
-
-        document.getElementById("noResults").style.display =
-            visibleCount === 0 ? "block" : "none";
-    }
-
-    document
-        .getElementById("searchInput")
-        .addEventListener("input", filterProducts);
-
-    window.addEventListener("storage", updateCartCount);
-
-    filterProducts();
-    updateCartCount();
-</script>
 
 </body>
 </html>
