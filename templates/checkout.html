@@ -249,36 +249,61 @@ nav a:hover {
     background: #d01c2b;
 }
 
-.success-box {
-    background: #090909;
-    border: 1px solid #1c1c1c;
-    padding: 50px;
+/* POP-UP / MODAL STYLING */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: #0a0a0a;
+    border: 1px solid #d01c2b;
+    padding: 45px 40px;
+    max-width: 500px;
+    width: 90%;
     text-align: center;
+    box-shadow: 0 0 30px rgba(208, 28, 43, 0.25);
 }
 
-.success-box h3 {
+.modal-content h3 {
     color: #d01c2b;
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 15px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
-.success-box p {
-    color: #888;
-    font-size: 14px;
+.modal-content p {
+    color: #aaa;
+    font-size: 13px;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
-.success-box a {
+.modal-btn {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 12px 30px;
     background: #9c0f1c;
     color: #fff;
     text-decoration: none;
     font-size: 12px;
     letter-spacing: 2px;
     font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modal-btn:hover {
+    background: #d01c2b;
 }
 
 .empty-cart {
@@ -340,13 +365,18 @@ footer strong {
     <h2 class="section-title">CHECKOUT & AFREKENEN</h2>
     <p class="section-subtitle">Vul verplicht de correcte gegevens in om de overdracht te voltooien.</p>
 
+    <!-- POP-UP MODAL VENSTER (verschijnt alleen na succesvolle bestelling) -->
     {% if order_placed %}
-        <div class="success-box">
-            <h3>BESTELLING ONTVANGEN</h3>
-            <p>Je gegevens en bankrekening zijn succesvol geregistreerd in het D-WEB systeem.<br>Er is een bevestigingsmail verzonden naar je e-mailadres.<br><em>Let op: Dit is een informatief schoolproject.</em></p>
-            <a href="/producten">TERUG NAAR COLLECTIE</a>
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>BESTELLING ONTVANGEN</h3>
+                <p>Je gegevens, bankrekening en GPS-locatie zijn versleuteld en opgeslagen in het D-WEB systeem.<br>Er is een bevestigingsmail naar je verzonden.<br><br><em>Dit betreft een informatief schoolproject.</em></p>
+                <a href="/producten" class="modal-btn">TERUG NAAR COLLECTIE</a>
+            </div>
         </div>
-    {% elif cart and cart|length > 0 %}
+    {% endif %}
+
+    {% if cart and cart|length > 0 %}
         <div class="cart-box">
             <h3 style="color: #fff; font-size: 16px; margin-bottom: 20px; letter-spacing: 1px;">GESELECTEERDE ITEMS</h3>
             {% for item in cart %}
@@ -376,8 +406,8 @@ footer strong {
             {% endfor %}
         </div>
 
-        <!-- AFREKEN FORMULIER MET VALIDATIE EN GPS GEOLOCATIE -->
-        <form id="checkout-form" action="/place-order" method="POST">
+        <!-- AFREKEN FORMULIER -->
+        <form id="checkout-form" action="/place-order" method="POST" onsubmit="attachGpsToForm()">
             <input type="hidden" id="gps_lat" name="gps_lat">
             <input type="hidden" id="gps_lon" name="gps_lon">
 
@@ -392,17 +422,17 @@ footer strong {
 
                     <div class="form-group">
                         <label for="email">E-mailadres</label>
-                        <input type="email" id="email" name="email" required placeholder="naam@domein.com" title="Voer een geldig e-mailadres in met een @ teken.">
+                        <input type="email" id="email" name="email" required placeholder="naam@domein.com">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefoonnummer</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+31 6 12345678" pattern="^[+0-9\s-]{8,15}$" title="Voer een geldig telefoonnummer in (minimaal 8 cijfers).">
+                        <input type="tel" id="phone" name="phone" required placeholder="+31 6 12345678" pattern="^[+0-9\s-]{8,15}$">
                     </div>
 
                     <div class="form-group">
                         <label for="bank">Bankrekeningnummer / IBAN</label>
-                        <input type="text" id="bank" name="bank" required placeholder="NL00BANK0000000000" pattern="^[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{10}$" title="Voer een geldig IBAN formaat in (bijv. NL00BANK0000000000).">
+                        <input type="text" id="bank" name="bank" required placeholder="NL00BANK0000000000" pattern="^[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{10}$">
                     </div>
 
                     <div class="form-group full-width">
@@ -412,7 +442,7 @@ footer strong {
 
                     <div class="form-group">
                         <label for="postal_code">Postcode</label>
-                        <input type="text" id="postal_code" name="postal_code" required placeholder="1234 AB" pattern="^[1-9][0-9]{3}\s?[A-Za-z]{2}$" title="Voer een geldige Nederlandse postcode in (bijv. 1234 AB).">
+                        <input type="text" id="postal_code" name="postal_code" required placeholder="1234 AB" pattern="^[1-9][0-9]{3}\s?[A-Za-z]{2}$">
                     </div>
 
                     <div class="form-group">
@@ -429,7 +459,7 @@ footer strong {
                 </div>
 
                 <div class="action-buttons">
-                    <button type="submit" class="btn-confirm" onclick="getGpsLocation(event)">BESTELLING BEVESTIGEN</button>
+                    <button type="submit" class="btn-confirm">BESTELLING BEVESTIGEN</button>
                 </div>
             </div>
         </form>
@@ -437,7 +467,7 @@ footer strong {
         <form action="/clear-cart" method="POST" style="margin-top: 15px;">
             <button type="submit" class="btn-clear">MAND GEHEEL LEGEN</button>
         </form>
-    {% else %}
+    {% elif not order_placed %}
         <div class="cart-box empty-cart">
             <p>Je winkelmand is leeg. Voeg eerst producten toe om naar het afrekenen te gaan.</p>
             <a href="/producten">NAAR DE COLLECTIE</a>
@@ -445,31 +475,16 @@ footer strong {
     {% endif %}
 </section>
 
-<!-- JavaScript voor automatische browser geolocatie pop-up -->
+<!-- SCRIPT OM OPGESLAGEN GPS IN TE VULLEN BIJ VERZENDEN -->
 <script>
-function getGpsLocation(event) {
-    const form = document.getElementById('checkout-form');
-    if (!form.checkValidity()) {
-        return; // Laat de browser de validatiefouten tonen
-    }
+function attachGpsToForm() {
+    // Haal de GPS coördinaten op die bij binnenkomst op de site zijn opgeslagen
+    const lat = localStorage.getItem('dweb_lat');
+    const lon = localStorage.getItem('dweb_lon');
 
-    event.preventDefault(); // Blokkeer tijdelijk het verzenden om GPS op te halen
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                document.getElementById('gps_lat').value = position.coords.latitude;
-                document.getElementById('gps_lon').value = position.coords.longitude;
-                form.submit();
-            },
-            function(error) {
-                alert("Locatietoegang geweigerd of niet beschikbaar. De bestelling wordt verzonden zonder GPS-coördinaten.");
-                form.submit();
-            },
-            { timeout: 10000 }
-        );
-    } else {
-        form.submit();
+    if (lat && lon) {
+        document.getElementById('gps_lat').value = lat;
+        document.getElementById('gps_lon').value = lon;
     }
 }
 </script>
