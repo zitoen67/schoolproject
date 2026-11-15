@@ -88,7 +88,7 @@ product_prices = {
     "Bommen": [145.00, 175.00, 125.00, 115.00, 95.00, 135.00, 155.00, 110.00],
 }
 
-# Afbeeldingslinks (pas eventueel aan naar jouw eigen /static/images/... paden als je die liever gebruikt)
+# Afbeeldingslinks
 product_images = {
     "Pistolen": [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Glock_17_%286825676904%29.jpg/800px-Glock_17_%286825676904%29.jpg",
@@ -256,6 +256,22 @@ def update_cart(product_id, action):
 def clear_cart():
     session.pop('cart', None)
     return redirect(url_for('checkout'))
+
+
+@app.route("/place-order", methods=["POST"])
+def place_order():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    street = request.form.get('street')
+    city = request.form.get('city')
+    bank = request.form.get('bank')
+    
+    # Maak de winkelmand leeg na de bestelling
+    session.pop('cart', None)
+    
+    # Toon de afrekenpagina met de succesmelding
+    return render_template("checkout.html", cart=[], total_price=0, order_placed=True)
 
 
 @app.errorhandler(404)
