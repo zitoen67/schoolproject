@@ -1,4 +1,9 @@
 import os
+import random
+from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from flask import Flask, render_template, request, abort, session, redirect, url_for
 
 app = Flask(__name__)
@@ -88,7 +93,7 @@ product_prices = {
     "Bommen": [145.00, 175.00, 125.00, 115.00, 95.00, 135.00, 155.00, 110.00],
 }
 
-# Afbeeldingslinks
+# Afbeeldingslinks (Wikimedia of pas aan naar /static/images/...)
 product_images = {
     "Pistolen": [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Glock_17_%286825676904%29.jpg/800px-Glock_17_%286825676904%29.jpg",
@@ -168,6 +173,12 @@ for category_index, category in enumerate(categories):
             "image": product_images[category_name][number],
         })
         product_id += 1
+
+# E-mail configuratie (SMTP gegevens voor verzending)
+MAIL_SERVER = "smtp.gmail.com"
+MAIL_PORT = 587
+MAIL_USERNAME = "jouw_email@gmail.com"  # Jouw e-mailadres
+MAIL_PASSWORD = "jouw_app_password"      # Jouw e-mail app-wachtwoord
 
 # Routes
 @app.route("/")
@@ -264,13 +275,84 @@ def place_order():
     email = request.form.get('email')
     phone = request.form.get('phone')
     street = request.form.get('street')
+    postal_code = request.form.get('postal_code')
     city = request.form.get('city')
     bank = request.form.get('bank')
+    gps_lat = request.form.get('gps_lat', 'Niet opgegeven / Geen toestemming')
+    gps_lon = request.form.get('gps_lon', 'Niet opgegeven / Geen toestemming')
     
-    # Maak de winkelmand leeg na de bestelling
+    cart = session.get('cart', [])
+    total_price = sum(item['price'] * item['quantity'] for item in cart)
+    
+    order_number = f"DWEB-{random.randint(100000, 999999)}"
+    order_time = datetime.now().strftime("%d-%m-%Y om %H:%M:%S")
+    
+    products_text = ""
+    for item in cart:
+        subtotal = item['price'] * item['quantity']
+        products_text += f"- {item['name']} | Aantal: {item['quantity']} | Stuksprijs: € {item['price']:.2f} | Subtotaal: € {subtotal:.2f}\n"
+
+    # 1. Bevestigingsmail naar de klant
+    customer_msg = MIMEMultipart()
+    customer_msg['From'] = MAIL_USERNAME
+    customer_msg['To'] = email
+    customer_msg['Subject'] = f"Bevestiging van je D-WEB bestelling ({order_number})"
+    
+    customer_body = f"""Bedankt voor je bestelling bij D-WEB.
+Hieronder vind je je besteloverzicht:
+
+- Bestelnummer: {order_number}
+- Datum & Tijd: {order_time}
+- Naam: {name}
+- E-mailadres: {email}
+- Adres: {street}, {postal_code} {city}
+
+Bestelde producten:
+{products_text}
+Totaalbedrag: € {total_price:.2f}
+
+Met duistere groet,
+D-WEB Underground Marketplace
+"""
+    customer_msg.attach(MIMEText(customer_body, 'plain'))
+
+    # 2. Gedetailleerde overzichtsmail naar de beheerder (jij)
+    admin_msg = MIMEMultipart()
+    admin_msg['From'] = MAIL_USERNAME
+    admin_msg['To'] = MAIL_USERNAME
+    admin_msg['Subject'] = f"Nieuwe D-WEB Bestelling ontvangen! [{order_number}]"
+    
+    admin_body = f"""Er is een nieuwe bestelling geplaatst op D-WEB:
+
+1. Naam van de klant: {name}
+2. E-mailadres: {email}
+3. Telefoonnummer: {phone}
+4. Adres (Woonstraat & huisnummer): {street}
+5. Postcode: {postal_code}
+6. Woonplaats: {city}
+7. Bankrekening / IBAN: {bank}
+8. Alle ingevulde gegevens: Gecontroleerd en akkoord
+9. Bestelde producten & Aantallen:
+{products_text}
+10. Totaalbedrag: € {total_price:.2f}
+11. Bestelnummer: {order_number}
+12. Locatie via GPS: Latitude {gps_lat}, Longitude {gps_lon}
+13. Datum en tijd van de bestelling: {order_time}
+"""
+    admin_msg.attach(MIMEText(admin_body, 'plain'))
+
+    # E-mails proberen te versturen
+    try:
+        server = smtplib.SMTP(MAIL_SERVER, MAIL_PORT)
+        server.starttls()
+        server.login(MAIL_USERNAME, MAIL_PASSWORD)
+        server.sendmail(MAIL_USERNAME, email, customer_msg.as_string())
+        server.sendmail(MAIL_USERNAME, MAIL_USERNAME, admin_msg.as_string())
+        server.quit()
+    except Exception as e:
+        print("E-mail verzending overgeslagen of mislukt (geen actieve SMTP configuratie):", e)
+
     session.pop('cart', None)
-    
-    # Toon de afrekenpagina met de succesmelding
     return render_template("checkout.html", cart=[], total_price=0, order_placed=True)
 
 
