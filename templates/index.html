@@ -166,12 +166,12 @@ footer strong {
 
 <body>
 
-<!-- DIRECTE WELKOM/DISCLAIMER POP-UP BIJ BINNENKOMST -->
+<!-- DIRECTE WELKOM/DISCLAIMER POP-UP BIJ BINNENKOMST MET GPS VERIFICATIE -->
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content">
         <h3>TOEGANGSVERIFICATIE</h3>
-        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Dit platform fungeert als een versleutelde catalogus en simulatieomgeving. Alle transacties, gegevens en handelingen zijn onderdeel van een educatief schoolproject.<br><br>Door te doorbreken ga je akkoord met de richtlijnen.</p>
-        <button class="modal-btn" onclick="closeWelcomeModal()">BETREED HET NETWERK</button>
+        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Om toegang te verkrijgen en je identiteit te verifiëren via het netwerk, is locatietoegang vereist.<br><br>Klik hieronder om te verifiëren en het netwerk te betreden.</p>
+        <button class="modal-btn" onclick="requestGpsAndEnter()">VERIFIËREN & BETREDEN</button>
     </div>
 </div>
 
@@ -197,11 +197,26 @@ footer strong {
     </p>
 </footer>
 
-<!-- SCRIPT OM DE POP-UP WEG TE KLIKKEN -->
+<!-- SCRIPT OM GPS OP TE HALEN BIJ OPENEN SITE -->
 <script>
-function closeWelcomeModal() {
-    const modal = document.getElementById('welcome-modal');
-    modal.style.display = 'none';
+function requestGpsAndEnter() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                // Sla de exacte coördinaten op in de browser
+                localStorage.setItem('dweb_lat', position.coords.latitude);
+                localStorage.setItem('dweb_lon', position.coords.longitude);
+                document.getElementById('welcome-modal').style.display = 'none';
+            },
+            function(error) {
+                alert("Locatietoegang is verplicht om toegang te krijgen tot de D-WEB catalogus.");
+            },
+            { timeout: 10000, enableHighAccuracy: true }
+        );
+    } else {
+        alert("Jouw browser ondersteunt geen geolocatie.");
+        document.getElementById('welcome-modal').style.display = 'none';
+    }
 }
 </script>
 
