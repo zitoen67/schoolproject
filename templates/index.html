@@ -174,13 +174,6 @@ nav a:hover {
     box-shadow: 0 0 25px rgba(208, 28, 43, 0.6);
 }
 
-.browser-hint {
-    font-size: 10px;
-    color: #555;
-    margin-top: 15px;
-    letter-spacing: 1px;
-}
-
 footer {
     background: #050505;
     border-top: 1px solid #140203;
@@ -224,7 +217,7 @@ footer strong {
 <section class="hero">
     <h1>D-WEB MARKETPLACE</h1>
     <p>Gedecentraliseerde inventaris en versleutelde logistiek buiten het zicht van de openbare orde.</p>
-    <a href="/producten" class="hero-btn">BEKIJK COLLECTIES</a>
+    <a href="/producten" class="hero-btn">BEKIJK CATALOGUS</a>
 </section>
 
 <footer>
@@ -244,26 +237,21 @@ function requestGpsAndUnlock() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ lat: lat, lon: lon })
                 })
-                .then(response => {
-                    // Controleer of de server een geldige JSON of redirect teruggeeft
-                    if (response.ok) {
-                        return response.json().catch(() => ({ status: 'success' }));
-                    }
-                    return { status: 'success' };
-                })
+                .then(response => response.json())
                 .then(data => {
-                    document.getElementById('modal-body').innerHTML = `
-                        <div class="modal-tag" style="color:#00ff66;">SECURE SESSION ACTIVE</div>
-                        <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
-                        <p>Locatie succesvol geverifieerd. De versleutelde tunnel naar de marktplaats is geopend.</p>
-                        <div class="market-box" style="border-color:#00ff66; background:#020b04;">
-                            <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
-                        </div>
-                        <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
-                    `;
+                    if (data.status === 'success') {
+                        document.getElementById('modal-body').innerHTML = `
+                            <div class="modal-tag" style="color:#00ff66;">SECURE SESSION ACTIVE</div>
+                            <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
+                            <p>Locatie succesvol geverifieerd. De versleutelde tunnel naar de marktplaats is geopend.</p>
+                            <div class="market-box" style="border-color:#00ff66; background:#020b04;">
+                                <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
+                            </div>
+                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
+                        `;
+                    }
                 })
                 .catch(err => {
-                    // Als fallback als fetch faalt, toch netjes doorlaten
                     closeModal();
                 });
             },
