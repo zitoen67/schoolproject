@@ -3,50 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-WEB | Underground Marketplace</title>
+<title>D-WEB // UNDERGROUND SYNDICATE</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #030303; color: #e0e0e0; font-family: Arial, sans-serif; overflow-x: hidden; }
-header { height: 75px; padding: 0 7%; display: flex; justify-content: space-between; align-items: center; background: #080808; border-bottom: 1px solid #1c1c1c; }
-.logo { color: #d01c2b; font-size: 29px; font-weight: 900; letter-spacing: 4px; }
-nav a { color: #bbb; text-decoration: none; margin-left: 25px; font-size: 13px; letter-spacing: 1px; }
-nav a:hover { color: #d01c2b; }
-.hero { height: calc(100vh - 75px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; background: radial-gradient(circle at center, #110506 0%, #030303 70%); }
-.hero h1 { font-size: 42px; color: #fff; letter-spacing: 5px; margin-bottom: 15px; }
-.hero p { color: #777; font-size: 15px; max-width: 600px; line-height: 1.6; margin-bottom: 35px; letter-spacing: 1px; }
-.hero-btn { padding: 14px 32px; background: #9c0f1c; color: #fff; text-decoration: none; font-weight: bold; font-size: 13px; letter-spacing: 2px; transition: 0.2s; }
-.hero-btn:hover { background: #d01c2b; }
+body { background: #010101; color: #b5b5b5; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
 
-/* AANTREKKELIJKE & EXCLUSIEVE MODAL STYLING */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 9999; }
-.modal-content { background: #090909; border: 1px solid #d01c2b; padding: 45px 35px; max-width: 540px; width: 90%; text-align: center; box-shadow: 0 0 50px rgba(208, 28, 43, 0.35); position: relative; }
-.modal-badge { display: inline-block; background: #1a0507; border: 1px solid #d01c2b; color: #d01c2b; font-size: 10px; font-weight: bold; letter-spacing: 3px; padding: 6px 14px; margin-bottom: 20px; text-transform: uppercase; }
-.modal-content h3 { color: #fff; font-size: 24px; margin-bottom: 15px; letter-spacing: 3px; font-weight: 800; }
-.modal-content p { color: #aaa; font-size: 13px; line-height: 1.8; margin-bottom: 25px; }
-.benefit-box { background: #0e0405; border-left: 3px solid #d01c2b; padding: 15px; text-align: left; margin-bottom: 25px; font-size: 13px; color: #ddd; line-height: 1.6; }
-.benefit-box strong { color: #d01c2b; }
-.modal-btn { display: block; width: 100%; padding: 15px; background: #9c0f1c; color: #fff; text-decoration: none; font-size: 13px; letter-spacing: 2px; font-weight: bold; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; box-shadow: 0 0 15px rgba(156, 15, 28, 0.4); }
-.modal-btn:hover { background: #d01c2b; box-shadow: 0 0 25px rgba(208, 28, 43, 0.6); }
-.browser-hint { font-size: 11px; color: #555; margin-top: 15px; letter-spacing: 0.5px; }
+header {
+    height: 75px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #030303;
+    border-bottom: 1px solid #1a0203;
+}
 
-footer { background: #080808; border-top: 1px solid #1c1c1c; padding: 35px 7%; text-align: center; color: #555; font-size: 12px; }
-footer strong { color: #d01c2b; letter-spacing: 3px; }
+.logo {
+    color: #d01c2b;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-shadow: 0 0 12px rgba(208, 28, 43, 0.7);
+}
+
+nav a {
+    color: #666;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+nav a:hover {
+    color: #d01c2b;
+}
+
+.hero {
+    height: calc(100vh - 75px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    background: radial-gradient(circle at center, #180204 0%, #010101 80%);
+}
+
+.hero h1 {
+    font-size: 44px;
+    color: #fff;
+    letter-spacing: 6px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(208, 28, 43, 0.5);
+}
+
+.hero p {
+    color: #555;
+    font-size: 14px;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+}
+
+.hero-btn {
+    padding: 14px 32px;
+    background: #600007;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 3px;
+    border: 1px solid #d01c2b;
+    transition: 0.2s;
+}
+
+.hero-btn:hover {
+    background: #d01c2b;
+    box-shadow: 0 0 25px rgba(208, 28, 43, 0.8);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.99);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #040404;
+    border: 2px solid #d01c2b;
+    padding: 40px 35px;
+    max-width: 560px;
+    width: 90%;
+    text-align: left;
+    box-shadow: 0 0 70px rgba(208, 28, 43, 0.5);
+    position: relative;
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #330a0d;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    font-size: 11px;
+    color: #d01c2b;
+    letter-spacing: 2px;
+}
+
+.modal-content h3 {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.modal-content p {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.darknet-box {
+    background: #0d0102;
+    border: 1px dashed #d01c2b;
+    padding: 15px;
+    margin-bottom: 25px;
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.7;
+}
+
+.darknet-box span {
+    color: #d01c2b;
+    font-weight: bold;
+}
+
+.modal-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #600007;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    border: 1px solid #d01c2b;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.modal-btn:hover {
+    background: #d01c2b;
+    box-shadow: 0 0 30px rgba(208, 28, 43, 0.9);
+}
+
+.security-warning {
+    font-size: 10px;
+    color: #444;
+    margin-top: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+footer {
+    background: #030303;
+    border-top: 1px solid #1a0203;
+    padding: 35px 7%;
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+footer strong {
+    color: #d01c2b;
+}
 </style>
 </head>
 <body>
 
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
-        <div class="modal-badge">NODE SECURITY HANDSHAKE</div>
-        <h3>EXCLUSIEVE TOEGANG</h3>
-        <p>Welkom bij de besloten D-WEB catalogus. Om je node te verifiëren en de beveiligde inventaris te ontgrendelen, is een eenmalige locatiehandshake vereist.</p>
+        <div class="terminal-header">
+            <span>[SYNDICAAT // PERIMETER_LOCKED]</span>
+            <span style="color: #ff1a1a;">● STRIKT GEHEIM</span>
+        </div>
         
-        <div class="benefit-box">
-            🎁 <strong>Directe Welkomstbonus:</strong> Na succesvolle verificatie wordt kortingscode <strong>DWEB20</strong> automatisch geactiveerd voor <strong>20% korting én gratis express verzending</strong> op je gehele order.
+        <h3>INFILTRATIE-CONTROLE VEREIST</h3>
+        <p>Je probeert binnen te dringen in de beveiligde perimeter van het <strong>D-WEB</strong> syndicaat. Om te bewijzen dat je geen pion bent van de autoriteiten, is een directe identiteits- en locatie-scan verplicht.</p>
+        
+        <div class="darknet-box">
+            [!] <span>LET OP:</span> Weigering of blokkering leidt tot directe IP-zwarte lijst en permanente uitsluiting.<br><br>
+            🗝️ <strong>SCHADUW-IMMUNITEIT:</strong> Bij succesvolle verificatie wordt de zwarte markt-pas <span>DWEB20</span> geactiveerd (20% korting + gratis verscheping zonder sporen).
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">VERIFIEER LOCATIE & ONTVANG KORTING</button>
-        <div class="browser-hint">Kies in de browser-melding op <strong>'Toestaan'</strong> om door te gaan.</div>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">SCAN LOCATIE & DOORBREKEN</button>
+        <div class="security-warning">Selecteer in de browser-melding <strong>'Toestaan'</strong> om de schaduwpoort te openen.</div>
     </div>
 </div>
 
@@ -60,14 +227,13 @@ footer strong { color: #d01c2b; letter-spacing: 3px; }
 </header>
 
 <section class="hero">
-    <h1>D-WEB MARKETPLACE</h1>
-    <p>Exclusieve catalogus en gedecentraliseerde inventaris. Navigeer door onze gecategoriseerde selectie.</p>
-    <a href="/producten" class="hero-btn">BEKIJK COLLECTIE</a>
+    <h1>SCHADUW-MARKTPLAATS</h1>
+    <p>Volledig afgeschermde inventaris en logistieke distributie buiten het zicht van de wet.</p>
+    <a href="/producten" class="hero-btn">BETREED DE ZWARTE MARKT</a>
 </section>
 
 <footer>
-    <strong>D-WEB</strong>
-    <p style="margin-top:12px;">UNDERGROUND MARKETPLACE © 2026</p>
+    <strong>D-WEB</strong> // UNDERGROUND PROTOCOL © 2026
 </footer>
 
 <script>
@@ -87,25 +253,28 @@ function requestGpsAndUnlock() {
                 .then(data => {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
-                            <div class="modal-badge" style="background:#041507; border-color:#4CAF50; color:#4CAF50;">HANDSHAKE SUCCESVOL</div>
-                            <h3 style="color:#4CAF50;">TOEGANG VERLEEND</h3>
-                            <p>Je GPS-locatie is geverifieerd.<br>Jouw exclusieve <strong>20% korting en gratis verzending</strong> zijn direct gekoppeld aan je sessie.</p>
-                            <div class="benefit-box" style="border-left-color:#4CAF50;">
-                                ACTIEVE KORTINGSCODE:<br>
-                                <strong style="color:#4CAF50; font-size:16px; letter-spacing:2px;">DWEB20 (GEACTIVEERD)</strong>
+                            <div class="terminal-header" style="color:#00ff66;">
+                                <span>[UPLINK GESLAAGD]</span>
+                                <span>TOEGANG VERLEEND</span>
                             </div>
-                            <button class="modal-btn" style="background:#2e7d32;" onclick="closeModal()">BETREED DE CATALOGUS</button>
+                            <h3 style="color:#00ff66;">SCHADUW-REGISTRATIE VOLTOOID</h3>
+                            <p>Je digitale footprint is goedgekeurd door het syndicaat. Je sporen zijn gewist en de poorten van de zwarte markt staan voor je open.</p>
+                            <div class="darknet-box" style="border-color:#00ff66; background:#020b04;">
+                                🟢 <strong>ZWARTE MARKT-PAS ACTIEF:</strong><br>
+                                <span style="color:#00ff66; font-size:15px; font-weight:bold; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Anonieme Verzending)
+                            </div>
+                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">NAAR DE WAPENKAMER</button>
                         `;
                     }
                 });
             },
             function(error) {
-                alert("TOEGANG GEWEIGERD: Verificatie mislukt. Je moet locatietoegang 'Toestaan' in de browser om de beveiligde D-WEB omgeving te betreden.");
+                alert("[FATALE FOUT] Toegang geweigerd: Je moet locatietoegang 'Toestaan' in de browser om de onderwereld te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
     } else {
-        alert("Jouw browser ondersteunt geen geolocatie.");
+        alert("Fout: Geen veilige uplink gedetecteerd in deze browser.");
     }
 }
 
