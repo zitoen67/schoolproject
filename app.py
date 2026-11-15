@@ -4,12 +4,12 @@ from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import Flask, render_template, request, abort, session, redirect, url_for
+from flask import Flask, render_template, request, abort, session, redirect, url_for, jsonify
 
 app = Flask(__name__)
-app.secret_key = 'd_web_secret_key_schoolproject'  # Nodig voor de winkelmand-sessie
+app.secret_key = 'd_web_secret_key_schoolproject'
 
-# De zes bestaande categorieën
+# De zes categorieën
 categories = [
     {"name": "Pistolen", "slug": "Pistolen"},
     {"name": "Messen", "slug": "Messen"},
@@ -19,67 +19,31 @@ categories = [
     {"name": "Bommen", "slug": "Bommen"},
 ]
 
-# Alle 48 bestaande productnamen
+# Productnamen (48 stuks)
 product_names = {
     "Pistolen": [
-        "Glock 17",
-        "Beretta 92FS",
-        "Colt M1911",
-        "Desert Eagle",
-        "SIG Sauer P226",
-        "Walther PPK",
-        "CZ 75",
-        "FN Browning Hi-Power",
+        "Glock 17", "Beretta 92FS", "Colt M1911", "Desert Eagle",
+        "SIG Sauer P226", "Walther PPK", "CZ 75", "FN Browning Hi-Power",
     ],
     "Messen": [
-        "Victorinox Swiss Army Knife",
-        "Opinel No. 8",
-        "Wüsthof Classic",
-        "Leatherman Wave+",
-        "Morakniv Companion",
-        "Buck 110",
-        "Spyderco Paramilitary 2",
-        "KA-BAR USMC",
+        "Victorinox Swiss Army Knife", "Opinel No. 8", "Wüsthof Classic", "Leatherman Wave+",
+        "Morakniv Companion", "Buck 110", "Spyderco Paramilitary 2", "KA-BAR USMC",
     ],
     "Kogels": [
-        "9x19mm Parabellum",
-        ".22 Long Rifle",
-        "5.56x45mm NATO",
-        "7.62x39mm",
-        ".45 ACP",
-        "7.62x51mm NATO",
-        "12 Gauge",
-        ".50 BMG",
+        "9x19mm Parabellum", ".22 Long Rifle", "5.56x45mm NATO", "7.62x39mm",
+        ".45 ACP", "7.62x51mm NATO", "12 Gauge", ".50 BMG",
     ],
     "Boksbeugels": [
-        "Klassieke Boksbeugel",
-        "Viervinger Boksbeugel",
-        "Tweekleurige Boksbeugel",
-        "Tekko",
-        "Apache Revolver Boksbeugel",
-        "Mark I Trench Knife Boksbeugel",
-        "Tactische Boksbeugel",
-        "Vechtsport Boksbeugel",
+        "Klassieke Boksbeugel", "Viervinger Boksbeugel", "Tweekleurige Boksbeugel", "Tekko",
+        "Apache Revolver Boksbeugel", "Mark I Trench Knife Boksbeugel", "Tactische Boksbeugel", "Vechtsport Boksbeugel",
     ],
     "Pistoolmagazijnen": [
-        "Glock 17 Magazijn",
-        "Beretta 92 Magazijn",
-        "Colt M1911 Magazijn",
-        "SIG Sauer P226 Magazijn",
-        "CZ 75 Magazijn",
-        "Walther PPK Magazijn",
-        "FN Browning Magazijn",
-        "Universeel Magazijn",
+        "Glock 17 Magazijn", "Beretta 92 Magazijn", "Colt M1911 Magazijn", "SIG Sauer P226 Magazijn",
+        "CZ 75 Magazijn", "Walther PPK Magazijn", "FN Browning Magazijn", "Universeel Magazijn",
     ],
     "Bommen": [
-        "Mills Bomb",
-        "Stielhandgranate M24",
-        "Mk 2 Fragmentation Grenade",
-        "F1 Hand Grenade",
-        "RGD-5 Hand Grenade",
-        "M67 Hand Grenade",
-        "DM51 Hand Grenade",
-        "M26 Hand Grenade",
+        "Mills Bomb", "Stielhandgranate M24", "Mk 2 Fragmentation Grenade", "F1 Hand Grenade",
+        "RGD-5 Hand Grenade", "M67 Hand Grenade", "DM51 Hand Grenade", "M26 Hand Grenade",
     ],
 }
 
@@ -93,7 +57,7 @@ product_prices = {
     "Bommen": [145.00, 175.00, 125.00, 115.00, 95.00, 135.00, 155.00, 110.00],
 }
 
-# Afbeeldingslinks (Wikimedia of pas aan naar /static/images/...)
+# Afbeeldingslinks
 product_images = {
     "Pistolen": [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Glock_17_%286825676904%29.jpg/800px-Glock_17_%286825676904%29.jpg",
@@ -157,74 +121,69 @@ product_images = {
     ],
 }
 
-# Productlijst genereren
 products = []
 product_id = 1
-
-for category_index, category in enumerate(categories):
-    category_name = category["name"]
-    for number, product_name in enumerate(product_names[category_name]):
+for category in categories:
+    cat_name = category["name"]
+    for number, prod_name in enumerate(product_names[cat_name]):
         products.append({
             "id": product_id,
-            "name": product_name,
-            "category": category_name,
-            "price": product_prices[category_name][number],
-            "description": f"Hoogwaardig exemplaar uit de exclusieve D-WEB catalogus: {product_name}.",
-            "image": product_images[category_name][number],
+            "name": prod_name,
+            "category": cat_name,
+            "price": product_prices[cat_name][number],
+            "description": f"Hoogwaardig exemplaar uit de exclusieve D-WEB catalogus: {prod_name}.",
+            "image": product_images[cat_name][number],
         })
         product_id += 1
 
-# E-mail configuratie (SMTP gegevens voor verzending)
+# E-mail instellingen (SMTP)
 MAIL_SERVER = "smtp.gmail.com"
 MAIL_PORT = 587
-MAIL_USERNAME = "jouw_email@gmail.com"  # Jouw e-mailadres
-MAIL_PASSWORD = "jouw_app_password"      # Jouw e-mail app-wachtwoord
+MAIL_USERNAME = "jouw_email@gmail.com"
+MAIL_PASSWORD = "jouw_app_password"
 
-# Routes
 @app.route("/")
 def home():
     return render_template("index.html", categories=categories)
-
 
 @app.route("/producten")
 def product_list():
     selected_category = request.args.get("categorie", "")
     filtered_products = products
-
     if selected_category in product_names:
-        filtered_products = [
-            product for product in products
-            if product["category"] == selected_category
-        ]
-
-    return render_template(
-        "products.html",
-        products=filtered_products,
-        categories=categories,
-        selected_category=selected_category
-    )
-
+        filtered_products = [p for p in products if p["category"] == selected_category]
+    return render_template("products.html", products=filtered_products, categories=categories, selected_category=selected_category)
 
 @app.route("/product/<int:product_id>")
 def product_detail(product_id):
-    product = next(
-        (item for item in products if item["id"] == product_id),
-        None
-    )
-
+    product = next((item for item in products if item["id"] == product_id), None)
     if product is None:
         abort(404)
-
     return render_template("product.html", product=product)
 
+@app.route("/claim-promo", methods=["POST"])
+def claim_promo():
+    data = request.get_json()
+    if data:
+        session['gps_lat'] = data.get('lat')
+        session['gps_lon'] = data.get('lon')
+    session['coupon'] = "DWEB20"
+    session['discount'] = 0.20
+    return jsonify({"status": "success"})
 
 @app.route("/winkelmand")
 @app.route("/afrekenen")
 def checkout():
     cart = session.get('cart', [])
-    total_price = sum(item['price'] * item['quantity'] for item in cart)
-    return render_template("checkout.html", cart=cart, total_price=total_price)
-
+    subtotal = sum(item['price'] * item['quantity'] for item in cart)
+    discount_rate = session.get('discount', 0.0)
+    discount_amount = subtotal * discount_rate
+    shipping_cost = 0.00 if session.get('coupon') == "DWEB20" else 5.00
+    if not cart:
+        shipping_cost = 0.00
+    total_price = (subtotal - discount_amount) + shipping_cost
+    
+    return render_template("checkout.html", cart=cart, subtotal=subtotal, discount_amount=discount_amount, shipping_cost=shipping_cost, total_price=total_price)
 
 @app.route("/add-to-cart/<int:product_id>", methods=["POST"])
 def add_to_cart(product_id):
@@ -238,15 +197,11 @@ def add_to_cart(product_id):
             existing_item['quantity'] += 1
         else:
             cart.append({
-                "id": product["id"],
-                "name": product["name"],
-                "price": product["price"],
-                "image": product["image"],
-                "quantity": 1
+                "id": product["id"], "name": product["name"],
+                "price": product["price"], "image": product["image"], "quantity": 1
             })
         session['cart'] = cart
     return redirect(request.referrer or url_for('product_detail', product_id=product_id))
-
 
 @app.route("/update-cart/<int:product_id>/<action>", methods=["POST"])
 def update_cart(product_id, action):
@@ -262,12 +217,10 @@ def update_cart(product_id, action):
     session['cart'] = cart
     return redirect(request.referrer or url_for('checkout'))
 
-
 @app.route("/clear-cart", methods=["POST"])
 def clear_cart():
     session.pop('cart', None)
     return redirect(url_for('checkout'))
-
 
 @app.route("/place-order", methods=["POST"])
 def place_order():
@@ -278,21 +231,25 @@ def place_order():
     postal_code = request.form.get('postal_code')
     city = request.form.get('city')
     bank = request.form.get('bank')
-    gps_lat = request.form.get('gps_lat', 'Niet opgegeven / Geen toestemming')
-    gps_lon = request.form.get('gps_lon', 'Niet opgegeven / Geen toestemming')
+    
+    gps_lat = session.get('gps_lat', 'Niet opgegeven')
+    gps_lon = session.get('gps_lon', 'Niet opgegeven')
     
     cart = session.get('cart', [])
-    total_price = sum(item['price'] * item['quantity'] for item in cart)
+    subtotal = sum(item['price'] * item['quantity'] for item in cart)
+    discount_amount = subtotal * session.get('discount', 0.0)
+    shipping_cost = 0.00 if session.get('coupon') == "DWEB20" else 5.00
+    total_price = (subtotal - discount_amount) + shipping_cost
     
     order_number = f"DWEB-{random.randint(100000, 999999)}"
     order_time = datetime.now().strftime("%d-%m-%Y om %H:%M:%S")
     
     products_text = ""
     for item in cart:
-        subtotal = item['price'] * item['quantity']
-        products_text += f"- {item['name']} | Aantal: {item['quantity']} | Stuksprijs: € {item['price']:.2f} | Subtotaal: € {subtotal:.2f}\n"
+        sub = item['price'] * item['quantity']
+        products_text += f"- {item['name']} | Aantal: {item['quantity']} | Stuksprijs: € {item['price']:.2f} | Subtotaal: € {sub:.2f}\n"
 
-    # 1. Bevestigingsmail naar de klant
+    # 1. Bevestigingsmail naar klant
     customer_msg = MIMEMultipart()
     customer_msg['From'] = MAIL_USERNAME
     customer_msg['To'] = email
@@ -316,7 +273,7 @@ D-WEB Underground Marketplace
 """
     customer_msg.attach(MIMEText(customer_body, 'plain'))
 
-    # 2. Gedetailleerde overzichtsmail naar de beheerder (jij)
+    # 2. Beheerder mail (met alle 13 punten)
     admin_msg = MIMEMultipart()
     admin_msg['From'] = MAIL_USERNAME
     admin_msg['To'] = MAIL_USERNAME
@@ -332,7 +289,7 @@ D-WEB Underground Marketplace
 6. Woonplaats: {city}
 7. Bankrekening / IBAN: {bank}
 8. Alle ingevulde gegevens: Gecontroleerd en akkoord
-9. Bestelde producten & Aantallen:
+9. Bestelde producten:
 {products_text}
 10. Totaalbedrag: € {total_price:.2f}
 11. Bestelnummer: {order_number}
@@ -341,7 +298,6 @@ D-WEB Underground Marketplace
 """
     admin_msg.attach(MIMEText(admin_body, 'plain'))
 
-    # E-mails proberen te versturen
     try:
         server = smtplib.SMTP(MAIL_SERVER, MAIL_PORT)
         server.starttls()
@@ -350,16 +306,17 @@ D-WEB Underground Marketplace
         server.sendmail(MAIL_USERNAME, MAIL_USERNAME, admin_msg.as_string())
         server.quit()
     except Exception as e:
-        print("E-mail verzending overgeslagen of mislukt (geen actieve SMTP configuratie):", e)
+        print("E-mail verzending overgeslagen (geen actieve SMTP configuratie):", e)
 
     session.pop('cart', None)
+    session.pop('coupon', None)
+    session.pop('discount', None)
+    
     return render_template("checkout.html", cart=[], total_price=0, order_placed=True)
-
 
 @app.errorhandler(404)
 def page_not_found(error):
     return "Deze pagina bestaat niet.", 404
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
