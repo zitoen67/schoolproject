@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, session, redirect, url_for
 
 app = Flask(__name__)
+app.secret_key = 'd_web_secret_key_schoolproject'  # Nodig voor de winkelmand-sessie
 
 # De zes bestaande categorieën
 categories = [
@@ -87,7 +88,7 @@ product_prices = {
     "Bommen": [145.00, 175.00, 125.00, 115.00, 95.00, 135.00, 155.00, 110.00],
 }
 
-# Geverifieerde, directe afbeeldingslinks per specifiek product
+# Afbeeldingslinks (pas eventueel aan naar jouw eigen /static/images/... paden als je die liever gebruikt)
 product_images = {
     "Pistolen": [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Glock_17_%286825676904%29.jpg/800px-Glock_17_%286825676904%29.jpg",
@@ -151,13 +152,12 @@ product_images = {
     ],
 }
 
-# Automatisch genereren van de productlijst
+# Productlijst genereren
 products = []
 product_id = 1
 
 for category_index, category in enumerate(categories):
     category_name = category["name"]
-
     for number, product_name in enumerate(product_names[category_name]):
         products.append({
             "id": product_id,
@@ -207,12 +207,62 @@ def product_detail(product_id):
     return render_template("product.html", product=product)
 
 
+@app.route("/winkelmand")
+@app.route("/afrekenen")
+def checkout():
+    cart = session.get('cart', [])
+    total_price = sum(item['price'] * item['quantity'] for item in cart)
+    return render_template("checkout.html", cart=cart, total_price=total_price)
+
+
+@app.route("/add-to-cart/<int:product_id>", methods=["POST"])
+def add_to_cart(product_id):
+    product = next((item for item in products if item["id"] == product_id), None)
+    if product:
+        if 'cart' not in session:
+            session['cart'] = []
+        cart = session['cart']
+        existing_item = next((item for item in cart if item['id'] == product_id), None)
+        if existing_item:
+            existing_item['quantity'] += 1
+        else:
+            cart.append({
+                "id": product["id"],
+                "name": product["name"],
+                "price": product["price"],
+                "image": product["image"],
+                "quantity": 1
+            })
+        session['cart'] = cart
+    return redirect(request.referrer or url_for('product_detail', product_id=product_id))
+
+
+@app.route("/update-cart/<int:product_id>/<action>", methods=["POST"])
+def update_cart(product_id, action):
+    cart = session.get('cart', [])
+    existing_item = next((item for item in cart if item['id'] == product_id), None)
+    if existing_item:
+        if action == "plus":
+            existing_item['quantity'] += 1
+        elif action == "min":
+            existing_item['quantity'] -= 1
+            if existing_item['quantity'] <= 0:
+                cart.remove(existing_item)
+    session['cart'] = cart
+    return redirect(request.referrer or url_for('checkout'))
+
+
+@app.route("/clear-cart", methods=["POST"])
+def clear_cart():
+    session.pop('cart', None)
+    return redirect(url_for('checkout'))
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return "Deze pagina bestaat niet.", 404
 
 
-# Render-compatibele server start (leest dynamische PORT van Render of gebruikt 5000 lokaal)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
