@@ -72,6 +72,7 @@ product_names = {
         "JDAM",
         "MOAB"
     ],
+    }
 
 product_images = {
     category: [
