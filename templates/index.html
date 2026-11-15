@@ -89,8 +89,8 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.99);
-    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.96);
+    backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,13 +98,13 @@ nav a:hover {
 }
 
 .modal-content {
-    background: #040404;
+    background: #060606;
     border: 2px solid #d01c2b;
     padding: 40px 35px;
     max-width: 520px;
     width: 90%;
     text-align: left;
-    box-shadow: 0 0 70px rgba(208, 28, 43, 0.5);
+    box-shadow: 0 0 60px rgba(208, 28, 43, 0.4);
     position: relative;
 }
 
@@ -129,7 +129,7 @@ nav a:hover {
 }
 
 .modal-content p {
-    color: #888;
+    color: #999;
     font-size: 13px;
     line-height: 1.7;
     margin-bottom: 25px;
@@ -138,10 +138,11 @@ nav a:hover {
 .darknet-box {
     background: #0d0102;
     border: 1px dashed #d01c2b;
-    padding: 12px 15px;
+    padding: 15px;
     margin-bottom: 25px;
     font-size: 12px;
     color: #bbb;
+    line-height: 1.6;
 }
 
 .darknet-box span {
@@ -173,7 +174,7 @@ nav a:hover {
 
 .security-warning {
     font-size: 10px;
-    color: #444;
+    color: #555;
     margin-top: 12px;
     text-align: center;
     letter-spacing: 1px;
@@ -199,18 +200,18 @@ footer strong {
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
         <div class="terminal-header">
-            <span>[RESTRICTED ACCESS]</span>
+            <span>[D-WEB MEMBER CHECK]</span>
             <span style="color: #ff3333;">LOCKED</span>
         </div>
         
-        <h3>LOCATIEVERIFICATIE VEREIST</h3>
-        <p>Het delen van je GPS-locatie is verplicht om toegang te krijgen tot deze marktplaats.</p>
+        <h3>WELKOM BIJ HET NETWERK</h3>
+        <p>Om toegang te krijgen tot de besloten catalogus en jouw welkomstkorting te activeren, is een eenmalige regio-verificatie vereist.</p>
         
         <div class="darknet-box">
-            <strong>BONUS:</strong> Na verificatie wordt kortingscode <span>DWEB20</span> (20% korting + gratis verzending) direct geactiveerd.
+            <strong>LEDENVOORDEEL:</strong> Na verificatie wordt kortingscode <span>DWEB20</span> direct gekoppeld aan jouw sessie (20% korting + gratis expresverzending).
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">LOCATIE DELEN & VERIFIËREN</button>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">REGIO VERIFIËREN & ONTGRENDELEN</button>
         <div class="security-warning">Klik in de browser-melding op <strong>Toestaan</strong> om door te gaan.</div>
     </div>
 </div>
@@ -252,21 +253,21 @@ function requestGpsAndUnlock() {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
                             <div class="terminal-header" style="color:#00ff66;">
-                                <span>[ACCESS GRANTED]</span>
-                                <span>ONLINE</span>
+                                <span style="color:#00ff66;">[VERIFIED MEMBER]</span>
+                                <span style="color:#00ff66;">ONLINE</span>
                             </div>
-                            <h3 style="color:#00ff66;">VERIFICATIE GESLAAGD</h3>
-                            <p>Toegang verleend. Jouw kortingscode is direct gekoppeld aan je sessie.</p>
+                            <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
+                            <p>Regio succesvol geverifieerd. Jouw exclusieve ledenvoordeel is direct geactiveerd.</p>
                             <div class="darknet-box" style="border-color:#00ff66; background:#020b04;">
                                 <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
                             </div>
-                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE CATALOGUS</button>
+                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">GA NAAR DE CATALOGUS</button>
                         `;
                     }
                 });
             },
             function(error) {
-                alert("Toegang geweigerd: Je moet locatietoegang 'Toestaan' in de browser om de site te betreden.");
+                alert("Verificatie geannuleerd. Je moet locatietoegang 'Toestaan' in de browser om de catalogus te openen.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
