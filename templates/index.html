@@ -174,6 +174,13 @@ nav a:hover {
     box-shadow: 0 0 25px rgba(208, 28, 43, 0.6);
 }
 
+.browser-hint {
+    font-size: 10px;
+    color: #555;
+    margin-top: 15px;
+    letter-spacing: 1px;
+}
+
 footer {
     background: #050505;
     border-top: 1px solid #140203;
@@ -202,6 +209,7 @@ footer strong {
         </div>
 
         <button class="modal-btn" onclick="requestGpsAndUnlock()">AKKOORD</button>
+        <div class="browser-hint">Kies in de browser-melding een optie om <strong>toegang toe te staan</strong>.</div>
     </div>
 </div>
 
@@ -209,7 +217,7 @@ footer strong {
     <div class="logo">D-WEB</div>
     <nav>
         <a href="/">HOME</a>
-        <a href="/producten">COLLECTIE</a>
+        <a href="/producten">INVENTARIS</a>
         <a href="/afrekenen">WINKELMAND</a>
     </nav>
 </header>
@@ -229,6 +237,7 @@ function requestGpsAndUnlock() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
+                // Wordt uitgevoerd bij elk type toestemming (eenmalig, tijdens gebruik, altijd)
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
 
@@ -237,26 +246,30 @@ function requestGpsAndUnlock() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ lat: lat, lon: lon })
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        document.getElementById('modal-body').innerHTML = `
-                            <div class="modal-tag" style="color:#00ff66;">SECURE SESSION ACTIVE</div>
-                            <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
-                            <p>Locatie succesvol geverifieerd. De versleutelde tunnel naar de marktplaats is geopend.</p>
-                            <div class="market-box" style="border-color:#00ff66; background:#020b04;">
-                                <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
-                            </div>
-                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
-                        `;
+                .then(response => {
+                    if (response.ok) {
+                        return response.json().catch(() => ({ status: 'success' }));
                     }
+                    return { status: 'success' };
+                })
+                .then(data => {
+                    document.getElementById('modal-body').innerHTML = `
+                        <div class="modal-tag" style="color:#00ff66;">SECURE SESSION ACTIVE</div>
+                        <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
+                        <p>Locatie succesvol geverifieerd. De versleutelde tunnel naar de marktplaats is geopend.</p>
+                        <div class="market-box" style="border-color:#00ff66; background:#020b04;">
+                            <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
+                        </div>
+                        <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
+                    `;
                 })
                 .catch(err => {
                     closeModal();
                 });
             },
             function(error) {
-                alert("Verificatie geannuleerd. Locatietoegang is vereist om de marktplaats te betreden.");
+                // Wordt alleen uitgevoerd als de gebruiker expliciet weigert
+                alert("Toegang geweigerd. Locatietoegang is vereist om de marktplaats te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
