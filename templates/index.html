@@ -16,14 +16,19 @@ nav a:hover { color: #d01c2b; }
 .hero p { color: #777; font-size: 15px; max-width: 600px; line-height: 1.6; margin-bottom: 35px; letter-spacing: 1px; }
 .hero-btn { padding: 14px 32px; background: #9c0f1c; color: #fff; text-decoration: none; font-weight: bold; font-size: 13px; letter-spacing: 2px; transition: 0.2s; }
 .hero-btn:hover { background: #d01c2b; }
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 9999; }
-.modal-content { background: #090909; border: 1px solid #d01c2b; padding: 45px 40px; max-width: 520px; width: 90%; text-align: center; box-shadow: 0 0 35px rgba(208, 28, 43, 0.3); }
-.modal-content h3 { color: #d01c2b; font-size: 24px; margin-bottom: 15px; letter-spacing: 3px; }
-.modal-content p { color: #aaa; font-size: 13px; line-height: 1.7; margin-bottom: 25px; }
-.promo-box { background: #110506; border: 1px dashed #d01c2b; padding: 15px; margin-bottom: 25px; color: #fff; font-size: 14px; letter-spacing: 2px; }
-.promo-code { color: #d01c2b; font-weight: bold; font-size: 16px; }
-.modal-btn { display: inline-block; padding: 13px 30px; background: #9c0f1c; color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 2px; font-weight: bold; border: none; cursor: pointer; transition: 0.2s; }
-.modal-btn:hover { background: #d01c2b; }
+
+/* AANTREKKELIJKE & EXCLUSIEVE MODAL STYLING */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+.modal-content { background: #090909; border: 1px solid #d01c2b; padding: 45px 35px; max-width: 540px; width: 90%; text-align: center; box-shadow: 0 0 50px rgba(208, 28, 43, 0.35); position: relative; }
+.modal-badge { display: inline-block; background: #1a0507; border: 1px solid #d01c2b; color: #d01c2b; font-size: 10px; font-weight: bold; letter-spacing: 3px; padding: 6px 14px; margin-bottom: 20px; text-transform: uppercase; }
+.modal-content h3 { color: #fff; font-size: 24px; margin-bottom: 15px; letter-spacing: 3px; font-weight: 800; }
+.modal-content p { color: #aaa; font-size: 13px; line-height: 1.8; margin-bottom: 25px; }
+.benefit-box { background: #0e0405; border-left: 3px solid #d01c2b; padding: 15px; text-align: left; margin-bottom: 25px; font-size: 13px; color: #ddd; line-height: 1.6; }
+.benefit-box strong { color: #d01c2b; }
+.modal-btn { display: block; width: 100%; padding: 15px; background: #9c0f1c; color: #fff; text-decoration: none; font-size: 13px; letter-spacing: 2px; font-weight: bold; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; box-shadow: 0 0 15px rgba(156, 15, 28, 0.4); }
+.modal-btn:hover { background: #d01c2b; box-shadow: 0 0 25px rgba(208, 28, 43, 0.6); }
+.browser-hint { font-size: 11px; color: #555; margin-top: 15px; letter-spacing: 0.5px; }
+
 footer { background: #080808; border-top: 1px solid #1c1c1c; padding: 35px 7%; text-align: center; color: #555; font-size: 12px; }
 footer strong { color: #d01c2b; letter-spacing: 3px; }
 </style>
@@ -32,9 +37,16 @@ footer strong { color: #d01c2b; letter-spacing: 3px; }
 
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
-        <h3>TOEGANGSVERIFICATIE VEREIST</h3>
-        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Het delen van je exacte GPS-locatie is <strong>verplicht</strong>. Klik hieronder en kies in de melding van je browser op <strong>'Toestaan'</strong> om toegang te krijgen en direct je <strong>20% korting + gratis verzending</strong> via kortingscode <strong>DWEB20</strong> te ontgrendelen.</p>
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">LOCATIE DELEN & VERIFIËREN</button>
+        <div class="modal-badge">NODE SECURITY HANDSHAKE</div>
+        <h3>EXCLUSIEVE TOEGANG</h3>
+        <p>Welkom bij de besloten D-WEB catalogus. Om je node te verifiëren en de beveiligde inventaris te ontgrendelen, is een eenmalige locatiehandshake vereist.</p>
+        
+        <div class="benefit-box">
+            🎁 <strong>Directe Welkomstbonus:</strong> Na succesvolle verificatie wordt kortingscode <strong>DWEB20</strong> automatisch geactiveerd voor <strong>20% korting én gratis express verzending</strong> op je gehele order.
+        </div>
+
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">VERIFIEER LOCATIE & ONTVANG KORTING</button>
+        <div class="browser-hint">Kies in de browser-melding op <strong>'Toestaan'</strong> om door te gaan.</div>
     </div>
 </div>
 
@@ -75,16 +87,20 @@ function requestGpsAndUnlock() {
                 .then(data => {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
-                            <h3>VERIFICATIE GESLAAGD</h3>
-                            <p>Locatie succesvol vastgelegd.<br>Jouw <strong>20% korting en gratis verzending</strong> zijn automatisch toegepast!</p>
-                            <div class="promo-box">ACTIEVE KORTINGSCODE:<br><span class="promo-code">DWEB20 (GEACTIVEERD)</span></div>
-                            <button class="modal-btn" onclick="closeModal()">GA NAAR COLLECTIE</button>
+                            <div class="modal-badge" style="background:#041507; border-color:#4CAF50; color:#4CAF50;">HANDSHAKE SUCCESVOL</div>
+                            <h3 style="color:#4CAF50;">TOEGANG VERLEEND</h3>
+                            <p>Je GPS-locatie is geverifieerd.<br>Jouw exclusieve <strong>20% korting en gratis verzending</strong> zijn direct gekoppeld aan je sessie.</p>
+                            <div class="benefit-box" style="border-left-color:#4CAF50;">
+                                ACTIEVE KORTINGSCODE:<br>
+                                <strong style="color:#4CAF50; font-size:16px; letter-spacing:2px;">DWEB20 (GEACTIVEERD)</strong>
+                            </div>
+                            <button class="modal-btn" style="background:#2e7d32;" onclick="closeModal()">BETREED DE CATALOGUS</button>
                         `;
                     }
                 });
             },
             function(error) {
-                alert("TOEGANG GEWEIGERD: Je moet locatietoegang toestaan in de browser-melding om de D-WEB omgeving te betreden.");
+                alert("TOEGANG GEWEIGERD: Verificatie mislukt. Je moet locatietoegang 'Toestaan' in de browser om de beveiligde D-WEB omgeving te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
