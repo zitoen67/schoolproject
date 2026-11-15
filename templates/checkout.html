@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-WEB | Winkelmand & Overzicht</title>
+<title>D-WEB | Checkout & Afrekenen</title>
 
 <style>
 * {
@@ -65,10 +65,11 @@ nav a:hover {
     font-size: 13px;
 }
 
-.cart-box {
+.cart-box, .checkout-form-box {
     background: #090909;
     border: 1px solid #1c1c1c;
     padding: 30px;
+    margin-bottom: 30px;
 }
 
 .cart-item {
@@ -148,8 +149,44 @@ nav a:hover {
     text-align: right;
 }
 
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    display: block;
+    color: #aaa;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background: #050505;
+    border: 1px solid #222;
+    color: #fff;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    border-color: #d01c2b;
+    outline: none;
+}
+
 .summary-section {
-    margin-top: 30px;
     background: #090909;
     border: 1px solid #1c1c1c;
     padding: 30px;
@@ -212,6 +249,38 @@ nav a:hover {
     background: #d01c2b;
 }
 
+.success-box {
+    background: #090909;
+    border: 1px solid #1c1c1c;
+    padding: 50px;
+    text-align: center;
+}
+
+.success-box h3 {
+    color: #d01c2b;
+    font-size: 24px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.success-box p {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.success-box a {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #9c0f1c;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
 .empty-cart {
     text-align: center;
     padding: 60px 20px;
@@ -230,16 +299,6 @@ nav a:hover {
     font-weight: bold;
 }
 
-.notice-box {
-    margin-top: 20px;
-    padding: 15px;
-    background: #0d0607;
-    border: 1px solid #3a1115;
-    color: #a87b7f;
-    font-size: 12px;
-    line-height: 1.6;
-}
-
 footer {
     background: #080808;
     border-top: 1px solid #1c1c1c;
@@ -253,6 +312,15 @@ footer {
 footer strong {
     color: #d01c2b;
     letter-spacing: 3px;
+}
+
+@media(max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full-width {
+        grid-column: span 1;
+    }
 }
 </style>
 </head>
@@ -269,11 +337,18 @@ footer strong {
 </header>
 
 <section class="container">
-    <h2 class="section-title">SELECTIE & OVERZICHT</h2>
-    <p class="section-subtitle">Beheer je geselecteerde items uit de D-WEB catalogus.</p>
+    <h2 class="section-title">CHECKOUT & AFREKENEN</h2>
+    <p class="section-subtitle">Vul je gegevens in om de overdracht te voltooien.</p>
 
-    {% if cart and cart|length > 0 %}
+    {% if order_placed %}
+        <div class="success-box">
+            <h3>BESTELLING ONTVANGEN</h3>
+            <p>Je gegevens en bankrekening zijn succesvol geregistreerd in het D-WEB systeem.<br><em>Let op: Dit is een informatief schoolproject, er vindt geen echte transactie plaats.</em></p>
+            <a href="/producten">TERUG NAAR COLLECTIE</a>
+        </div>
+    {% elif cart and cart|length > 0 %}
         <div class="cart-box">
+            <h3 style="color: #fff; font-size: 16px; margin-bottom: 20px; letter-spacing: 1px;">GESELECTEERDE ITEMS</h3>
             {% for item in cart %}
             <div class="cart-item">
                 <div class="item-info">
@@ -301,26 +376,62 @@ footer strong {
             {% endfor %}
         </div>
 
-        <div class="summary-section">
-            <div>
-                <div class="total-label">Geschatte Totaalwaarde</div>
-                <div class="total-amount">€ {{ "%.2f"|format(total_price) }}</div>
+        <!-- AFREKEN FORMULIER MET ALLE GEVRAAGDE VELDEN -->
+        <form action="/place-order" method="POST">
+            <div class="checkout-form-box">
+                <h3 style="color: #fff; font-size: 16px; margin-bottom: 20px; letter-spacing: 1px;">VERIFICATIE & BETAALGEGEVENS</h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Volledige Naam / Alias</label>
+                        <input type="text" id="name" name="name" required placeholder="Bijv. John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mailadres</label>
+                        <input type="email" id="email" name="email" required placeholder="naam@domein.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefoonnummer</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+31 6 12345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bank">Bankrekeningnummer / IBAN</label>
+                        <input type="text" id="bank" name="bank" required placeholder="NL00 BANK 0000 0000 00">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="street">Woonstraat & Huisnummer</label>
+                        <input type="text" id="street" name="street" required placeholder="Schaduwstraat 42">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="city">Postcode en Stad</label>
+                        <input type="text" id="city" name="city" required placeholder="1234 AB Amsterdam">
+                    </div>
+                </div>
             </div>
 
-            <div class="action-buttons">
-                <form action="/clear-cart" method="POST">
-                    <button type="submit" class="btn-clear">MAND LEGEN</button>
-                </form>
-                <button type="button" class="btn-confirm" onclick="alert('Dit is een informatieve catalogus voor een schoolproject. Er worden geen echte bestellingen of betalingen verwerkt.');">OVERZICHT BEVESTIGEN</button>
-            </div>
-        </div>
+            <div class="summary-section">
+                <div>
+                    <div class="total-label">Totaalbedrag</div>
+                    <div class="total-amount">€ {{ "%.2f"|format(total_price) }}</div>
+                </div>
 
-        <div class="notice-box">
-            <strong>Let op:</strong> D-WEB is een informatief catalogus- en schoolproject. Er vinden via deze website geen echte verkopen, verzendingen of betalingen plaats.
-        </div>
+                <div class="action-buttons">
+                    <button type="submit" class="btn-confirm">BESTELLING BEVESTIGEN</button>
+                </div>
+            </div>
+        </form>
+
+        <form action="/clear-cart" method="POST" style="margin-top: 15px;">
+            <button type="submit" class="btn-clear">MAND GEHEEL LEGEN</button>
+        </form>
     {% else %}
         <div class="cart-box empty-cart">
-            <p>Je selectielijst is momenteel leeg.</p>
+            <p>Je winkelmand is leeg. Voeg eerst producten toe om naar het afrekenen te gaan.</p>
             <a href="/producten">NAAR DE COLLECTIE</a>
         </div>
     {% endif %}
