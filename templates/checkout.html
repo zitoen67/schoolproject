@@ -1,424 +1,337 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afrekenen | VÉRRO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-WEB | Winkelmand & Overzicht</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            color: #171717;
-            background: #f7f7f7;
-        }
+body {
+    background: #030303;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
 
-        header {
-            background: white;
-            padding: 24px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-        }
+header {
+    height: 75px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #080808;
+    border-bottom: 1px solid #1c1c1c;
+}
 
-        .logo {
-            font-size: 27px;
-            font-weight: bold;
-            letter-spacing: 5px;
-        }
+.logo {
+    color: #d01c2b;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
 
-        main {
-            max-width: 750px;
-            margin: 45px auto;
-            padding: 35px;
-            background: white;
-        }
+nav a:hover {
+    color: #d01c2b;
+}
 
-        h1 {
-            margin-bottom: 12px;
-        }
+.container {
+    padding: 65px 7%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
 
-        .intro {
-            color: #777;
-            margin-bottom: 25px;
-        }
+.section-title {
+    font-size: 25px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
 
-        .summary {
-            margin: 25px 0;
-            padding: 20px;
-            background: #f7f7f7;
-        }
+.section-subtitle {
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 13px;
+}
 
-        .cartItem {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #ddd;
-        }
+.cart-box {
+    background: #090909;
+    border: 1px solid #1c1c1c;
+    padding: 30px;
+}
 
-        .cartItem img {
-            width: 75px;
-            height: 90px;
-            object-fit: cover;
-            background: #eee;
-        }
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #1a1a1a;
+    gap: 20px;
+}
 
-        .itemInfo {
-            flex: 1;
-            line-height: 1.7;
-        }
+.cart-item:last-child {
+    border-bottom: none;
+}
 
-        .remove {
-            border: 0;
-            background: none;
-            color: #888;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 5px;
-        }
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
 
-        .totals p {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 12px;
-        }
+.item-info img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    background: #050505;
+    border: 1px solid #1a1a1a;
+    padding: 5px;
+}
 
-        .grandTotal {
-            font-size: 19px;
-            font-weight: bold;
-            border-top: 1px solid #ddd;
-            padding-top: 15px;
-        }
+.item-name {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 
-        label {
-            display: block;
-            margin: 17px 0 7px;
-            font-size: 14px;
-        }
+.item-price {
+    color: #888;
+    font-size: 13px;
+}
 
-        input, select {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            font-size: 15px;
-        }
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    background: #111;
+    border: 1px solid #2a2a2a;
+}
 
-        button.submit {
-            width: 100%;
-            padding: 16px;
-            margin-top: 25px;
-            background: #171717;
-            color: white;
-            border: 0;
-            cursor: pointer;
-            font-size: 14px;
-        }
+.qty-btn {
+    background: #161616;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        button:disabled {
-            opacity: .5;
-            cursor: not-allowed;
-        }
+.qty-btn:hover {
+    background: #d01c2b;
+}
 
-        #message {
-            margin-top: 18px;
-            line-height: 1.6;
-        }
+.qty-display {
+    padding: 0 15px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+}
 
-        .demo {
-            margin-top: 20px;
-            color: #777;
-            font-size: 12px;
-            line-height: 1.6;
-        }
+.item-subtotal {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+    min-width: 100px;
+    text-align: right;
+}
 
-        .empty {
-            padding: 20px 0;
-            color: #777;
-        }
+.summary-section {
+    margin-top: 30px;
+    background: #090909;
+    border: 1px solid #1c1c1c;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-        @media(max-width: 600px) {
-            main {
-                margin: 20px 12px;
-                padding: 22px;
-            }
+.total-label {
+    color: #888;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
-            header {
-                padding: 20px 5%;
-            }
+.total-amount {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 5px;
+}
 
-            .logo {
-                font-size: 22px;
-            }
-        }
-    </style>
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-clear {
+    padding: 13px 22px;
+    background: #141414;
+    color: #aaa;
+    border: 1px solid #2a2a2a;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-clear:hover {
+    border-color: #d01c2b;
+    color: #fff;
+}
+
+.btn-confirm {
+    padding: 13px 28px;
+    background: #9c0f1c;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-confirm:hover {
+    background: #d01c2b;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.empty-cart a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #9c0f1c;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.notice-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #0d0607;
+    border: 1px solid #3a1115;
+    color: #a87b7f;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+footer {
+    background: #080808;
+    border-top: 1px solid #1c1c1c;
+    padding: 35px 7%;
+    text-align: center;
+    color: #555;
+    font-size: 12px;
+    margin-top: 80px;
+}
+
+footer strong {
+    color: #d01c2b;
+    letter-spacing: 3px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <a class="logo" href="/">VÉRRO</a>
-    <a href="/producten">← Verder winkelen</a>
+    <div class="logo">D-WEB</div>
+    <nav>
+        <a href="/">HOME</a>
+        <a href="/producten">COLLECTIE</a>
+        <a href="/afrekenen">WINKELMAND</a>
+    </nav>
 </header>
 
-<main>
-    <h1>Afrekenen</h1>
-    <p class="intro">Controleer je bestelling en vul je gegevens in.</p>
+<section class="container">
+    <h2 class="section-title">SELECTIE & OVERZICHT</h2>
+    <p class="section-subtitle">Beheer je geselecteerde items uit de D-WEB catalogus.</p>
 
-    <div class="summary">
-        <h3>Jouw bestelling</h3>
+    {% if cart and cart|length > 0 %}
+        <div class="cart-box">
+            {% for item in cart %}
+            <div class="cart-item">
+                <div class="item-info">
+                    <img src="{{ item.image }}" alt="{{ item.name }}">
+                    <div>
+                        <div class="item-name">{{ item.name }}</div>
+                        <div class="item-price">€ {{ "%.2f"|format(item.price) }} per stuk</div>
+                    </div>
+                </div>
 
-        <div id="orderItems"></div>
+                <div class="quantity-controls">
+                    <form action="/update-cart/{{ item.id }}/min" method="POST" style="display:inline;">
+                        <button type="submit" class="qty-btn">-</button>
+                    </form>
+                    <span class="qty-display">{{ item.quantity }}</span>
+                    <form action="/update-cart/{{ item.id }}/plus" method="POST" style="display:inline;">
+                        <button type="submit" class="qty-btn">+</button>
+                    </form>
+                </div>
 
-        <div class="totals">
-            <p>
-                <span>Subtotaal</span>
-                <span id="subtotal">€0,00</span>
-            </p>
-
-            <p>
-                <span>Korting</span>
-                <span id="discount">€0,00</span>
-            </p>
-
-            <p>
-                <span>Verzendkosten</span>
-                <span id="shipping">€4,95</span>
-            </p>
-
-            <p class="grandTotal">
-                <span>Totaal</span>
-                <span id="total">€0,00</span>
-            </p>
+                <div class="item-subtotal">
+                    € {{ "%.2f"|format(item.price * item.quantity) }}
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    </div>
 
-    <form id="checkoutForm">
-        <label for="name">Volledige naam</label>
-        <input id="name" required>
+        <div class="summary-section">
+            <div>
+                <div class="total-label">Geschatte Totaalwaarde</div>
+                <div class="total-amount">€ {{ "%.2f"|format(total_price) }}</div>
+            </div>
 
-        <label for="address">Straat en huisnummer</label>
-        <input id="address" required>
+            <div class="action-buttons">
+                <form action="/clear-cart" method="POST">
+                    <button type="submit" class="btn-clear">MAND LEGEN</button>
+                </form>
+                <button type="button" class="btn-confirm" onclick="alert('Dit is een informatieve catalogus voor een schoolproject. Er worden geen echte bestellingen of betalingen verwerkt.');">OVERZICHT BEVESTIGEN</button>
+            </div>
+        </div>
 
-        <label for="city">Postcode en woonplaats</label>
-        <input id="city" required>
+        <div class="notice-box">
+            <strong>Let op:</strong> D-WEB is een informatief catalogus- en schoolproject. Er vinden via deze website geen echte verkopen, verzendingen of betalingen plaats.
+        </div>
+    {% else %}
+        <div class="cart-box empty-cart">
+            <p>Je selectielijst is momenteel leeg.</p>
+            <a href="/producten">NAAR DE COLLECTIE</a>
+        </div>
+    {% endif %}
+</section>
 
-        <label for="email">E-mailadres</label>
-        <input id="email" type="email" required>
-
-        <label for="paymentMethod">Betaalmethode</label>
-        <select id="paymentMethod" required>
-            <option value="iDEAL (demo)">iDEAL (demo)</option>
-            <option value="Creditcard (demo)">Creditcard (demo)</option>
-        </select>
-
-        <button class="submit" id="submitButton" type="submit">
-            Bestelling plaatsen
-        </button>
-    </form>
-
-    <p id="message" aria-live="polite"></p>
-
-    <p class="demo">
-        Dit is een schooldemo. Er wordt geen echte betaling uitgevoerd.
-        Gebruik uitsluitend testgegevens en geen echte klantgegevens.
+<footer>
+    <strong>D-WEB</strong>
+    <p style="margin-top:12px;">
+        UNDERGROUND MARKETPLACE © 2026
     </p>
-</main>
-
-<script>
-    let cart = [];
-
-    try {
-        cart = JSON.parse(localStorage.getItem("verroCart")) || [];
-    } catch {
-        cart = [];
-    }
-
-    const discountApplied =
-        localStorage.getItem("verroDiscount") === "yes";
-
-    const itemsElement = document.getElementById("orderItems");
-    const submitButton = document.getElementById("submitButton");
-
-    function euro(amount) {
-        return "€" + amount.toFixed(2).replace(".", ",");
-    }
-
-    function getQuantity(item) {
-        return Math.max(1, Number(item.quantity) || 1);
-    }
-
-    function calculateTotals() {
-        const subtotal = cart.reduce((sum, item) => {
-            return sum + Number(item.price) * getQuantity(item);
-        }, 0);
-
-        const discount = discountApplied ? subtotal * 0.20 : 0;
-        const shipping = discountApplied ? 0 : 4.95;
-        const total = subtotal - discount + shipping;
-
-        return { subtotal, discount, shipping, total };
-    }
-
-    function updateCheckout() {
-        itemsElement.replaceChildren();
-
-        if (cart.length === 0) {
-            const empty = document.createElement("p");
-            empty.className = "empty";
-            empty.textContent = "Je winkelmandje is leeg.";
-            itemsElement.appendChild(empty);
-
-            submitButton.disabled = true;
-
-            document.getElementById("subtotal").textContent = euro(0);
-            document.getElementById("discount").textContent = euro(0);
-            document.getElementById("shipping").textContent = euro(0);
-            document.getElementById("total").textContent = euro(0);
-
-            return;
-        }
-
-        submitButton.disabled = false;
-
-        cart.forEach((item, index) => {
-            const row = document.createElement("div");
-            row.className = "cartItem";
-
-            const img = document.createElement("img");
-            img.src = item.image || "";
-            img.alt = item.name || "Product";
-
-            const info = document.createElement("div");
-            info.className = "itemInfo";
-
-            const name = document.createElement("strong");
-            name.textContent = item.name || "Product";
-
-            const details = document.createElement("p");
-            details.textContent =
-                "Maat: " + (item.size || "-") +
-                " | Aantal: " + getQuantity(item);
-
-            const price = document.createElement("p");
-            price.textContent =
-                euro(Number(item.price) * getQuantity(item));
-
-            const remove = document.createElement("button");
-            remove.className = "remove";
-            remove.type = "button";
-            remove.textContent = "Verwijderen";
-
-            remove.addEventListener("click", function() {
-                cart.splice(index, 1);
-                localStorage.setItem("verroCart", JSON.stringify(cart));
-                updateCheckout();
-            });
-
-            info.append(name, details, price, remove);
-            row.append(img, info);
-            itemsElement.appendChild(row);
-        });
-
-        const totals = calculateTotals();
-
-        document.getElementById("subtotal").textContent =
-            euro(totals.subtotal);
-
-        document.getElementById("discount").textContent =
-            "- " + euro(totals.discount);
-
-        document.getElementById("shipping").textContent =
-            euro(totals.shipping);
-
-        document.getElementById("total").textContent =
-            euro(totals.total);
-    }
-
-    updateCheckout();
-
-    document.getElementById("checkoutForm").addEventListener(
-        "submit",
-        async function(event) {
-            event.preventDefault();
-
-            if (cart.length === 0) {
-                return;
-            }
-
-            const totals = calculateTotals();
-
-            const orderData = {
-                name: document.getElementById("name").value.trim(),
-                address: document.getElementById("address").value.trim(),
-                city: document.getElementById("city").value.trim(),
-                email: document.getElementById("email").value.trim(),
-                paymentMethod:
-                    document.getElementById("paymentMethod").value,
-                items: cart,
-                total: euro(totals.total)
-            };
-
-            const message = document.getElementById("message");
-
-            submitButton.disabled = true;
-            message.textContent = "Demobestelling wordt verwerkt...";
-
-            try {
-                const response = await fetch("/order", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(orderData)
-                });
-
-                const result = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(
-                        result.error || "Er ging iets mis."
-                    );
-                }
-
-                localStorage.removeItem("verroCart");
-                localStorage.removeItem("verroDiscount");
-
-                document.querySelector("main").innerHTML = `
-                    <h1>Bedankt voor je bestelling!</h1>
-                    <p style="margin-top:15px;">
-                        Je demobestelling is ontvangen.
-                    </p>
-                    <p style="margin-top:10px;">
-                        Er is geen echte betaling uitgevoerd.
-                    </p>
-                    <p style="margin-top:25px;">
-                        <a href="/producten">
-                            Verder winkelen →
-                        </a>
-                    </p>
-                `;
-
-            } catch (error) {
-                message.textContent =
-                    error.message || "Er ging iets mis. Probeer opnieuw.";
-
-                submitButton.disabled = false;
-            }
-        }
-    );
-</script>
+</footer>
 
 </body>
 </html>
