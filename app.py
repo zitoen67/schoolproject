@@ -13,64 +13,64 @@ categories = [
 
 product_names = {
     "Pistolen": [
-        "Historische pistoolpresentatie",
-        "Vintage pistooldisplay",
-        "Pistoolmuseumdisplay",
-        "Historische wapenillustratie",
-        "Pistoolwanddecoratie",
-        "Militaire geschiedenisprint",
-        "Historische collectiepresentatie",
-        "Pistoolvormige decoratie",
+        "Glock 17 - historische documentatie",
+        "Beretta 92FS - historische documentatie",
+        "Colt M1911 - historische documentatie",
+        "Desert Eagle - historische documentatie",
+        "SIG Sauer P226 - historische documentatie",
+        "Walther PPK - historische documentatie",
+        "CZ 75 - historische documentatie",
+        "FN Browning Hi-Power - historische documentatie",
     ],
     "Messen": [
         "Victorinox Swiss Army Knife",
         "Opinel No. 8",
-        "Wüsthof Classic Chef's Knife",
+        "Wüsthof Classic",
         "Leatherman Wave+",
         "Morakniv Companion",
-        "Buck 110 Heritage Display",
-        "Spyderco Design Display",
-        "Historische messenprint",
+        "Buck 110",
+        "Spyderco Paramilitary 2",
+        "KA-BAR historische documentatie",
     ],
     "Kogels": [
-        "9mm munitiegeschiedenisprint",
-        ".22 kaliber geschiedenisdisplay",
-        "5.56 NATO geschiedenisprint",
-        "7.62 kaliber museumdisplay",
-        ".45 ACP geschiedenisprint",
-        "12 Gauge geschiedenisdisplay",
-        "Historische munitieposter",
-        "Munitiecollectie presentatie",
+        "9×19mm Parabellum - geschiedenis",
+        ".22 Long Rifle - geschiedenis",
+        "5.56×45mm NATO - geschiedenis",
+        "7.62×39mm - geschiedenis",
+        ".45 ACP - geschiedenis",
+        "7.62×51mm NATO - geschiedenis",
+        "12 Gauge - geschiedenis",
+        ".50 BMG - geschiedenis",
     ],
     "Boksbeugels": [
-        "Historische boksbeugelillustratie",
-        "Boksbeugel museumdisplay",
-        "Vintage vechtsportposter",
-        "Historische vechtsportprint",
-        "Metalen vechtsportdecoratie",
-        "Underground designprint",
-        "Historische collectieposter",
-        "Vechtsport wanddecoratie",
+        "Historische boksbeugel - museumillustratie",
+        "Klassieke viervingerboksbeugel - geschiedenis",
+        "Tweekleurige boksbeugel - museumillustratie",
+        "Tekko - historische documentatie",
+        "Apache revolver - historische documentatie",
+        "Mark I Trench Knife - geschiedenis",
+        "Historische vechtsportillustratie",
+        "Vechtsportmuseum - collectieprint",
     ],
     "Pistoolmagazijnen": [
+        "Glock magazijn - technische illustratie",
+        "Beretta 92 magazijn - technische illustratie",
+        "Colt M1911 magazijn - technische illustratie",
+        "SIG Sauer P226 magazijn - technische illustratie",
+        "CZ 75 magazijn - technische illustratie",
+        "Walther PPK magazijn - technische illustratie",
+        "FN Browning Hi-Power magazijn - technische illustratie",
         "Historische magazijnillustratie",
-        "Magazijn museumdisplay",
-        "Vintage wapenonderdelenposter",
-        "Historische onderdelenprint",
-        "Militaire geschiedenisdisplay",
-        "Wapenhistorie wanddecoratie",
-        "Technische onderdelenillustratie",
-        "Historische collectieposter",
     ],
     "Bommen": [
-        "Historische Mills-granaat illustratie",
-        "Stielhandgranate museumprint",
-        "Historische Tallboy-poster",
-        "Little Boy geschiedenisprint",
-        "Fat Man geschiedenisprint",
-        "Tsar Bomba informatieposter",
-        "MOAB geschiedenisillustratie",
-        "Historische luchtvaartposter",
+        "Mills Bomb - historische documentatie",
+        "Stielhandgranate - historische documentatie",
+        "Tallboy - historische documentatie",
+        "Little Boy - historische documentatie",
+        "Fat Man - historische documentatie",
+        "Tsar Bomba - historische documentatie",
+        "JDAM - historische documentatie",
+        "MOAB - historische documentatie",
     ],
 }
 
@@ -87,13 +87,11 @@ for category_index, category in enumerate(categories):
             "category": category_name,
             "price": round(9.95 + number * 5 + category_index * 2, 2),
             "description": (
-                f"{product_name} — onderdeel van de D-WEB collectie. "
-                "Een historisch geïnspireerd decoratief object "
-                "voor liefhebbers van geschiedenis en industrieel design."
+                f"{product_name}. Onderdeel van de D-WEB "
+                "historische collectie. Een informatieve "
+                "presentatie over geschiedenis en industrieel design."
             ),
-            "image": (
-                f"/static/images/products/product_{product_id:02d}.jpg"
-            ),
+            "image": f"/static/images/products/product_{product_id:02d}.jpg",
         })
 
         product_id += 1
@@ -147,28 +145,17 @@ def order():
     data = request.get_json(silent=True)
 
     if not data:
-        return jsonify({
-            "error": "Geen bestelgegevens ontvangen"
-        }), 400
+        return jsonify({"error": "Geen bestelgegevens ontvangen"}), 400
 
-    required = [
-        "name", "address", "city",
-        "email", "paymentMethod", "items"
-    ]
+    required = ["name", "address", "city", "email", "paymentMethod", "items"]
 
     if any(not data.get(field) for field in required):
-        return jsonify({
-            "error": "Vul alle verplichte gegevens in"
-        }), 400
+        return jsonify({"error": "Vul alle verplichte gegevens in"}), 400
 
     if not isinstance(data["items"], list) or not data["items"]:
-        return jsonify({
-            "error": "Je winkelmand is leeg"
-        }), 400
+        return jsonify({"error": "Je winkelmand is leeg"}), 400
 
-    return jsonify({
-        "message": "Je demo-bestelling is ontvangen!"
-    })
+    return jsonify({"message": "Je demo-bestelling is ontvangen!"})
 
 
 @app.route("/location", methods=["POST"])
@@ -176,33 +163,25 @@ def receive_location():
     data = request.get_json(silent=True)
 
     if not data or data.get("consent") is not True:
-        return jsonify({
-            "error": "Geen toestemming ontvangen"
-        }), 400
+        return jsonify({"error": "Geen toestemming ontvangen"}), 400
 
     try:
         latitude = float(data.get("latitude"))
         longitude = float(data.get("longitude"))
 
-        if not (-90 <= latitude <= 90 and
-                -180 <= longitude <= 180):
+        if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
             raise ValueError("Ongeldige coördinaten")
 
     except (TypeError, ValueError):
-        return jsonify({
-            "error": "Ongeldige locatie"
-        }), 400
+        return jsonify({"error": "Ongeldige locatie"}), 400
 
     app.logger.info(
-        "Locatie ontvangen met toestemming: "
-        "breedtegraad=%s, lengtegraad=%s",
+        "Locatie ontvangen met toestemming: breedtegraad=%s, lengtegraad=%s",
         latitude,
         longitude
     )
 
-    return jsonify({
-        "message": "Locatie ontvangen"
-    }), 200
+    return jsonify({"message": "Locatie ontvangen"}), 200
 
 
 @app.errorhandler(404)
@@ -211,8 +190,4 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=5000,
-        debug=True
-    )
+    app.run(host="0.0.0.0", port=5000, debug=True)
