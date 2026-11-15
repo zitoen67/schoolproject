@@ -246,19 +246,8 @@
             {{ product.description }}
         </p>
 
-        <div class="sizeTitle">KIES JE MAAT</div>
 
-        <div class="sizes">
-            {% for size in product.sizes %}
-                <button
-                    type="button"
-                    class="sizeButton"
-                    onclick="selectSize(this, '{{ size }}')"
-                >
-                    {{ size }}
-                </button>
-            {% endfor %}
-        </div>
+    
 
         <button class="addButton" onclick="addToCart()">
             IN WINKELMAND
