@@ -48,7 +48,6 @@ nav a:hover {
     color: #d01c2b;
 }
 
-/* HERO SECTION */
 .hero {
     height: calc(100vh - 75px);
     display: flex;
@@ -91,7 +90,6 @@ nav a:hover {
     background: #d01c2b;
 }
 
-/* POP-UP / WELKOM MODAL STYLING */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -182,11 +180,10 @@ footer strong {
 
 <body>
 
-<!-- DIRECTE WELKOM POP-UP BIJ BINNENKOMST -->
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
         <h3>TOEGANGSVERIFICATIE</h3>
-        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Verifieer je locatie om toegang te krijgen tot de catalogus en ontvang direct <strong>20% korting + gratis verzending</strong> op je eerste bestelling.</p>
+        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Verifieer je locatie om toegang te krijgen en ontvang direct <strong>20% korting + gratis verzending</strong> via kortingscode <strong>DWEB20</strong>.</p>
         <button class="modal-btn" onclick="requestGpsAndUnlock()">VERIFIËREN & ONTVANG KORTING</button>
     </div>
 </div>
@@ -208,35 +205,40 @@ footer strong {
 
 <footer>
     <strong>D-WEB</strong>
-    <p style="margin-top:12px;">
-        UNDERGROUND MARKETPLACE © 2026
-    </p>
+    <p style="margin-top:12px;">UNDERGROUND MARKETPLACE © 2026</p>
 </footer>
 
-<!-- SCRIPT VOOR GPS EN KORTINGSCODE WEERGAVE -->
 <script>
 function requestGpsAndUnlock() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                // Sla GPS coördinaten op in de browser voor de checkout
-                localStorage.setItem('dweb_lat', position.coords.latitude);
-                localStorage.setItem('dweb_lon', position.coords.longitude);
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
 
-                // Pas de inhoud van de pop-up aan om de kortingscode te tonen
-                const modalBody = document.getElementById('modal-body');
-                modalBody.innerHTML = `
-                    <h3>VERIFICATIE GESLAAGD</h3>
-                    <p>Locatie succesvol geregistreerd.<br>Als beloning ontvang je 20% korting en gratis verzending op je gehele order!</p>
-                    <div class="promo-box">
-                        JOUW KORTINGSCODE:<br>
-                        <span class="promo-code">D-WEB 20</span>
-                    </div>
-                    <button class="modal-btn" onclick="closeModal()">BETREED HET NETWERK</button>
-                `;
+                fetch('/claim-promo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lat: lat, lon: lon })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const modalBody = document.getElementById('modal-body');
+                        modalBody.innerHTML = `
+                            <h3>VERIFICATIE GESLAAGD</h3>
+                            <p>Locatie geregistreerd.<br>Jouw <strong>20% korting en gratis verzending</strong> zijn automatisch toegepast!</p>
+                            <div class="promo-box">
+                                ACTIEVE KORTINGSCODE:<br>
+                                <span class="promo-code">DWEB20 (GEACTIVEERD)</span>
+                            </div>
+                            <button class="modal-btn" onclick="closeModal()">GA NAAR COLLECTIE</button>
+                        `;
+                    }
+                });
             },
             function(error) {
-                alert("Locatietoegang is vereist om toegang te krijgen tot het netwerk.");
+                alert("Locatietoegang is verplicht om toegang te krijgen tot het netwerk.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
