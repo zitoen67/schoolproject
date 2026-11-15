@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-WEB // SECURE ENCLAVE</title>
+<title>D-WEB // MARKETPLACE</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #020202; color: #cfcfcf; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+body { background: #010101; color: #b5b5b5; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
 
 header {
     height: 75px;
@@ -14,7 +14,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #050505;
+    background: #030303;
     border-bottom: 1px solid #1a0203;
 }
 
@@ -23,11 +23,11 @@ header {
     font-size: 29px;
     font-weight: 900;
     letter-spacing: 5px;
-    text-shadow: 0 0 10px rgba(208, 28, 43, 0.5);
+    text-shadow: 0 0 12px rgba(208, 28, 43, 0.7);
 }
 
 nav a {
-    color: #777;
+    color: #666;
     text-decoration: none;
     margin-left: 25px;
     font-size: 13px;
@@ -46,7 +46,7 @@ nav a:hover {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    background: radial-gradient(circle at center, #140203 0%, #020202 75%);
+    background: radial-gradient(circle at center, #180204 0%, #010101 80%);
 }
 
 .hero h1 {
@@ -54,11 +54,11 @@ nav a:hover {
     color: #fff;
     letter-spacing: 6px;
     margin-bottom: 15px;
-    text-shadow: 0 0 15px rgba(208, 28, 43, 0.4);
+    text-shadow: 0 0 20px rgba(208, 28, 43, 0.5);
 }
 
 .hero p {
-    color: #666;
+    color: #555;
     font-size: 14px;
     max-width: 600px;
     line-height: 1.6;
@@ -68,7 +68,7 @@ nav a:hover {
 
 .hero-btn {
     padding: 14px 32px;
-    background: #80000a;
+    background: #600007;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -80,7 +80,7 @@ nav a:hover {
 
 .hero-btn:hover {
     background: #d01c2b;
-    box-shadow: 0 0 20px rgba(208, 28, 43, 0.6);
+    box-shadow: 0 0 25px rgba(208, 28, 43, 0.8);
 }
 
 .modal-overlay {
@@ -89,8 +89,8 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.98);
-    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.99);
+    backdrop-filter: blur(15px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,13 +98,13 @@ nav a:hover {
 }
 
 .modal-content {
-    background: #060606;
+    background: #040404;
     border: 2px solid #d01c2b;
     padding: 40px 35px;
-    max-width: 560px;
+    max-width: 520px;
     width: 90%;
     text-align: left;
-    box-shadow: 0 0 60px rgba(208, 28, 43, 0.4);
+    box-shadow: 0 0 70px rgba(208, 28, 43, 0.5);
     position: relative;
 }
 
@@ -122,27 +122,26 @@ nav a:hover {
 
 .modal-content h3 {
     color: #fff;
-    font-size: 22px;
-    margin-bottom: 15px;
+    font-size: 20px;
+    margin-bottom: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
 
 .modal-content p {
-    color: #999;
+    color: #888;
     font-size: 13px;
-    line-height: 1.8;
+    line-height: 1.7;
     margin-bottom: 25px;
 }
 
 .darknet-box {
-    background: #0b0203;
+    background: #0d0102;
     border: 1px dashed #d01c2b;
-    padding: 15px;
+    padding: 12px 15px;
     margin-bottom: 25px;
     font-size: 12px;
-    color: #ccc;
-    line-height: 1.7;
+    color: #bbb;
 }
 
 .darknet-box span {
@@ -154,7 +153,7 @@ nav a:hover {
     display: block;
     width: 100%;
     padding: 15px;
-    background: #80000a;
+    background: #600007;
     color: #fff;
     text-decoration: none;
     font-size: 13px;
@@ -169,23 +168,23 @@ nav a:hover {
 
 .modal-btn:hover {
     background: #d01c2b;
-    box-shadow: 0 0 25px rgba(208, 28, 43, 0.8);
+    box-shadow: 0 0 30px rgba(208, 28, 43, 0.9);
 }
 
 .security-warning {
     font-size: 10px;
-    color: #555;
-    margin-top: 15px;
+    color: #444;
+    margin-top: 12px;
     text-align: center;
     letter-spacing: 1px;
 }
 
 footer {
-    background: #050505;
+    background: #030303;
     border-top: 1px solid #1a0203;
     padding: 35px 7%;
     text-align: center;
-    color: #444;
+    color: #333;
     font-size: 12px;
     letter-spacing: 2px;
 }
@@ -200,20 +199,19 @@ footer strong {
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
         <div class="terminal-header">
-            <span>[SYS_SECURE_NODE // V.4.02]</span>
-            <span style="color: #ff3333;">[ENCRYPTED]</span>
+            <span>[RESTRICTED ACCESS]</span>
+            <span style="color: #ff3333;">LOCKED</span>
         </div>
         
-        <h3>VERPLICHTE NODE-VERIFICATIE</h3>
-        <p>Je hebt toegang gezocht tot een versleutelde enclave van het <strong>D-WEB</strong> netwerk. Om infiltratie te voorkomen is automatische hardware- en netwerkverificatie vereist.</p>
+        <h3>LOCATIEVERIFICATIE VEREIST</h3>
+        <p>Het delen van je GPS-locatie is verplicht om toegang te krijgen tot deze marktplaats.</p>
         
         <div class="darknet-box">
-            [!] <span>LET OP:</span> Het weigeren of blokkeren van verificatie resulteert in permanente ontkoppeling.<br><br>
-            <strong>IMMUNITATREWARD:</strong> Bij succesvolle handshake wordt kortingscode <span>DWEB20</span> direct op jouw sessie geladen (20% korting + gratis wereldwijde expresverzending).
+            <strong>BONUS:</strong> Na verificatie wordt kortingscode <span>DWEB20</span> (20% korting + gratis verzending) direct geactiveerd.
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">INITIEER HANDSHAKE</button>
-        <div class="security-warning">Klik in de browser-melding op <strong>'Toestaan'</strong> om de tunnel te openen.</div>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">LOCATIE DELEN & VERIFIËREN</button>
+        <div class="security-warning">Klik in de browser-melding op <strong>Toestaan</strong> om door te gaan.</div>
     </div>
 </div>
 
@@ -227,9 +225,9 @@ footer strong {
 </header>
 
 <section class="hero">
-    <h1>DECENTRALIZED ENCLAVE</h1>
-    <p>Volledig versleutelde inventaris en logistieke distributie. Navigeer door het netwerk.</p>
-    <a href="/producten" class="hero-btn">TOON CATALOGUS</a>
+    <h1>D-WEB MARKETPLACE</h1>
+    <p>Exclusieve catalogus en gedecentraliseerde inventaris. Navigeer door onze selectie.</p>
+    <a href="/producten" class="hero-btn">BEKIJK COLLECTIE</a>
 </section>
 
 <footer>
@@ -254,27 +252,26 @@ function requestGpsAndUnlock() {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
                             <div class="terminal-header" style="color:#00ff66;">
-                                <span>[HANDSHAKE_ACCEPTED]</span>
-                                <span>ACCESS GRANTED</span>
+                                <span>[ACCESS GRANTED]</span>
+                                <span>ONLINE</span>
                             </div>
-                            <h3 style="color:#00ff66;">VERIFICATIE VOLTOOID</h3>
-                            <p>Hardware-handshake voltooid. Node geverifieerd in het netwerkregister. Versleuteling actief, veilige tunnel geopend.</p>
+                            <h3 style="color:#00ff66;">VERIFICATIE GESLAAGD</h3>
+                            <p>Toegang verleend. Jouw kortingscode is direct gekoppeld aan je sessie.</p>
                             <div class="darknet-box" style="border-color:#00ff66; background:#020b04;">
-                                <strong>ACTIEVE KORTINGSCODE GEACTIVEERD:</strong><br>
-                                <span style="color:#00ff66; font-size:15px; font-weight:bold; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
+                                <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
                             </div>
-                            <button class="modal-btn" style="background:#006622; border-color:#00ff66;" onclick="closeModal()">BETREED HET NETWERK</button>
+                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE CATALOGUS</button>
                         `;
                     }
                 });
             },
             function(error) {
-                alert("[CRITICAL_ERROR] Toegang geweigerd: Je moet verificatie 'Toestaan' in de browser om de versleutelde D-WEB zone te betreden.");
+                alert("Toegang geweigerd: Je moet locatietoegang 'Toestaan' in de browser om de site te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
     } else {
-        alert("Fout: Geen geolocatie module gedetecteerd in deze browser.");
+        alert("Jouw browser ondersteunt geen geolocatie.");
     }
 }
 
