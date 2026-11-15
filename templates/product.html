@@ -305,12 +305,7 @@
         document.getElementById("cartCount").textContent = count;
     }
 
-    function addToCart() {
-        if (!selectedSize) {
-            document.getElementById("message").textContent =
-                "Kies eerst een maat.";
-            return;
-        }
+
 
         const cart = getCart();
 
