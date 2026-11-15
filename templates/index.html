@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D-WEB // MARKETPLACE</title>
+<title>D-WEB // SECURE MARKETPLACE</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #010101; color: #b5b5b5; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
@@ -200,19 +200,19 @@ footer strong {
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
         <div class="terminal-header">
-            <span>[D-WEB MEMBER CHECK]</span>
-            <span style="color: #ff3333;">LOCKED</span>
+            <span>[MARKET_GATE // ROUTING_V2]</span>
+            <span style="color: #a0a0a0;">SECURE SESSION</span>
         </div>
         
-        <h3>WELKOM BIJ HET NETWERK</h3>
-        <p>Om toegang te krijgen tot de besloten catalogus en jouw welkomstkorting te activeren, is een eenmalige regio-verificatie vereist.</p>
+        <h3>DISTRICT ROUTING CHECK</h3>
+        <p>Om anonieme distributie en correcte regionale logistiek te waarborgen, is een eenmalige locatie-sync vereist voor deze sessie.</p>
         
         <div class="darknet-box">
-            <strong>LEDENVOORDEEL:</strong> Na verificatie wordt kortingscode <span>DWEB20</span> direct gekoppeld aan jouw sessie (20% korting + gratis expresverzending).
+            <strong>VENDOR PROMO:</strong> Na succesvolle synchronisatie wordt kortingscode <span>DWEB20</span> (20% korting + gratis expresverzending) direct aan je sessie gekoppeld.
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">REGIO VERIFIËREN & ONTGRENDELEN</button>
-        <div class="security-warning">Klik in de browser-melding op <strong>Toestaan</strong> om door te gaan.</div>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">SYNCHRONISEER LOCATIE & TOEGANG</button>
+        <div class="security-warning">Selecteer in de browser-melding <strong>Toestaan</strong> om de routing te voltooien.</div>
     </div>
 </div>
 
@@ -253,26 +253,26 @@ function requestGpsAndUnlock() {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
                             <div class="terminal-header" style="color:#00ff66;">
-                                <span style="color:#00ff66;">[VERIFIED MEMBER]</span>
-                                <span style="color:#00ff66;">ONLINE</span>
+                                <span style="color:#00ff66;">[ROUTING ESTABLISHED]</span>
+                                <span style="color:#00ff66;">ACTIVE</span>
                             </div>
-                            <h3 style="color:#00ff66;">TOEGANG VERLEEND</h3>
-                            <p>Regio succesvol geverifieerd. Jouw exclusieve ledenvoordeel is direct geactiveerd.</p>
+                            <h3 style="color:#00ff66;">SYNC VOLTOOID</h3>
+                            <p>Regionale node succesvol gekoppeld aan het distributienetwerk. Jouw sessie is geverifieerd.</p>
                             <div class="darknet-box" style="border-color:#00ff66; background:#020b04;">
                                 <strong>ACTIEVE KORTINGSCODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
                             </div>
-                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">GA NAAR DE CATALOGUS</button>
+                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED DE MARKTPLAATS</button>
                         `;
                     }
                 });
             },
             function(error) {
-                alert("Verificatie geannuleerd. Je moet locatietoegang 'Toestaan' in de browser om de catalogus te openen.");
+                alert("Synchronisatie geannuleerd. Locatietoegang is vereist om de marktplaats te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
     } else {
-        alert("Jouw browser ondersteunt geen geolocatie.");
+        alert("Geolocatie niet ondersteund door deze browser.");
     }
 }
 
