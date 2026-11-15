@@ -21,19 +21,19 @@ categories = [
 product_names = {
     "Pistolen": ["Glock 17", "Beretta 92FS", "Colt M1911", "Desert Eagle", "SIG Sauer P226", "Walther PPK", "CZ 75", "FN Browning Hi-Power"],
     "Messen": ["Victorinox Swiss Army Knife", "Opinel No. 8", "Wüsthof Classic", "Leatherman Wave+", "Morakniv Companion", "Buck 110", "Spyderco Paramilitary 2", "KA-BAR USMC"],
-    "Kogels": ["9x19mm Parabellum", ".22 Long Rifle", "5.56x45mm NATO", "7.62x39mm", ".45 ACP", "7.62x51mm NATO", "12 Gauge", ".50 BMG"],
+    "Kogels": ["9x19mm Parabellum (50 stuks)", ".22 Long Rifle(50 stuks)", "5.56x45mm NATO(50 stuks)", "7.62x39mm(50 stuks)", ".45 ACP(50 stuks)", "7.62x51mm NATO(20 stuks)", "12 Gauge(25 stuks)", ".50 BMG(10 stuks)"],
     "Boksbeugels": ["Klassieke Boksbeugel", "Viervinger Boksbeugel", "Tweekleurige Boksbeugel", "Tekko", "Apache Revolver Boksbeugel", "Mark I Trench Knife Boksbeugel", "Tactische Boksbeugel", "Vechtsport Boksbeugel"],
-    "Pistoolmagazijnen": ["Glock 17 Magazijn", "Beretta 92 Magazijn", "Colt M1911 Magazijn", "SIG Sauer P226 Magazijn", "CZ 75 Magazijn", "Walther PPK Magazijn", "FN Browning Magazijn", "Universeel Magazijn"],
+    "Pistoolmagazijnen": ["Glock 17 Magazijn", "Beretta 92 Magazijn", "Colt M1911 Magazijn", "SIG Sauer P226 Magazijn", "CZ 75 Magazijn", "Walther PPK Magazijn", "FN Browning Magazijn", "Mec-Gar magazijn"],
     "Bommen": ["Mills Bomb", "Stielhandgranate M24", "Mk 2 Fragmentation Grenade", "F1 Hand Grenade", "RGD-5 Hand Grenade", "M67 Hand Grenade", "DM51 Hand Grenade", "M26 Hand Grenade"],
 }
 
 product_prices = {
-    "Pistolen": [695.00, 890.00, 1150.00, 2450.00, 1395.00, 950.00, 850.00, 1250.00],
-    "Messen": [39.95, 14.95, 119.00, 149.95, 19.95, 89.95, 235.00, 135.00],
-    "Kogels": [18.50, 7.50, 16.00, 14.50, 29.50, 24.00, 15.00, 65.00],
-    "Boksbeugels": [25.00, 29.95, 34.95, 65.00, 1850.00, 195.00, 39.95, 27.50],
-    "Pistoolmagazijnen": [32.00, 39.00, 35.00, 55.00, 45.00, 49.00, 52.00, 29.95],
-    "Bommen": [145.00, 175.00, 125.00, 115.00, 95.00, 135.00, 155.00, 110.00],
+    "Pistolen": [1.999,99, 999.99, 1499.99, 2999.99, 2199,99, 599,99, 799,99, 1249,99],
+    "Messen": [34.99, 12.99, 119.99, 144.99, 19.99, 109,99, 249.99, 134.99],
+    "Kogels": [15,99, 6,99, 38,99, 37,99, 29.99, 22.99, 9,99, 79,99],
+    "Boksbeugels": [34,99, 24.99, 34.99, 89,99, 2.399,99, 899,99, 39.99, 8,99],
+    "Pistoolmagazijnen": [39.99, 34.99, 24,99, 39,99, 39,99, 29,99, 49,99, 32.99],
+    "Bommen": [299,99, 899,99, 249,99, 114,99, 294.99, 134.99, 154.99, 109.99],
 }
 
 products = []
