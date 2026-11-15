@@ -1,8 +1,5 @@
-from flask import Flask, render_template, request, jsonify, abort
-from datetime import datetime
-import smtplib
-from email.message import EmailMessage
-import os
+from flask import Flask, render_template, request, abort
+
 app = Flask(__name__)
 
 categories = [
@@ -88,13 +85,17 @@ for category_index, category in enumerate(categories):
             "id": product_id,
             "name": product_name,
             "category": category_name,
-            "price": round(9.95 + number * 5 + category_index * 2, 2),
+            "price": round(
+                9.95 + number * 5 + category_index * 2, 2
+            ),
             "description": (
                 f"{product_name}. Onderdeel van de D-WEB "
                 "historische collectie. Een informatieve "
                 "presentatie over geschiedenis en industrieel design."
             ),
-            "image": f"/static/images/products/product_{product_id:02d}.jpg",
+            "image": (
+                f"/static/images/products/product_{product_id:02d}.jpg"
+            ),
         })
 
         product_id += 1
@@ -102,7 +103,10 @@ for category_index, category in enumerate(categories):
 
 @app.route("/")
 def home():
-    return render_template("index.html", categories=categories)
+    return render_template(
+        "index.html",
+        categories=categories
+    )
 
 
 @app.route("/producten")
@@ -111,7 +115,7 @@ def product_list():
 
     filtered_products = products
 
-    if selected_category:
+    if selected_category in product_names:
         filtered_products = [
             product for product in products
             if product["category"] == selected_category
@@ -135,99 +139,10 @@ def product_detail(product_id):
     if product is None:
         abort(404)
 
-    return render_template("product.html", product=product)
-
-
-@app.route("/afrekenen")
-def checkout():
-    return render_template("checkout.html")
-
-
-@app.route("/order", methods=["POST"])
-def order():
-    data = request.get_json(silent=True)
-
-    if not data:
-        return jsonify({"error": "Geen gegevens ontvangen"}), 400
-
-    required = ["name", "email", "items"]
-
-    if any(not data.get(field) for field in required):
-        return jsonify({"error": "Vul alle verplichte gegevens in"}), 400
-
-    if not isinstance(data["items"], list) or not data["items"]:
-        return jsonify({"error": "De winkelmand is leeg"}), 400
-
-
-
-    order_number = datetime.now().strftime("%Y%m%d%H%M%S")
-
-    message = EmailMessage()
-    message["Subject"] = f"D-WEB bestelling {order_number}"
-    message["From"] = os.environ.get("SMTP_LOGIN")
-    message["To"] = os.environ.get("ADMIN_EMAIL")
-
-    message.set_content(
-        f"""
-Nieuwe D-WEB bestelling
-
-Bestelnummer: {order_number}
-Naam: {data['name']}
-E-mailadres: {data['email']}
-
-Producten:
-{chr(10).join(str(item) for item in data['items'])}
-
-
-"""
+    return render_template(
+        "product.html",
+        product=product
     )
-
-    try:
-        with smtplib.SMTP(
-            os.environ.get("SMTP_SERVER"),
-            int(os.environ.get("SMTP_PORT", 587))
-        ) as server:
-            server.starttls()
-            server.login(
-                os.environ.get("SMTP_LOGIN"),
-                os.environ.get("SMTP_PASSWORD")
-            )
-            server.send_message(message)
-
-    except Exception:
-        app.logger.exception("e-mail kon niet worden verstuurd")
-        return jsonify({"error": "E-mail versturen is niet gelukt"}), 500
-
-    return jsonify({
-        "message": "Je bestelling is ontvangen!",
-        "orderNumber": order_number
-    })
-
-
-@app.route("/location", methods=["POST"])
-def receive_location():
-    data = request.get_json(silent=True)
-
-    if not data or data.get("consent") is not True:
-        return jsonify({"error": "Geen toestemming ontvangen"}), 400
-
-    try:
-        latitude = float(data.get("latitude"))
-        longitude = float(data.get("longitude"))
-
-        if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
-            raise ValueError("Ongeldige coördinaten")
-
-    except (TypeError, ValueError):
-        return jsonify({"error": "Ongeldige locatie"}), 400
-
-    app.logger.info(
-        "Locatie ontvangen met toestemming: breedtegraad=%s, lengtegraad=%s",
-        latitude,
-        longitude
-    )
-
-    return jsonify({"message": "Locatie ontvangen"}), 200
 
 
 @app.errorhandler(404)
@@ -236,4 +151,8 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=False
+    )
