@@ -72,9 +72,7 @@ product_names = {
         "JDAM",
         "MOAB"
     ],
-}
 
-# Tijdelijke afbeeldingen met productnamen.
 product_images = {
     category: [
         f"https://placehold.co/900x1100/111111/eeeeee?text={name.replace(' ', '+')}"
@@ -82,7 +80,6 @@ product_images = {
     ]
     for category, names in product_names.items()
 }
-
 
 products = []
 product_id = 1
