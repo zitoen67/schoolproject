@@ -1,341 +1,257 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ product.name }} | VÉRRO</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D-WEB | {{ product.name }}</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            color: #171717;
-            background: #fff;
-        }
+body {
+    background: #030303;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
 
-        header {
-            height: 76px;
-            padding: 0 7%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #eee;
-        }
+header {
+    height: 75px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #080808;
+    border-bottom: 1px solid #1c1c1c;
+}
 
-        .logo {
-            color: #111;
-            text-decoration: none;
-            font-size: 27px;
-            font-weight: bold;
-            letter-spacing: 5px;
-        }
+.logo {
+    color: #d01c2b;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
 
-        nav {
-            display: flex;
-            gap: 28px;
-        }
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
 
-        nav a {
-            color: #222;
-            text-decoration: none;
-            font-size: 13px;
-        }
+nav a:hover {
+    color: #d01c2b;
+}
 
-        .cartLink {
-            color: #111;
-            text-decoration: none;
-            font-size: 13px;
-        }
+.container {
+    padding: 65px 7%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .breadcrumb {
-            padding: 25px 7%;
-            color: #777;
-            font-size: 13px;
-        }
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: #090909;
+    border: 1px solid #1c1c1c;
+    padding: 40px;
+}
 
-        .breadcrumb a {
-            color: #777;
-            text-decoration: none;
-        }
+.product-image-box {
+    width: 100%;
+    height: 400px;
+    background: radial-gradient(circle at center, #141414 0%, #050505 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #1a1a1a;
+}
 
-        .productPage {
-            max-width: 1200px;
-            margin: 20px auto 80px;
-            padding: 0 25px;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 65px;
-        }
+.product-image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: contrast(1.1) brightness(0.9);
+}
 
-        .productImage {
-            width: 100%;
-            height: 620px;
-            object-fit: cover;
-            background: #eee;
-        }
+.product-details h1 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
 
-        .productInfo {
-            padding-top: 35px;
-        }
+.product-category-tag {
+    color: #d01c2b;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
+}
 
-        .category {
-            color: #888;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 18px;
-        }
+.product-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+}
 
-        h1 {
-            font-size: 34px;
-            margin-bottom: 18px;
-        }
+.product-desc {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
 
-        .price {
-            font-size: 21px;
-            margin-bottom: 30px;
-        }
+.cart-action-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        .description {
-            color: #666;
-            line-height: 1.8;
-            font-size: 14px;
-            margin-bottom: 35px;
-        }
+.add-btn {
+    padding: 14px 30px;
+    background: #9c0f1c;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-size: 13px;
+    transition: 0.2s;
+}
 
-        .sizeTitle {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 13px;
-        }
+.add-btn:hover {
+    background: #d01c2b;
+}
 
-        .sizes {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 28px;
-        }
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    background: #111;
+    border: 1px solid #2a2a2a;
+}
 
-        .sizeButton {
-            width: 48px;
-            height: 45px;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-        }
+.qty-btn {
+    background: #161616;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        .sizeButton.selected {
-            background: #111;
-            color: white;
-            border-color: #111;
-        }
+.qty-btn:hover {
+    background: #d01c2b;
+}
 
-        .addButton {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            background: #111;
-            color: white;
-            font-size: 13px;
-            letter-spacing: 1px;
-            cursor: pointer;
-        }
+.qty-display {
+    padding: 0 20px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 15px;
+}
 
-        .addButton:hover {
-            background: #333;
-        }
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: #888;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
 
-        .message {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #287a42;
-            min-height: 18px;
-        }
+.back-link:hover {
+    color: #fff;
+}
 
-        .backLink {
-            display: inline-block;
-            margin-top: 25px;
-            color: #555;
-            font-size: 13px;
-            text-decoration: none;
-        }
+footer {
+    background: #080808;
+    border-top: 1px solid #1c1c1c;
+    padding: 35px 7%;
+    text-align: center;
+    color: #555;
+    font-size: 12px;
+    margin-top: 80px;
+}
 
-        footer {
-            padding: 35px 7%;
-            background: #111;
-            color: white;
-            text-align: center;
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
+footer strong {
+    color: #d01c2b;
+    letter-spacing: 3px;
+}
 
-        @media(max-width: 750px) {
-            header {
-                padding: 0 5%;
-            }
-
-            nav {
-                display: none;
-            }
-
-            .productPage {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin-top: 0;
-            }
-
-            .productImage {
-                height: 430px;
-            }
-
-            .productInfo {
-                padding-top: 10px;
-            }
-
-            h1 {
-                font-size: 27px;
-            }
-        }
-    </style>
+@media(max-width: 800px) {
+    .product-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <a href="/" class="logo">VÉRRO</a>
-
+    <div class="logo">D-WEB</div>
     <nav>
         <a href="/">HOME</a>
         <a href="/producten">COLLECTIE</a>
+        <a href="/afrekenen">WINKELMAND</a>
     </nav>
-
-    <a href="/afrekenen" class="cartLink">
-        WINKELMAND <span id="cartCount">0</span>
-    </a>
 </header>
 
-<div class="breadcrumb">
-    <a href="/">Home</a> /
-    <a href="/producten">Collectie</a> /
-    {{ product.name }}
+<div class="container">
+    <div class="product-detail-grid">
+        <div class="product-image-box">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+        </div>
+        
+        <div class="product-details">
+            <span class="product-category-tag">{{ product.category }}</span>
+            <h1>{{ product.name }}</h1>
+            <div class="product-price">€ {{ "%.2f"|format(product.price) }}</div>
+            <p class="product-desc">{{ product.description }}</p>
+
+            {% set cart = session.get('cart', []) %}
+            {% set current_item = cart | selectattr('id', 'equalto', product.id) | first %}
+
+            {% if current_item %}
+                <div class="cart-action-container">
+                    <div class="quantity-controls">
+                        <form action="/update-cart/{{ product.id }}/min" method="POST" style="display:inline;">
+                            <button type="submit" class="qty-btn">-</button>
+                        </form>
+                        <span class="qty-display">{{ current_item.quantity }} in mand</span>
+                        <form action="/update-cart/{{ product.id }}/plus" method="POST" style="display:inline;">
+                            <button type="submit" class="qty-btn">+</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <form action="/add-to-cart/{{ product.id }}" method="POST">
+                    <button type="submit" class="add-btn">VOEG TOE AAN WINKELMAND</button>
+                </form>
+            {% endif %}
+
+            <div>
+                <a href="/producten" class="back-link">← Terug naar collectie</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<main class="productPage">
-
-    <img
-        class="productImage"
-        src="{{ product.image }}"
-        alt="{{ product.name }}"
-    >
-
-    <section class="productInfo">
-
-        <div class="category">{{ product.category }}</div>
-
-        <h1>{{ product.name }}</h1>
-
-        <div class="price">
-            € {{ "%.2f"|format(product.price) }}
-        </div>
-
-        <p class="description">
-            {{ product.description }}
-        </p>
-
-
-    
-
-        <button class="addButton" onclick="addToCart()">
-            IN WINKELMAND
-        </button>
-
-        <p class="message" id="message"></p>
-
-        <a href="/producten" class="backLink">
-            ← Terug naar collectie
-        </a>
-
-    </section>
-
-</main>
-
 <footer>
-    VÉRRO — PREMIUM STREETWEAR
+    <strong>D-WEB</strong>
+    <p style="margin-top:12px;">
+        UNDERGROUND MARKETPLACE © 2026
+    </p>
 </footer>
-
-<script>
-    const product = {
-        id: {{ product.id|tojson }},
-        name: {{ product.name|tojson }},
-        price: {{ product.price|tojson }},
-        image: {{ product.image|tojson }}
-    };
-
-    let selectedSize = "";
-
-    function selectSize(button, size) {
-        document.querySelectorAll(".sizeButton").forEach(item => {
-            item.classList.remove("selected");
-        });
-
-        button.classList.add("selected");
-        selectedSize = size;
-
-        document.getElementById("message").textContent = "";
-    }
-
-    function getCart() {
-        try {
-            return JSON.parse(localStorage.getItem("verroCart")) || [];
-        } catch {
-            return [];
-        }
-    }
-
-    function updateCartCount() {
-        const cart = getCart();
-        const count = cart.reduce((total, item) => {
-            return total + (Number(item.quantity) || 1);
-        }, 0);
-
-        document.getElementById("cartCount").textContent = count;
-    }
-
-
-
-        const cart = getCart();
-
-        const existingItem = cart.find(item =>
-            item.id === product.id && item.size === selectedSize
-        );
-
-        if (existingItem) {
-            existingItem.quantity = (Number(existingItem.quantity) || 1) + 1;
-        } else {
-            cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                size: selectedSize,
-                quantity: 1
-            });
-        }
-
-        localStorage.setItem("verroCart", JSON.stringify(cart));
-
-        updateCartCount();
-
-        document.getElementById("message").textContent =
-            "Product toegevoegd aan je winkelmand!";
-    }
-
-    updateCartCount();
-</script>
 
 </body>
 </html>
