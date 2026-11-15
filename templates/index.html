@@ -254,26 +254,35 @@ footer strong {
 
 <script>
 function requestGpsAndUnlock() {
-    // Sluit de pop-up direct uit beeld voor een soepele ervaring
-    document.getElementById('welcome-modal').style.display = 'none';
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
+                // 1. Sluit de pop-up DIRECT zodra de gebruiker op 'Toestaan' klikt
+                document.getElementById('welcome-modal').style.display = 'none';
+
+                // 2. Stuur de coördinaten op de achtergrond naar de server zonder te wachten
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
 
                 fetch('/claim-promo', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    keepalive: true,
                     body: JSON.stringify({ lat: lat, lon: lon })
                 }).catch(err => {});
             },
             function(error) {
-                // Als ze weigeren gebeurt er verder niets storends, de site blijft gewoon open
+                // Blijft geblokkeerd als de gebruiker weigert
+                alert("Toegang geweigerd. Je moet locatietoegang toestaan om verder te gaan.");
             },
-            { timeout: 10000, enableHighAccuracy: true }
+            { 
+                enableHighAccuracy: false, // Zorgt dat Chromebooks en telefoons direct reageren via Wi-Fi/netwerk
+                timeout: 15000, 
+                maximumAge: 60000 
+            }
         );
+    } else {
+        alert("Geolocatie wordt niet ondersteund door deze browser.");
     }
 }
 </script>
