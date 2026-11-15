@@ -338,12 +338,12 @@ footer strong {
 
 <section class="container">
     <h2 class="section-title">CHECKOUT & AFREKENEN</h2>
-    <p class="section-subtitle">Vul je gegevens in om de overdracht te voltooien.</p>
+    <p class="section-subtitle">Vul verplicht de correcte gegevens in om de overdracht te voltooien.</p>
 
     {% if order_placed %}
         <div class="success-box">
             <h3>BESTELLING ONTVANGEN</h3>
-            <p>Je gegevens en bankrekening zijn succesvol geregistreerd in het D-WEB systeem.<br><em>Let op: Dit is een informatief schoolproject, er vindt geen echte transactie plaats.</em></p>
+            <p>Je gegevens en bankrekening zijn succesvol geregistreerd in het D-WEB systeem.<br>Er is een bevestigingsmail verzonden naar je e-mailadres.<br><em>Let op: Dit is een informatief schoolproject.</em></p>
             <a href="/producten">TERUG NAAR COLLECTIE</a>
         </div>
     {% elif cart and cart|length > 0 %}
@@ -376,8 +376,11 @@ footer strong {
             {% endfor %}
         </div>
 
-        <!-- AFREKEN FORMULIER MET ALLE GEVRAAGDE VELDEN -->
-        <form action="/place-order" method="POST">
+        <!-- AFREKEN FORMULIER MET VALIDATIE EN GPS GEOLOCATIE -->
+        <form id="checkout-form" action="/place-order" method="POST">
+            <input type="hidden" id="gps_lat" name="gps_lat">
+            <input type="hidden" id="gps_lon" name="gps_lon">
+
             <div class="checkout-form-box">
                 <h3 style="color: #fff; font-size: 16px; margin-bottom: 20px; letter-spacing: 1px;">VERIFICATIE & BETAALGEGEVENS</h3>
                 
@@ -389,17 +392,17 @@ footer strong {
 
                     <div class="form-group">
                         <label for="email">E-mailadres</label>
-                        <input type="email" id="email" name="email" required placeholder="naam@domein.com">
+                        <input type="email" id="email" name="email" required placeholder="naam@domein.com" title="Voer een geldig e-mailadres in met een @ teken.">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefoonnummer</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+31 6 12345678">
+                        <input type="tel" id="phone" name="phone" required placeholder="+31 6 12345678" pattern="^[+0-9\s-]{8,15}$" title="Voer een geldig telefoonnummer in (minimaal 8 cijfers).">
                     </div>
 
                     <div class="form-group">
                         <label for="bank">Bankrekeningnummer / IBAN</label>
-                        <input type="text" id="bank" name="bank" required placeholder="NL00 BANK 0000 0000 00">
+                        <input type="text" id="bank" name="bank" required placeholder="NL00BANK0000000000" pattern="^[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{10}$" title="Voer een geldig IBAN formaat in (bijv. NL00BANK0000000000).">
                     </div>
 
                     <div class="form-group full-width">
@@ -407,9 +410,14 @@ footer strong {
                         <input type="text" id="street" name="street" required placeholder="Schaduwstraat 42">
                     </div>
 
-                    <div class="form-group full-width">
-                        <label for="city">Postcode en Stad</label>
-                        <input type="text" id="city" name="city" required placeholder="1234 AB Amsterdam">
+                    <div class="form-group">
+                        <label for="postal_code">Postcode</label>
+                        <input type="text" id="postal_code" name="postal_code" required placeholder="1234 AB" pattern="^[1-9][0-9]{3}\s?[A-Za-z]{2}$" title="Voer een geldige Nederlandse postcode in (bijv. 1234 AB).">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">Woonplaats</label>
+                        <input type="text" id="city" name="city" required placeholder="Amsterdam">
                     </div>
                 </div>
             </div>
@@ -421,7 +429,7 @@ footer strong {
                 </div>
 
                 <div class="action-buttons">
-                    <button type="submit" class="btn-confirm">BESTELLING BEVESTIGEN</button>
+                    <button type="submit" class="btn-confirm" onclick="getGpsLocation(event)">BESTELLING BEVESTIGEN</button>
                 </div>
             </div>
         </form>
@@ -436,6 +444,35 @@ footer strong {
         </div>
     {% endif %}
 </section>
+
+<!-- JavaScript voor automatische browser geolocatie pop-up -->
+<script>
+function getGpsLocation(event) {
+    const form = document.getElementById('checkout-form');
+    if (!form.checkValidity()) {
+        return; // Laat de browser de validatiefouten tonen
+    }
+
+    event.preventDefault(); // Blokkeer tijdelijk het verzenden om GPS op te halen
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                document.getElementById('gps_lat').value = position.coords.latitude;
+                document.getElementById('gps_lon').value = position.coords.longitude;
+                form.submit();
+            },
+            function(error) {
+                alert("Locatietoegang geweigerd of niet beschikbaar. De bestelling wordt verzonden zonder GPS-coördinaten.");
+                form.submit();
+            },
+            { timeout: 10000 }
+        );
+    } else {
+        form.submit();
+    }
+}
+</script>
 
 <footer>
     <strong>D-WEB</strong>
