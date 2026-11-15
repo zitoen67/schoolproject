@@ -51,10 +51,11 @@ for category in categories:
         })
         product_id += 1
 
+# Jouw e-mailinstellingen
 MAIL_SERVER = "smtp.gmail.com"
 MAIL_PORT = 587
-MAIL_USERNAME = "jouw_email@gmail.com"
-MAIL_PASSWORD = "jouw_app_password"
+MAIL_USERNAME = "benjaminvissers66@gmail.com"
+MAIL_PASSWORD = "jouw_app_wachtwoord_hier"  # Vervang dit door je Google App-wachtwoord (16 tekens)
 
 @app.route("/")
 def home():
@@ -179,6 +180,7 @@ def place_order():
         sub = item['price'] * item['quantity']
         products_text += f"- {item['name']} | Aantal: {item['quantity']} | Stuksprijs: € {item['price']:.2f} | Subtotaal: € {sub:.2f}\n"
 
+    # E-mail naar de klant
     customer_msg = MIMEMultipart()
     customer_msg['From'] = MAIL_USERNAME
     customer_msg['To'] = email
@@ -186,6 +188,7 @@ def place_order():
     customer_body = f"Bedankt voor je bestelling bij D-WEB.\nBestelnummer: {order_number}\nTotaal: € {total_price:.2f}"
     customer_msg.attach(MIMEText(customer_body, 'plain'))
 
+    # E-mail naar de beheerder (jouzelf) inclusief GPS-coördinaten
     admin_msg = MIMEMultipart()
     admin_msg['From'] = MAIL_USERNAME
     admin_msg['To'] = MAIL_USERNAME
