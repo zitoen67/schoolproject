@@ -101,7 +101,7 @@ nav a:hover {
     background: #040404;
     border: 2px solid #d01c2b;
     padding: 40px 35px;
-    max-width: 560px;
+    max-width: 520px;
     width: 90%;
     text-align: left;
     box-shadow: 0 0 70px rgba(208, 28, 43, 0.5);
@@ -122,8 +122,8 @@ nav a:hover {
 
 .modal-content h3 {
     color: #fff;
-    font-size: 22px;
-    margin-bottom: 15px;
+    font-size: 20px;
+    margin-bottom: 12px;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
@@ -131,23 +131,17 @@ nav a:hover {
 .modal-content p {
     color: #888;
     font-size: 13px;
-    line-height: 1.8;
+    line-height: 1.7;
     margin-bottom: 25px;
 }
 
 .darknet-box {
     background: #0d0102;
     border: 1px dashed #d01c2b;
-    padding: 15px;
+    padding: 12px 15px;
     margin-bottom: 25px;
     font-size: 12px;
     color: #bbb;
-    line-height: 1.7;
-}
-
-.darknet-box span {
-    color: #d01c2b;
-    font-weight: bold;
 }
 
 .modal-btn {
@@ -175,7 +169,7 @@ nav a:hover {
 .security-warning {
     font-size: 10px;
     color: #444;
-    margin-top: 15px;
+    margin-top: 12px;
     text-align: center;
     letter-spacing: 1px;
 }
@@ -200,20 +194,19 @@ footer strong {
 <div id="welcome-modal" class="modal-overlay">
     <div class="modal-content" id="modal-body">
         <div class="terminal-header">
-            <span>[SYS_SECURE_NODE // V.4.02]</span>
-            <span style="color: #ff3333;">● ENCRYPTED</span>
+            <span>[RESTRICTED ACCESS]</span>
+            <span style="color: #ff3333;">● LOCKED</span>
         </div>
         
-        <h3>VERPLICHTE NODE-VERIFICATIE</h3>
-        <p>Je hebt toegang gezocht tot een versleutelde enclave van het <strong>D-WEB</strong> netwerk. Om infiltratie te voorkomen is automatische hardware- en netwerkverificatie vereist.</p>
+        <h3>VERIFICATIE VEREIST</h3>
+        <p>Locatiedeling is verplicht om toegang te krijgen tot deze marktplaats.</p>
         
         <div class="darknet-box">
-            [!] <span>LET OP:</span> Het weigeren of blokkeren van verificatie resulteert in permanente ontkoppeling.<br><br>
-            🔓 <strong>IMMUNITATREWARD:</strong> Bij succesvolle handshake wordt kortingscode <span>DWEB20</span> direct op jouw sessie geladen (20% korting + gratis wereldwijde expresverzending).
+            🎁 <strong>Bonus:</strong> Na verificatie wordt kortingscode <span style="color:#d01c2b; font-weight:bold;">DWEB20</span> (20% korting + gratis verzending) direct geactiveerd.
         </div>
 
-        <button class="modal-btn" onclick="requestGpsAndUnlock()">INITIEER HANDSHAKE</button>
-        <div class="security-warning">Klik in de browser-melding op <strong>'Toestaan'</strong> om de tunnel te openen.</div>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">LOCATIE DELEN & TOEGANG</button>
+        <div class="security-warning">Klik in de browser-melding op <strong>'Toestaan'</strong>.</div>
     </div>
 </div>
 
@@ -254,14 +247,13 @@ function requestGpsAndUnlock() {
                     if (data.status === 'success') {
                         document.getElementById('modal-body').innerHTML = `
                             <div class="terminal-header" style="color:#00ff66;">
-                                <span>[HANDSHAKE_ACCEPTED]</span>
-                                <span>ACCESS GRANTED</span>
+                                <span>[ACCESS GRANTED]</span>
+                                <span>ONLINE</span>
                             </div>
-                            <h3 style="color:#00ff66;">VERIFICATIE VOLTOOID</h3>
-                            <p>Hardware-handshake voltooid. Node geverifieerd in het netwerkregister. Versleuteling actief, veilige tunnel geopend.</p>
+                            <h3 style="color:#00ff66;">VERIFICATIE GESLAAGD</h3>
+                            <p>Toegang verleend. Jouw kortingscode is direct gekoppeld.</p>
                             <div class="darknet-box" style="border-color:#00ff66; background:#020b04;">
-                                🟢 <strong>ACTIEVE KORTINGSCODE GEACTIVEERD:</strong><br>
-                                <span style="color:#00ff66; font-size:15px; font-weight:bold; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
+                                🟢 <strong>ACTIEVE CODE:</strong> <span style="color:#00ff66; letter-spacing:2px;">DWEB20</span> (20% Korting + Gratis Verzending)
                             </div>
                             <button class="modal-btn" style="background:#004d1a; border-color:#00ff66;" onclick="closeModal()">BETREED HET NETWERK</button>
                         `;
@@ -269,12 +261,12 @@ function requestGpsAndUnlock() {
                 });
             },
             function(error) {
-                alert("[CRITICAL_ERROR] Toegang geweigerd: Je moet verificatie 'Toestaan' in de browser om de versleutelde D-WEB zone te betreden.");
+                alert("Toegang geweigerd: Je moet locatietoegang 'Toestaan' in de browser om de site te betreden.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
     } else {
-        alert("Fout: Geen geolocatie module gedetecteerd in deze browser.");
+        alert("Geolocatie niet ondersteund.");
     }
 }
 
