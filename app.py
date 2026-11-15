@@ -94,8 +94,10 @@ for category_index, category in enumerate(categories):
                 "presentatie over geschiedenis en industrieel design."
             ),
             "image": (
-                f"/static/images/products/product_{product_id:02d}.jpg"
-            ),
+    "/static/images/products/product_09.png"
+    if product_id == 9
+    else f"/static/images/products/product_{product_id:02d}.jpg"
+),
         })
 
         product_id += 1
