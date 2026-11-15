@@ -44,7 +44,7 @@ product_names = {
     ],
     "Boksbeugels": [
         "Klassieke Viervinger-boksbeugel",
-        "Romeinse Caestus",
+        "tweekleurige boksbeugel",
         "Mark I Trench Knife",
         "Apache Revolver",
         "Tekko",
