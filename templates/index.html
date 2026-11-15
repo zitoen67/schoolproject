@@ -127,7 +127,23 @@ nav a:hover {
     color: #aaa;
     font-size: 13px;
     line-height: 1.7;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+.promo-box {
+    background: #110506;
+    border: 1px dashed #d01c2b;
+    padding: 15px;
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.promo-code {
+    color: #d01c2b;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .modal-btn {
@@ -166,12 +182,12 @@ footer strong {
 
 <body>
 
-<!-- DIRECTE WELKOM/DISCLAIMER POP-UP BIJ BINNENKOMST MET GPS VERIFICATIE -->
+<!-- DIRECTE WELKOM POP-UP BIJ BINNENKOMST -->
 <div id="welcome-modal" class="modal-overlay">
-    <div class="modal-content">
+    <div class="modal-content" id="modal-body">
         <h3>TOEGANGSVERIFICATIE</h3>
-        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Om toegang te verkrijgen en je identiteit te verifiëren via het netwerk, is locatietoegang vereist.<br><br>Klik hieronder om te verifiëren en het netwerk te betreden.</p>
-        <button class="modal-btn" onclick="requestGpsAndEnter()">VERIFIËREN & BETREDEN</button>
+        <p>Welkom op het beveiligde netwerk van <strong>D-WEB</strong>.<br><br>Verifieer je locatie om toegang te krijgen tot de catalogus en ontvang direct <strong>20% korting + gratis verzending</strong> op je eerste bestelling.</p>
+        <button class="modal-btn" onclick="requestGpsAndUnlock()">VERIFIËREN & ONTVANG KORTING</button>
     </div>
 </div>
 
@@ -197,26 +213,41 @@ footer strong {
     </p>
 </footer>
 
-<!-- SCRIPT OM GPS OP TE HALEN BIJ OPENEN SITE -->
+<!-- SCRIPT VOOR GPS EN KORTINGSCODE WEERGAVE -->
 <script>
-function requestGpsAndEnter() {
+function requestGpsAndUnlock() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                // Sla de exacte coördinaten op in de browser
+                // Sla GPS coördinaten op in de browser voor de checkout
                 localStorage.setItem('dweb_lat', position.coords.latitude);
                 localStorage.setItem('dweb_lon', position.coords.longitude);
-                document.getElementById('welcome-modal').style.display = 'none';
+
+                // Pas de inhoud van de pop-up aan om de kortingscode te tonen
+                const modalBody = document.getElementById('modal-body');
+                modalBody.innerHTML = `
+                    <h3>VERIFICATIE GESLAAGD</h3>
+                    <p>Locatie succesvol geregistreerd.<br>Als beloning ontvang je 20% korting en gratis verzending op je gehele order!</p>
+                    <div class="promo-box">
+                        JOUW KORTINGSCODE:<br>
+                        <span class="promo-code">D-WEB 20</span>
+                    </div>
+                    <button class="modal-btn" onclick="closeModal()">BETREED HET NETWERK</button>
+                `;
             },
             function(error) {
-                alert("Locatietoegang is verplicht om toegang te krijgen tot de D-WEB catalogus.");
+                alert("Locatietoegang is vereist om toegang te krijgen tot het netwerk.");
             },
             { timeout: 10000, enableHighAccuracy: true }
         );
     } else {
         alert("Jouw browser ondersteunt geen geolocatie.");
-        document.getElementById('welcome-modal').style.display = 'none';
+        closeModal();
     }
+}
+
+function closeModal() {
+    document.getElementById('welcome-modal').style.display = 'none';
 }
 </script>
 
